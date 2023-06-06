@@ -10,39 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-enum WeatherCondition {
-    case sunny
-    case cloudy
-    case rainy
-    
-    init?(weatherString: String) {
-        switch weatherString.lowercased() {
-        case "sunny":
-            self = .sunny
-        case "rainy":
-            self = .rainy
-        case "cloudy":
-            self = .cloudy
-        default:
-            return nil
-        }
-    }
-    
-    func displayConditionImage() -> UIImage? {
-        switch self {
-        case .sunny:
-            return UIImage(named: "sunny")?.withTintColor(.red)
-        case .cloudy:
-            return UIImage(named: "cloudy")?.withTintColor(.gray)
-        case .rainy:
-            return UIImage(named: "rainy")?.withTintColor(.blue)
-        }
-    }
-}
-
-
-
-class WeatherViewController: UIViewController {
+final class WeatherViewController: UIViewController {
     private let WeatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
@@ -118,9 +86,7 @@ private extension WeatherViewController {
         let condition = self.weatherService.getWeatherInformation()
         if let condition = WeatherCondition(weatherString: condition) {
             let image = condition.displayConditionImage()
-            DispatchQueue.main.async {
-                self.WeatherConditionImageView.image = image
-            }
+            self.WeatherConditionImageView.image = image
         }
     }
     

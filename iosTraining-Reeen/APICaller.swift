@@ -12,7 +12,7 @@ protocol WeatherService {
     func getWeatherInformation() -> String
 }
 
-class ConcreteWeatherService: WeatherService {
+final class ConcreteWeatherService: WeatherService {
     func getWeatherInformation() -> String {
         YumemiWeather.fetchWeatherCondition()
     }
