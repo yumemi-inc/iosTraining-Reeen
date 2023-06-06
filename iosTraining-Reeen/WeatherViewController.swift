@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  iosTraining-Reeen
 //
 //  Created by 高橋 蓮 on 2023/06/06.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class WeatherViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .gray
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension WeatherViewController {
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
