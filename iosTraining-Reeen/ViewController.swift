@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+private extension ViewController {
      func setupViews() {
          view.backgroundColor = .lightGray
          view.addSubview(imageView)
