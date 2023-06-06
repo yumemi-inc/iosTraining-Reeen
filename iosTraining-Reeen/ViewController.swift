@@ -55,7 +55,7 @@ class ViewController: UIViewController {
 
 private extension ViewController {
      func setupViews() {
-         view.backgroundColor = .lightGray
+         view.backgroundColor = .white
          view.addSubview(imageView)
          view.addSubview(maxTemperatureLabel)
          view.addSubview(minTemperatureLabel)
