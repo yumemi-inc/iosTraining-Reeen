@@ -31,11 +31,11 @@ enum WeatherCondition {
     func displayConditionImage() -> UIImage? {
         switch self {
         case .sunny:
-            return UIImage(named: "sunny")
+            return UIImage(named: "sunny")?.withTintColor(.red)
         case .cloudy:
-            return UIImage(named: "cloudy")
+            return UIImage(named: "cloudy")?.withTintColor(.gray)
         case .rainy:
-            return UIImage(named: "rainy")
+            return UIImage(named: "rainy")?.withTintColor(.blue)
         }
     }
 }
@@ -43,9 +43,9 @@ enum WeatherCondition {
 
 
 class WeatherViewController: UIViewController {
-    private let imageView: UIImageView = {
+    private let WeatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -82,7 +82,7 @@ class WeatherViewController: UIViewController {
     }()
     
     private lazy var weatherConditionStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [imageView, temperatureStackView])
+        let stackView = UIStackView(arrangedSubviews: [WeatherConditionImageView, temperatureStackView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         return stackView
@@ -119,7 +119,7 @@ private extension WeatherViewController {
         if let condition = WeatherCondition(weatherString: condition) {
             let image = condition.displayConditionImage()
             DispatchQueue.main.async {
-                self.imageView.image = image
+                self.WeatherConditionImageView.image = image
             }
         }
     }
@@ -134,7 +134,7 @@ private extension WeatherViewController {
             make.center.equalToSuperview()
         }
         
-        imageView.snp.makeConstraints { make in
+        WeatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(view.snp.width).multipliedBy(0.5)
         }
         
