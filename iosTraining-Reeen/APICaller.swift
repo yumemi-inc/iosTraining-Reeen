@@ -8,11 +8,11 @@
 import Foundation
 import YumemiWeather
 
-protocol Weather {
+protocol WeatherService {
     func getWeatherInformation() -> String
 }
 
-final class APICaller: Weather {
+class ConcreteWeatherService: WeatherService {
     func getWeatherInformation() -> String {
         YumemiWeather.fetchWeatherCondition()
     }

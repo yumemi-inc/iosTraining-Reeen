@@ -19,6 +19,9 @@
 		0D15668D2A2EF99D009A5927 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668C2A2EF99D009A5927 /* YumemiWeather */; };
 		0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668F2A2EFC47009A5927 /* SnapKit */; };
 		0D1566922A2F1622009A5927 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566912A2F1622009A5927 /* APICaller.swift */; };
+		0D1566952A2F1E31009A5927 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0D1566942A2F1E31009A5927 /* RxCocoa */; };
+		0D1566972A2F1E31009A5927 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 0D1566962A2F1E31009A5927 /* RxRelay */; };
+		0D1566992A2F1E31009A5927 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0D1566982A2F1E31009A5927 /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +63,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D1566952A2F1E31009A5927 /* RxCocoa in Frameworks */,
 				0D15668D2A2EF99D009A5927 /* YumemiWeather in Frameworks */,
+				0D1566992A2F1E31009A5927 /* RxSwift in Frameworks */,
+				0D1566972A2F1E31009A5927 /* RxRelay in Frameworks */,
 				0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,12 +113,12 @@
 			children = (
 				0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */,
 				0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */,
+				0D1566912A2F1622009A5927 /* APICaller.swift */,
 				0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */,
 				0D1566612A2EDA7E009A5927 /* Main.storyboard */,
 				0D1566642A2EDA7F009A5927 /* Assets.xcassets */,
 				0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */,
 				0D1566692A2EDA7F009A5927 /* Info.plist */,
-				0D1566912A2F1622009A5927 /* APICaller.swift */,
 			);
 			path = "iosTraining-Reeen";
 			sourceTree = "<group>";
@@ -153,6 +159,9 @@
 			packageProductDependencies = (
 				0D15668C2A2EF99D009A5927 /* YumemiWeather */,
 				0D15668F2A2EFC47009A5927 /* SnapKit */,
+				0D1566942A2F1E31009A5927 /* RxCocoa */,
+				0D1566962A2F1E31009A5927 /* RxRelay */,
+				0D1566982A2F1E31009A5927 /* RxSwift */,
 			);
 			productName = "iosTraining-Reeen";
 			productReference = 0D1566582A2EDA7E009A5927 /* iosTraining-Reeen.app */;
@@ -229,6 +238,7 @@
 			packageReferences = (
 				0D15668B2A2EF99D009A5927 /* XCRemoteSwiftPackageReference "ios-training" */,
 				0D15668E2A2EFC47009A5927 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				0D1566932A2F1E31009A5927 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 0D1566592A2EDA7E009A5927 /* Products */;
 			projectDirPath = "";
@@ -634,6 +644,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		0D1566932A2F1E31009A5927 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -646,6 +664,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D15668E2A2EFC47009A5927 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		0D1566942A2F1E31009A5927 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D1566932A2F1E31009A5927 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		0D1566962A2F1E31009A5927 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D1566932A2F1E31009A5927 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		0D1566982A2F1E31009A5927 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D1566932A2F1E31009A5927 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

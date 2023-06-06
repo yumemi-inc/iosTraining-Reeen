@@ -7,6 +7,40 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+
+enum WeatherCondition {
+    case sunny
+    case cloudy
+    case rainy
+    
+    init?(weatherString: String) {
+        switch weatherString.lowercased() {
+        case "sunny":
+            self = .sunny
+        case "rainy":
+            self = .rainy
+        case "cloudy":
+            self = .cloudy
+        default:
+            return nil
+        }
+    }
+    
+    func displayConditionImage() -> UIImage? {
+        switch self {
+        case .sunny:
+            return UIImage(named: "sunny")
+        case .cloudy:
+            return UIImage(named: "cloudy")
+        case .rainy:
+            return UIImage(named: "rainy")
+        }
+    }
+}
+
+
 
 class WeatherViewController: UIViewController {
     private let imageView: UIImageView = {
@@ -61,6 +95,17 @@ class WeatherViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
+
+    private var weatherService: WeatherService
+    
+    init(weatherService: WeatherService) {
+        self.weatherService = weatherService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +114,16 @@ class WeatherViewController: UIViewController {
 }
 
 private extension WeatherViewController {
+    func displayWeatherCondition() {
+        let condition = self.weatherService.getWeatherInformation()
+        if let condition = WeatherCondition(weatherString: condition) {
+            let image = condition.displayConditionImage()
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }
+    }
+    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
