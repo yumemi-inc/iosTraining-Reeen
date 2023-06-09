@@ -7,23 +7,10 @@
 
 import UIKit
 
-enum WeatherCondition {
+enum WeatherCondition: String {
     case sunny
     case cloudy
     case rainy
-    
-    init?(weatherString: String) {
-        switch weatherString.lowercased() {
-        case "sunny":
-            self = .sunny
-        case "rainy":
-            self = .rainy
-        case "cloudy":
-            self = .cloudy
-        default:
-            return nil
-        }
-    }
     
     func displayConditionImage() -> UIImage? {
         switch self {
