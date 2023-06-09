@@ -10,7 +10,6 @@
 		0D15665C2A2EDA7E009A5927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */; };
 		0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */; };
 		0D1566602A2EDA7E009A5927 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */; };
-		0D1566632A2EDA7E009A5927 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D1566612A2EDA7E009A5927 /* Main.storyboard */; };
 		0D1566652A2EDA7F009A5927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1566642A2EDA7F009A5927 /* Assets.xcassets */; };
 		0D1566682A2EDA7F009A5927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */; };
 		0D1566732A2EDA7F009A5927 /* iosTraining_ReeenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */; };
@@ -44,7 +43,6 @@
 		0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		0D1566622A2EDA7E009A5927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D1566642A2EDA7F009A5927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D1566672A2EDA7F009A5927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D1566692A2EDA7F009A5927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				0D1566912A2F1622009A5927 /* APICaller.swift */,
 				0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */,
 				0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */,
-				0D1566612A2EDA7E009A5927 /* Main.storyboard */,
 				0D1566642A2EDA7F009A5927 /* Assets.xcassets */,
 				0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */,
 				0D1566692A2EDA7F009A5927 /* Info.plist */,
@@ -205,7 +202,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0D1566572A2EDA7E009A5927 = {
 						CreatedOnToolsVersion = 14.3;
@@ -251,7 +248,6 @@
 			files = (
 				0D1566682A2EDA7F009A5927 /* LaunchScreen.storyboard in Resources */,
 				0D1566652A2EDA7F009A5927 /* Assets.xcassets in Resources */,
-				0D1566632A2EDA7E009A5927 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,14 +313,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0D1566612A2EDA7E009A5927 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0D1566622A2EDA7E009A5927 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -372,6 +360,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -432,6 +421,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

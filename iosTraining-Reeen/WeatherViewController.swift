@@ -95,7 +95,7 @@ private extension WeatherViewController {
             self?.displayWeatherCondition()
         }), for: .touchUpInside)
         
-        weatherConditionImageView.snp.makeConstraints { make in
+        weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
