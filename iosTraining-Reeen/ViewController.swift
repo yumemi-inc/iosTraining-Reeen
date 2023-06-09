@@ -54,45 +54,43 @@ class ViewController: UIViewController {
 }
 
 private extension ViewController {
-     func setupViews() {
-         view.backgroundColor = .white
-         view.addSubview(imageView)
-         view.addSubview(maxTemperatureLabel)
-         view.addSubview(minTemperatureLabel)
-         view.addSubview(closeButton)
-         view.addSubview(reloadButton)
-         
+    func setupViews() {
+        view.backgroundColor = .white
+        view.addSubview(imageView)
+        view.addSubview(maxTemperatureLabel)
+        view.addSubview(minTemperatureLabel)
+        view.addSubview(closeButton)
+        view.addSubview(reloadButton)
+        
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(view.snp.width).multipliedBy(0.5)
         }
-
+        
         maxTemperatureLabel.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom)
             make.left.equalTo(imageView.snp.left)
             make.width.equalTo(imageView.snp.width).multipliedBy(0.5)
-            make.height.equalTo(50)
         }
-
+        
         minTemperatureLabel.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom)
             make.right.equalTo(imageView.snp.right)
             make.width.equalTo(imageView.snp.width).multipliedBy(0.5)
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.centerX.equalTo(maxTemperatureLabel)
+            make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
+            make.width.equalTo(maxTemperatureLabel.snp.width)
             make.height.equalTo(50)
         }
-         
-         closeButton.snp.makeConstraints { make in
-             make.centerX.equalTo(maxTemperatureLabel)
-             make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
-             make.width.equalTo(maxTemperatureLabel.snp.width)
-             make.height.equalTo(50)
-         }
-         
-         reloadButton.snp.makeConstraints { make in
-             make.centerX.equalTo(minTemperatureLabel)
-             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
-             make.width.equalTo(minTemperatureLabel.snp.width)
-             make.height.equalTo(50)
-         }
+        
+        reloadButton.snp.makeConstraints { make in
+            make.centerX.equalTo(minTemperatureLabel)
+            make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
+            make.width.equalTo(minTemperatureLabel.snp.width)
+            make.height.equalTo(50)
+        }
     }
 }
