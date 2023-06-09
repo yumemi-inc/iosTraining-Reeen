@@ -82,7 +82,20 @@ final class WeatherViewController: UIViewController {
 private extension WeatherViewController {
     func displayWeatherCondition() {
         let conditionString = self.weatherService.getWeatherInformation()
-        weatherConditionImageView.image = imageForWeatherCondition(conditionString)
+        weatherConditionImageView.image = imageForWeatherCondition(for: conditionString)
+    }
+    
+    func imageForWeatherCondition(for condition: String) -> UIImage? {
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage(named: "sunny")?.withTintColor(.red) }
+        
+        switch condition {
+        case .sunny:
+            return UIImage(named: "sunny")?.withTintColor(.red)
+        case .cloudy:
+            return UIImage(named: "cloudy")?.withTintColor(.gray)
+        case .rainy:
+            return UIImage(named: "rainy")?.withTintColor(.blue)
+        }
     }
     
     func setupViews() {
@@ -116,19 +129,5 @@ private extension WeatherViewController {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
-    }
-    
-    func imageForWeatherCondition(_ condition: String) -> UIImage? {
-        if let condition = WeatherCondition(rawValue: condition) {
-            switch condition {
-            case .sunny:
-                return UIImage(named: "sunny")?.withTintColor(.red)
-            case .cloudy:
-                return UIImage(named: "cloudy")?.withTintColor(.gray)
-            case .rainy:
-                return UIImage(named: "rainy")?.withTintColor(.blue)
-            }
-        }
-        return UIImage(named: "sunny")
     }
 }
