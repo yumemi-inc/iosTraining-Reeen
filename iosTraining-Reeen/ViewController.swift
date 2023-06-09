@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
-        //TODO: textは仮の設定
+        // TODO: textは仮の設定
         label.text = "最高気温"
         label.textColor = .red
         label.textAlignment = .center
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     
     private let minTemperatureLabel: UILabel = {
         let label = UILabel()
-        //TODO: textは仮の設定
+        // TODO: textは仮の設定
         label.text = "最低気温"
         label.textColor = .blue
         label.textAlignment = .center
@@ -87,14 +87,12 @@ private extension ViewController {
             make.centerX.equalTo(maxTemperatureLabel)
             make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(maxTemperatureLabel.snp.width)
-            make.height.equalTo(50)
         }
         
         reloadButton.snp.makeConstraints { make in
             make.centerX.equalTo(minTemperatureLabel)
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
-            make.height.equalTo(50)
         }
     }
 }
