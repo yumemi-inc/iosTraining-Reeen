@@ -34,14 +34,14 @@ class ViewController: UIViewController {
     }()
     
     private let closeButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Close", for: .normal)
         return button
     }()
     
     private let reloadButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Reload", for: .normal)
         return button
