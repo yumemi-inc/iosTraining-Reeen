@@ -62,9 +62,9 @@ final class WeatherViewController: UIViewController {
         return stackView
     }()
 
-    private var weatherService: WeatherService
+    private var weatherService: WeatherServiceProtocol
     
-    init(weatherService: WeatherService) {
+    init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
     }

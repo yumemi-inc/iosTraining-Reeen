@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         window.makeKeyAndVisible()
-        let viewController = WeatherViewController(weatherService: ConcreteWeatherService())
+        let viewController = WeatherViewController(weatherService: WeatherService())
         window.rootViewController = viewController
     }
 

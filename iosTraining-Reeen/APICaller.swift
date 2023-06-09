@@ -8,11 +8,11 @@
 import Foundation
 import YumemiWeather
 
-protocol WeatherService {
+protocol WeatherServiceProtocol {
     func getWeatherInformation() -> String
 }
 
-final class ConcreteWeatherService: WeatherService {
+final class WeatherService: WeatherServiceProtocol {
     func getWeatherInformation() -> String {
         YumemiWeather.fetchWeatherCondition()
     }
