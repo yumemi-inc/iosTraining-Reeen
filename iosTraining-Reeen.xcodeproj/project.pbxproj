@@ -19,6 +19,7 @@
 		0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668F2A2EFC47009A5927 /* SnapKit */; };
 		0D1566922A2F1622009A5927 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566912A2F1622009A5927 /* APICaller.swift */; };
 		0D15669B2A2F26FF009A5927 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */; };
+		0D1F321C2A332399007C298B /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F321B2A332399007C298B /* EmptyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		0D15667E2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTraining_ReeenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0D1566912A2F1622009A5927 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		0D1F321B2A332399007C298B /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */,
 				0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */,
 				0D1566912A2F1622009A5927 /* APICaller.swift */,
+				0D1F321B2A332399007C298B /* EmptyViewController.swift */,
 				0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */,
 				0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */,
 				0D1566642A2EDA7F009A5927 /* Assets.xcassets */,
@@ -276,6 +279,7 @@
 				0D15665C2A2EDA7E009A5927 /* AppDelegate.swift in Sources */,
 				0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */,
 				0D1566922A2F1622009A5927 /* APICaller.swift in Sources */,
+				0D1F321C2A332399007C298B /* EmptyViewController.swift in Sources */,
 				0D15669B2A2F26FF009A5927 /* WeatherCondition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
