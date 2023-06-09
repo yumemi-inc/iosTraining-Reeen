@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class WeatherViewController: UIViewController {
-    private let WeatherConditionImageView: UIImageView = {
+    private let weatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         return imageView
@@ -48,7 +48,7 @@ final class WeatherViewController: UIViewController {
     }()
     
     private lazy var weatherConditionStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [WeatherConditionImageView, temperatureStackView])
+        let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         return stackView
@@ -61,7 +61,7 @@ final class WeatherViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
-
+    
     private var weatherService: WeatherServiceProtocol
     
     init(weatherService: WeatherServiceProtocol) {
@@ -81,11 +81,8 @@ final class WeatherViewController: UIViewController {
 
 private extension WeatherViewController {
     func displayWeatherCondition() {
-        let condition = self.weatherService.getWeatherInformation()
-        if let condition = WeatherCondition(rawValue: condition) {
-            let image = condition.displayConditionImage()
-            self.WeatherConditionImageView.image = image
-        }
+        let conditionString = self.weatherService.getWeatherInformation()
+        weatherConditionImageView.image = imageForWeatherCondition(conditionString)
     }
     
     func setupViews() {
@@ -98,11 +95,11 @@ private extension WeatherViewController {
             self?.displayWeatherCondition()
         }), for: .touchUpInside)
         
-        WeatherConditionImageView.snp.makeConstraints { make in
+        weatherConditionImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
-        WeatherConditionImageView.snp.makeConstraints { make in
+        weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(view.snp.width).multipliedBy(0.5)
         }
         
@@ -117,5 +114,19 @@ private extension WeatherViewController {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+    }
+    
+    func imageForWeatherCondition(_ condition: String) -> UIImage? {
+        if let condition = WeatherCondition(rawValue: condition) {
+            switch condition {
+            case .sunny:
+                return UIImage(named: "sunny")?.withTintColor(.red)
+            case .cloudy:
+                return UIImage(named: "cloudy")?.withTintColor(.gray)
+            case .rainy:
+                return UIImage(named: "rainy")?.withTintColor(.blue)
+            }
+        }
+        return UIImage(named: "sunny")
     }
 }
