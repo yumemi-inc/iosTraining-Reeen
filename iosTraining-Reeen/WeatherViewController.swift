@@ -7,8 +7,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
 
 final class WeatherViewController: UIViewController {
     private let WeatherConditionImageView: UIImageView = {
@@ -96,7 +94,11 @@ private extension WeatherViewController {
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
-        weatherConditionStackView.snp.makeConstraints { make in
+        reloadButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.displayWeatherCondition()
+        }), for: .touchUpInside)
+        
+        WeatherConditionImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
