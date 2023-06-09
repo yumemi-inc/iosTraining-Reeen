@@ -91,9 +91,11 @@ private extension WeatherViewController {
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
-        reloadButton.addAction(UIAction(handler: { [weak self] _ in
+        let action = UIAction { [weak self] _ in
             self?.displayWeatherCondition()
-        }), for: .touchUpInside)
+        }
+        
+        reloadButton.addAction(action, for: .touchUpInside)
         
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
