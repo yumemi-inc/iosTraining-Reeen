@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
-        //textは仮の設定
+        //TODO: textは仮の設定
         label.text = "最高気温"
         label.textColor = .red
         label.textAlignment = .center
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     
     private let minTemperatureLabel: UILabel = {
         let label = UILabel()
-        //textは仮の設定
+        //TODO: textは仮の設定
         label.text = "最低気温"
         label.textColor = .blue
         label.textAlignment = .center
