@@ -81,7 +81,7 @@ final class WeatherViewController: UIViewController {
 
 private extension WeatherViewController {
     func displayWeatherCondition() {
-        let condition = self.weatherService.getWeatherInformation()
+        let condition = weatherService.getWeatherInformation()
         weatherConditionImageView.image = getImage(for: condition)
     }
     
