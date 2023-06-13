@@ -10,7 +10,9 @@ import UIKit
 final class EmptyViewController: UIViewController {
     
     private let weatherViewController = WeatherViewController(weatherService: WeatherService())
+    
     override func viewDidAppear(_ animated: Bool) {
-        present(weatherViewController, animated: true)
+        weatherViewController.modalPresentationStyle = .fullScreen
+        present(weatherViewController, animated: true, completion: nil)
     }
 }
