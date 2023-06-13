@@ -9,11 +9,21 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherServiceProtocol {
-    func getWeatherInformation() -> String
+    func getWeatherInformation()
+}
+
+protocol WeatherUpdateDelegate: AnyObject {
+    func didUpdateWeatherInformation(weatherInfo: String)
 }
 
 final class WeatherService: WeatherServiceProtocol {
-    func getWeatherInformation() -> String {
-        YumemiWeather.fetchWeatherCondition()
+    
+    weak var delegate: WeatherUpdateDelegate?
+    
+    func getWeatherInformation() {
+        let weatherInfo = YumemiWeather.fetchWeatherCondition()
+        delegate?.didUpdateWeatherInformation(weatherInfo: weatherInfo)
     }
 }
+
+

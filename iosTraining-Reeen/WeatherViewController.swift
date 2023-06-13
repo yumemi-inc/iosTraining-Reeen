@@ -108,7 +108,7 @@ private extension WeatherViewController {
         view.addSubview(reloadButton)
         
         let reloadAction = UIAction { [weak self] _ in
-            self?.displayWeatherCondition()
+            self?.updateDelgate()
         }
         reloadButton.addAction(reloadAction, for: .touchUpInside)
         
@@ -136,5 +136,17 @@ private extension WeatherViewController {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+    }
+}
+
+extension WeatherViewController: WeatherUpdateDelegate {
+    func updateDelgate() {
+        (weatherService as? WeatherService)?.delegate = self
+        weatherService.getWeatherInformation()
+    }
+    
+    func didUpdateWeatherInformation(weatherInfo: String) {
+        let image = getImage(for: weatherInfo)
+        weatherConditionImageView.image = image
     }
 }
