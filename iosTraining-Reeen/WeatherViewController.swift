@@ -80,27 +80,6 @@ final class WeatherViewController: UIViewController {
 }
 
 private extension WeatherViewController {
-    func displayWeatherCondition() {
-        let condition = weatherService.getWeatherInformation()
-        weatherConditionImageView.image = getImage(for: condition)
-    }
-    
-    func getImage(for condition: String) -> UIImage? {
-        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-        switch condition {
-        case .sunny:
-            return UIImage(named: "sunny")?.withTintColor(.red)
-        case .cloudy:
-            return UIImage(named: "cloudy")?.withTintColor(.gray)
-        case .rainy:
-            return UIImage(named: "rainy")?.withTintColor(.blue)
-        }
-    }
-    
-    func closeEmptyViewController() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
@@ -137,6 +116,10 @@ private extension WeatherViewController {
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
     }
+    
+    func closeEmptyViewController() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension WeatherViewController: WeatherUpdateDelegate {
@@ -148,5 +131,18 @@ extension WeatherViewController: WeatherUpdateDelegate {
     func didUpdateWeatherInformation(weatherInfo: String) {
         let image = getImage(for: weatherInfo)
         weatherConditionImageView.image = image
+    }
+    
+    func getImage(for condition: String) -> UIImage? {
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage(named: "sunny")?.withTintColor(.red) }
+        
+        switch condition {
+        case .sunny:
+            return UIImage(named: "sunny")?.withTintColor(.red)
+        case .cloudy:
+            return UIImage(named: "cloudy")?.withTintColor(.gray)
+        case .rainy:
+            return UIImage(named: "rainy")?.withTintColor(.blue)
+        }
     }
 }
