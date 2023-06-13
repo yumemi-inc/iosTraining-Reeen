@@ -12,17 +12,17 @@ protocol WeatherServiceProtocol {
     func getWeatherInformation()
 }
 
-protocol WeatherUpdateDelegate: AnyObject {
-    func weatherConditionDidUpdate(weatherInfo: String)
+protocol WeatherServiceDelegate: AnyObject {
+    func weatherService(_ weatherService: WeatherServiceProtocol, conditonUpdate weatherInfo: String)
 }
 
 final class WeatherService: WeatherServiceProtocol {
     
-    weak var delegate: WeatherUpdateDelegate?
+    weak var delegate: WeatherServiceDelegate?
     
     func getWeatherInformation() {
         let weatherInfo = YumemiWeather.fetchWeatherCondition()
-        delegate?.weatherConditionDidUpdate(weatherInfo: weatherInfo)
+        delegate?.weatherService(WeatherService(), conditonUpdate: weatherInfo)
     }
 }
 

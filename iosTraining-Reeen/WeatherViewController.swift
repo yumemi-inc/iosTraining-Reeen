@@ -141,8 +141,8 @@ private extension WeatherViewController {
     }
 }
 
-extension WeatherViewController: WeatherUpdateDelegate {
-    func weatherConditionDidUpdate(weatherInfo: String) {
+extension WeatherViewController: WeatherServiceDelegate {
+    func weatherService(_ weatherService: WeatherServiceProtocol, conditonUpdate weatherInfo: String) {
         let image = getImage(for: weatherInfo)
         weatherConditionImageView.image = image
     }
