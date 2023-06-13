@@ -16,6 +16,7 @@ protocol WeatherServiceProtocol: AnyObject {
 
 protocol WeatherServiceDelegate: AnyObject {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String)
+    func weatherService(_ weatherService: WeatherService, didFailWithError error: Error)
 }
 
 final class WeatherService: WeatherServiceProtocol {
@@ -23,9 +24,11 @@ final class WeatherService: WeatherServiceProtocol {
     weak var delegate: WeatherServiceDelegate?
     
     func getWeatherInformation() {
-        let weatherInfo = YumemiWeather.fetchWeatherCondition()
-        delegate?.weatherService(self, didUpdateCondition: weatherInfo)
+        do {
+            let weatherInfo = try YumemiWeather.fetchWeatherCondition(at: "tokyo")
+            delegate?.weatherService(self, didUpdateCondition: weatherInfo)
+        } catch {
+            delegate?.weatherService(self, didFailWithError: error)
+        }
     }
 }
-
-
