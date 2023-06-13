@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EmptyViewController: UIViewController {
+final class ModalHolderViewController: UIViewController {
     
     private let weatherViewController = WeatherViewController(weatherService: WeatherService())
     

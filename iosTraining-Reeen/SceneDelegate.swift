@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         window.makeKeyAndVisible()
-        let viewController = EmptyViewController()
-        window.rootViewController = viewController
+        let presentingViewController = ModalHolderViewController()
+        window.rootViewController = presentingViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
