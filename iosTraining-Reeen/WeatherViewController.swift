@@ -98,17 +98,25 @@ private extension WeatherViewController {
         }
     }
     
+    func closeEmptyViewController() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
-        let action = UIAction { [weak self] _ in
+        let reloadAction = UIAction { [weak self] _ in
             self?.displayWeatherCondition()
         }
+        reloadButton.addAction(reloadAction, for: .touchUpInside)
         
-        reloadButton.addAction(action, for: .touchUpInside)
+        let closeAction = UIAction { [weak self] _ in
+            self?.closeEmptyViewController()
+        }
+        closeButton.addAction(closeAction, for: .touchUpInside)
         
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
