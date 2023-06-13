@@ -126,13 +126,6 @@ private extension WeatherViewController {
     func closeWeatherViewController() {
         dismiss(animated: true, completion: nil)
     }
-}
-
-extension WeatherViewController: WeatherUpdateDelegate {
-    func didUpdateWeatherInformation(weatherInfo: String) {
-        let image = getImage(for: weatherInfo)
-        weatherConditionImageView.image = image
-    }
     
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
@@ -145,5 +138,12 @@ extension WeatherViewController: WeatherUpdateDelegate {
         case .rainy:
             return UIImage(named: "rainy")?.withTintColor(.blue)
         }
+    }
+}
+
+extension WeatherViewController: WeatherUpdateDelegate {
+    func didUpdateWeatherInformation(weatherInfo: String) {
+        let image = getImage(for: weatherInfo)
+        weatherConditionImageView.image = image
     }
 }
