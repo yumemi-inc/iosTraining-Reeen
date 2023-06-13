@@ -9,10 +9,11 @@ import UIKit
 
 final class ModalHolderViewController: UIViewController {
     
-    private let weatherViewController = WeatherViewController(weatherService: WeatherService())
+    var customPresentingViewController: UIViewController?
     
     override func viewDidAppear(_ animated: Bool) {
-        weatherViewController.modalPresentationStyle = .fullScreen
-        present(weatherViewController, animated: true, completion: nil)
+        guard let nextViewController = customPresentingViewController else { return }
+        nextViewController.modalPresentationStyle = .fullScreen
+        present(nextViewController, animated: true, completion: nil)
     }
 }
