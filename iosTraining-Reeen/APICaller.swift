@@ -13,7 +13,7 @@ protocol WeatherServiceProtocol {
 }
 
 protocol WeatherUpdateDelegate: AnyObject {
-    func didUpdateWeatherInformation(weatherInfo: String)
+    func weatherConditionDidUpdate(weatherInfo: String)
 }
 
 final class WeatherService: WeatherServiceProtocol {
@@ -22,7 +22,7 @@ final class WeatherService: WeatherServiceProtocol {
     
     func getWeatherInformation() {
         let weatherInfo = YumemiWeather.fetchWeatherCondition()
-        delegate?.didUpdateWeatherInformation(weatherInfo: weatherInfo)
+        delegate?.weatherConditionDidUpdate(weatherInfo: weatherInfo)
     }
 }
 
