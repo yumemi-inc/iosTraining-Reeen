@@ -86,7 +86,7 @@ private extension WeatherViewController {
     }
     
     func getImage(for condition: String) -> UIImage? {
-        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage(named: "sunny")?.withTintColor(.red) }
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
         
         switch condition {
         case .sunny:
