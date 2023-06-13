@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         let holderViewController = ModalHolderViewController()
         let weatherViewController = WeatherViewController(weatherService: WeatherService())
-        holderViewController.customPresentingViewController = weatherViewController
+        holderViewController.heldViewController = weatherViewController
         window.rootViewController = holderViewController
     }
     
