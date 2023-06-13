@@ -90,13 +90,15 @@ private extension WeatherViewController {
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
+        (weatherService as? WeatherService)?.delegate = self
+        
         let reloadAction = UIAction { [weak self] _ in
-            self?.updateDelgate()
+            self?.weatherService.getWeatherInformation()
         }
         reloadButton.addAction(reloadAction, for: .touchUpInside)
         
         let closeAction = UIAction { [weak self] _ in
-            self?.closeEmptyViewController()
+            self?.closeWeatherViewController()
         }
         closeButton.addAction(closeAction, for: .touchUpInside)
         
@@ -121,24 +123,19 @@ private extension WeatherViewController {
         }
     }
     
-    func closeEmptyViewController() {
+    func closeWeatherViewController() {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension WeatherViewController: WeatherUpdateDelegate {
-    func updateDelgate() {
-        (weatherService as? WeatherService)?.delegate = self
-        weatherService.getWeatherInformation()
-    }
-    
     func didUpdateWeatherInformation(weatherInfo: String) {
         let image = getImage(for: weatherInfo)
         weatherConditionImageView.image = image
     }
     
     func getImage(for condition: String) -> UIImage? {
-        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage(named: "sunny")?.withTintColor(.red) }
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
         
         switch condition {
         case .sunny:
