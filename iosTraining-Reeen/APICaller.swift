@@ -24,7 +24,7 @@ final class WeatherService: WeatherServiceProtocol {
     
     func getWeatherInformation() {
         let weatherInfo = YumemiWeather.fetchWeatherCondition()
-        delegate?.weatherService(WeatherService(), conditonUpdate: weatherInfo)
+        delegate?.weatherService(self, conditonUpdate: weatherInfo)
     }
 }
 

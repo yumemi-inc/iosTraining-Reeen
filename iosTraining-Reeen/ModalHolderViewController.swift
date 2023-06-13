@@ -16,4 +16,8 @@ final class ModalHolderViewController: UIViewController {
         heldViewController.modalPresentationStyle = .fullScreen
         present(heldViewController, animated: true, completion: nil)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        heldViewController = nil
+    }
 }
