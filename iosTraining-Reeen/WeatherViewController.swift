@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  iosTraining-Reeen
 //
 //  Created by 高橋 蓮 on 2023/06/06.
@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
-    private let imageView: UIImageView = {
+final class WeatherViewController: UIViewController {
+    private let weatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     }()
     
     private lazy var weatherConditionStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [imageView, temperatureStackView])
+        let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         return stackView
@@ -62,24 +62,59 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    private let weatherService: WeatherServiceProtocol
+    
+    init(weatherService: WeatherServiceProtocol) {
+        self.weatherService = weatherService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
 }
 
-private extension ViewController {
+private extension WeatherViewController {
+    func displayWeatherCondition() {
+        let condition = weatherService.getWeatherInformation()
+        weatherConditionImageView.image = getImage(for: condition)
+    }
+    
+    func getImage(for condition: String) -> UIImage? {
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
+        
+        switch condition {
+        case .sunny:
+            return UIImage(named: "sunny")?.withTintColor(.red)
+        case .cloudy:
+            return UIImage(named: "cloudy")?.withTintColor(.gray)
+        case .rainy:
+            return UIImage(named: "rainy")?.withTintColor(.blue)
+        }
+    }
+    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
+        let action = UIAction { [weak self] _ in
+            self?.displayWeatherCondition()
+        }
+        
+        reloadButton.addAction(action, for: .touchUpInside)
+        
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
-        imageView.snp.makeConstraints { make in
+        weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(view.snp.width).multipliedBy(0.5)
         }
         
