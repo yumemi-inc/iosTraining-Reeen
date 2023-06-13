@@ -62,7 +62,7 @@ final class WeatherViewController: UIViewController {
         return stackView
     }()
     
-    private var weatherService: WeatherServiceProtocol
+    private let weatherService: WeatherServiceProtocol
     
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
@@ -142,7 +142,7 @@ private extension WeatherViewController {
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherServiceProtocol, conditonUpdate weatherInfo: String) {
+    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String) {
         let image = getImage(for: weatherInfo)
         weatherConditionImageView.image = image
     }
