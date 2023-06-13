@@ -62,7 +62,7 @@ final class WeatherViewController: UIViewController {
         return stackView
     }()
     
-    private let weatherService: WeatherServiceProtocol
+    private var weatherService: WeatherServiceProtocol
     
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
@@ -90,7 +90,7 @@ private extension WeatherViewController {
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
-        (weatherService as? WeatherService)?.delegate = self
+        weatherService.delegate = self
         
         let reloadAction = UIAction { [weak self] _ in
             self?.weatherService.getWeatherInformation()
@@ -141,7 +141,7 @@ private extension WeatherViewController {
     }
 }
 
-extension WeatherViewController: WeatherServiceDelegate {
+extension WeatherViewController: WetherServiceDelegate {
     func weatherService(_ weatherService: WeatherServiceProtocol, conditonUpdate weatherInfo: String) {
         let image = getImage(for: weatherInfo)
         weatherConditionImageView.image = image
