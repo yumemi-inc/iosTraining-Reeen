@@ -28,7 +28,9 @@ final class WeatherService: WeatherServiceProtocol {
         do {
             let jsonString = #"{"area": "tokyo", "date": "2020-04-01T12:00:00+09:00"}"#
             let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
-            guard let data = weatherInfo.data(using: .utf8) else { return }
+            guard let data = weatherInfo.data(using: .utf8) else {
+                throw WeatherError.weatherDataNotExist
+            }
             decoder.keyDecodingStrategy = .convertFromSnakeCase
 
             let weatherData = try decoder.decode(WeatherData.self, from: data)
@@ -38,7 +40,7 @@ final class WeatherService: WeatherServiceProtocol {
         } catch YumemiWeatherError.unknownError {
             delegate?.weatherService(self, didFailWithError: .unknownError)
         } catch {
-            assertionFailure("Unexpected error occurred.")
+            delegate?.weatherService(self, didFailWithError: .weatherDataNotExist)
         }
     }
 }

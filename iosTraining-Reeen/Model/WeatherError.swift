@@ -10,6 +10,7 @@ import Foundation
 enum WeatherError: LocalizedError {
     case invalidParameterError
     case unknownError
+    case weatherDataNotExist
     
     var errorDescription: String? {
         switch self {
@@ -17,6 +18,8 @@ enum WeatherError: LocalizedError {
             "Invalid parameter error occurred."
         case .unknownError:
             "Unknown error occurred."
+        case .weatherDataNotExist:
+            "Weather data is not exist"
         }
     }
 }
