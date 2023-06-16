@@ -114,11 +114,14 @@
 				0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */,
 				0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */,
 				0D1566912A2F1622009A5927 /* APICaller.swift */,
+<<<<<<< HEAD
 				0D976FE12A3C40BB006F7A9D /* WeatherError.swift */,
+=======
+				0D976FDF2A3C2476006F7A9D /* WeatherData.swift */,
+>>>>>>> 1812fcf (feat: convertFromSnakeCaseの適用)
 				0D1F321B2A332399007C298B /* ModalHolderViewController.swift */,
 				0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */,
 				0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */,
-				0D976FDF2A3C2476006F7A9D /* WeatherData.swift */,
 				0D1566642A2EDA7F009A5927 /* Assets.xcassets */,
 				0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */,
 				0D1566692A2EDA7F009A5927 /* Info.plist */,

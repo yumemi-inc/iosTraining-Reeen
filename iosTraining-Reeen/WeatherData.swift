@@ -8,8 +8,7 @@
 import Foundation
 
 struct WeatherData: Codable {
-    let max_temperature: Int
-    let min_temperature: Int
-    let date: String
-    let weather_condition: String
+    let maxTemperature: Int
+    let minTemperature: Int
+    let weatherCondition: String
 }
