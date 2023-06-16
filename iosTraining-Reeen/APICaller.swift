@@ -15,19 +15,22 @@ protocol WeatherServiceProtocol: AnyObject {
 }
 
 protocol WeatherServiceDelegate: AnyObject {
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String)
+    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: WeatherData)
     func weatherService(_ weatherService: WeatherService, didFailWithError error: WeatherError)
 }
 
 final class WeatherService: WeatherServiceProtocol {
     
     weak var delegate: WeatherServiceDelegate?
+    private let decoder = JSONDecoder()
     
     func getWeatherInformation() {
         do {
             let jsonString = "{\"area\": \"tokyo\", \"date\": \"2020-04-01T12:00:00+09:00\"}"
             let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
-            delegate?.weatherService(self, didUpdateCondition: weatherInfo)
+            let data = weatherInfo.data(using: .utf8)!
+            let weatherData = try decoder.decode(WeatherData.self, from: data)
+            delegate?.weatherService(self, didUpdateCondition: weatherData)
         } catch YumemiWeatherError.invalidParameterError {
             delegate?.weatherService(self, didFailWithError: .invalidParameterError)
         } catch YumemiWeatherError.unknownError {
