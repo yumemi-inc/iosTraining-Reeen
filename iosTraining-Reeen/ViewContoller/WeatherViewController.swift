@@ -62,6 +62,7 @@ final class WeatherViewController: UIViewController {
         return stackView
     }()
     
+    private var errorAlert = UIAlertController()
     private let weatherService: WeatherServiceProtocol
     private let notificationCenter = NotificationCenter()
     
@@ -134,7 +135,7 @@ private extension WeatherViewController {
     }
     
     @objc func willEnterForeground() {
-        print("now in foreground")
+        errorAlert.dismiss(animated: true)
         weatherService.getWeatherInformation()
     }
     
