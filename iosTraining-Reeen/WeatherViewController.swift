@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import YumemiWeather
 
 final class WeatherViewController: UIViewController {
     private let weatherConditionImageView: UIImageView = {
@@ -140,25 +139,11 @@ private extension WeatherViewController {
             return UIImage(named: "rainy")?.withTintColor(.blue)
         }
     }
-    
-    func handleError(for error: Error) -> String {
-        if let yumemiWeatherError = error as? YumemiWeatherError {
-            switch yumemiWeatherError {
-            case .invalidParameterError:
-                return "Invalid parameter error occurred."
-            case .unknownError:
-                return "Unknown error occurred."
-            }
-        } else {
-            return "An error occurred that is not a YumemiWeatherError."
-        }
-    }
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: Error) {
-        let errorMessage = handleError(for: error)
-        let errorAlert = UIAlertController(title: "Alert", message: errorMessage, preferredStyle: .alert)
+    func weatherService(_ weatherService: WeatherService, didFailWithError error: WeatherError) {
+        let errorAlert = UIAlertController(title: "Alert", message: error.errorMessage(), preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
         present(errorAlert, animated: true, completion: nil)

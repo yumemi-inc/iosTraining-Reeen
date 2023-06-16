@@ -20,6 +20,7 @@
 		0D1566922A2F1622009A5927 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566912A2F1622009A5927 /* APICaller.swift */; };
 		0D15669B2A2F26FF009A5927 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */; };
 		0D1F321C2A332399007C298B /* ModalHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F321B2A332399007C298B /* ModalHolderViewController.swift */; };
+		0D976FE22A3C40BB006F7A9D /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D976FE12A3C40BB006F7A9D /* WeatherError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		0D1566912A2F1622009A5927 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		0D1F321B2A332399007C298B /* ModalHolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHolderViewController.swift; sourceTree = "<group>"; };
+		0D976FE12A3C40BB006F7A9D /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				0D15665B2A2EDA7E009A5927 /* AppDelegate.swift */,
 				0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */,
 				0D1566912A2F1622009A5927 /* APICaller.swift */,
+				0D976FE12A3C40BB006F7A9D /* WeatherError.swift */,
 				0D1F321B2A332399007C298B /* ModalHolderViewController.swift */,
 				0D15665F2A2EDA7E009A5927 /* WeatherViewController.swift */,
 				0D15669A2A2F26FF009A5927 /* WeatherCondition.swift */,
@@ -281,6 +284,7 @@
 				0D1566922A2F1622009A5927 /* APICaller.swift in Sources */,
 				0D1F321C2A332399007C298B /* ModalHolderViewController.swift in Sources */,
 				0D15669B2A2F26FF009A5927 /* WeatherCondition.swift in Sources */,
+				0D976FE22A3C40BB006F7A9D /* WeatherError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
