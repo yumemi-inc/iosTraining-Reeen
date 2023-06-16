@@ -139,18 +139,32 @@ private extension WeatherViewController {
             return UIImage(named: "rainy")?.withTintColor(.blue)
         }
     }
+    
+    func handleError(for error: Error) {
+        if let yumemiWeatherError = error as? YumemiWeatherError {
+            switch yumemiWeatherError {
+            case .invalidParameterError:
+                print("Invalid parameter error occurred.")
+            case .unknownError:
+                print("Unknown error occurred.")
+            }
+        } else {
+            print("An error occurred that is not a YumemiWeatherError.")
+        }
+    }
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherService, didFailWithError error: Error) {
-        let errorAlert = UIAlertController(title:"alert", message: "some error occurred.", preferredStyle: .alert)
+        handleError(for: error)
         
-        let alertAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            print("some error occurred.")
-        }
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true, completion: nil)
+//        let errorAlert = UIAlertController(title: "Alert", message: errorMessage, preferredStyle: .alert)
+//        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//        errorAlert.addAction(alertAction)
+//        present(errorAlert, animated: true, completion: nil)
     }
+    
+    
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String) {
         let image = getImage(for: weatherInfo)
