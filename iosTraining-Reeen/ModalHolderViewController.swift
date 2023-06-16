@@ -13,13 +13,9 @@ final class ModalHolderViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-          let weatherService = WeatherService()
-          let vc = WeatherViewController(weatherService: weatherService)
-          vc.modalPresentationStyle = .fullScreen
-          present(vc, animated: true, completion: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        heldViewController = nil
+        let weatherService = WeatherService()
+        let vc = WeatherViewController(weatherService: weatherService)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
