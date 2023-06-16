@@ -7,11 +7,11 @@
 
 import Foundation
  
-enum WeatherError {
+enum WeatherError: LocalizedError {
     case invalidParameterError
     case unknownError
     
-    func errorMessage() -> String {
+    var errorDescription: String? {
         switch self {
         case .invalidParameterError:
             "Invalid parameter error occurred."
