@@ -63,6 +63,7 @@ final class WeatherViewController: UIViewController {
     }()
     
     private let weatherService: WeatherServiceProtocol
+    private let notificationCenter = NotificationCenter()
     
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
@@ -80,6 +81,7 @@ final class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        addNotificationCenter()
     }
 }
 
@@ -121,6 +123,19 @@ private extension WeatherViewController {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+    }
+    
+    func addNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.willEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil)
+    }
+    
+    @objc func willEnterForeground() {
+        print("now in foreground")
+        weatherService.getWeatherInformation()
     }
     
     func closeWeatherViewController() {
