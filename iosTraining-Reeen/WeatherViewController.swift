@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import YumemiWeather
 
 final class WeatherViewController: UIViewController {
     private let weatherConditionImageView: UIImageView = {
@@ -140,31 +141,28 @@ private extension WeatherViewController {
         }
     }
     
-    func handleError(for error: Error) {
+    func handleError(for error: Error) -> String {
         if let yumemiWeatherError = error as? YumemiWeatherError {
             switch yumemiWeatherError {
             case .invalidParameterError:
-                print("Invalid parameter error occurred.")
+                return "Invalid parameter error occurred."
             case .unknownError:
-                print("Unknown error occurred.")
+                return "Unknown error occurred."
             }
         } else {
-            print("An error occurred that is not a YumemiWeatherError.")
+            return "An error occurred that is not a YumemiWeatherError."
         }
     }
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherService, didFailWithError error: Error) {
-        handleError(for: error)
-        
-//        let errorAlert = UIAlertController(title: "Alert", message: errorMessage, preferredStyle: .alert)
-//        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//        errorAlert.addAction(alertAction)
-//        present(errorAlert, animated: true, completion: nil)
+        let errorMessage = handleError(for: error)
+        let errorAlert = UIAlertController(title: "Alert", message: errorMessage, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        errorAlert.addAction(alertAction)
+        present(errorAlert, animated: true, completion: nil)
     }
-    
-    
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String) {
         let image = getImage(for: weatherInfo)
