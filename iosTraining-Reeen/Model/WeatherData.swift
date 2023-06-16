@@ -2,7 +2,7 @@
 //  WeatherData.swift
 //  iosTraining-Reeen
 //
-//  Created by 高橋 蓮 on 2023/06/16.
+//  Created by 高橋 蓮 on 2023/06/30.
 //
 
 import Foundation

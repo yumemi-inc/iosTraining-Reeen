@@ -10,7 +10,7 @@ import YumemiWeather
 
 protocol WeatherServiceProtocol: AnyObject {
     var delegate: WeatherServiceDelegate? { get set }
-    
+
     func getWeatherInformation()
 }
 
@@ -20,10 +20,10 @@ protocol WeatherServiceDelegate: AnyObject {
 }
 
 final class WeatherService: WeatherServiceProtocol {
-    
+
     private let decoder = JSONDecoder()
     weak var delegate: WeatherServiceDelegate?
-    
+
     func getWeatherInformation() {
         do {
             // input
@@ -32,7 +32,7 @@ final class WeatherService: WeatherServiceProtocol {
             let request = RequestParameters(area: "tokyo", date: formattedDate)
             let encodedRequest = try JSONEncoder().encode(request)
             guard let jsonString = String(data: encodedRequest, encoding: .utf8) else { return }
-            
+
             // output
             let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
             guard let data = weatherInfo.data(using: .utf8) else {
