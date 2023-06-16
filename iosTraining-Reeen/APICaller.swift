@@ -32,7 +32,7 @@ final class WeatherService: WeatherServiceProtocol {
         } catch YumemiWeatherError.unknownError {
             delegate?.weatherService(self, didFailWithError: .unknownError)
         } catch {
-            print("some error")
+            assertionFailure("error occurred in getWeatherInformation().")
         }
     }
 }
