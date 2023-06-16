@@ -26,6 +26,7 @@ final class WeatherService: WeatherServiceProtocol {
     
     func getWeatherInformation() {
         do {
+            // input
             let date = Date(timeIntervalSinceNow: 3 * 3600)
             let formattedDate = ISO8601DateFormatter().string(from: date)
             let request = RequestParameters(area: "tokyo", date: formattedDate)
