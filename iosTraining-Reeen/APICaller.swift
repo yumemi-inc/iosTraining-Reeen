@@ -25,7 +25,8 @@ final class WeatherService: WeatherServiceProtocol {
     
     func getWeatherInformation() {
         do {
-            let weatherInfo = try YumemiWeather.fetchWeatherCondition(at: "tokyo")
+            let jsonString = "{\"area\": \"tokyo\", \"date\": \"2020-04-01T12:00:00+09:00\"}"
+            let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
             delegate?.weatherService(self, didUpdateCondition: weatherInfo)
         } catch YumemiWeatherError.invalidParameterError {
             delegate?.weatherService(self, didFailWithError: .invalidParameterError)
