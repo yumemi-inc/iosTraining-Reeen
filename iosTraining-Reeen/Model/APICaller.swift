@@ -26,9 +26,9 @@ final class WeatherService: WeatherServiceProtocol {
     
     func getWeatherInformation() {
         do {
-            let jsonString = "{\"area\": \"tokyo\", \"date\": \"2020-04-01T12:00:00+09:00\"}"
+            let jsonString = #"{"area": "tokyo", "date": "2020-04-01T12:00:00+09:00"}"#
             let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
-            let data = weatherInfo.data(using: .utf8)!
+            guard let data = weatherInfo.data(using: .utf8) else { return }
             decoder.keyDecodingStrategy = .convertFromSnakeCase
 
             let weatherData = try decoder.decode(WeatherData.self, from: data)
