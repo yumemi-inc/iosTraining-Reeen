@@ -32,16 +32,25 @@ final class WeatherService: WeatherServiceProtocol {
                 throw WeatherError.weatherDataNotExist
             }
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             let weatherData = try decoder.decode(WeatherData.self, from: data)
             delegate?.weatherService(self, didUpdateCondition: weatherData)
-        } catch YumemiWeatherError.invalidParameterError {
-            delegate?.weatherService(self, didFailWithError: WeatherError.invalidParameterError)
-        } catch YumemiWeatherError.unknownError {
-            delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
         } catch {
+            handleWeatherServiceError(error)
+        }
+    }
+}
+
+extension WeatherService {
+    func handleWeatherServiceError(_ error: Error) {
+        if let yumemiWeatherError = error as? YumemiWeatherError {
+            switch yumemiWeatherError {
+            case .invalidParameterError:
+                delegate?.weatherService(self, didFailWithError: WeatherError.invalidParameterError)
+            case .unknownError:
+                delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
+            }
+        } else {
             delegate?.weatherService(self, didFailWithError: WeatherError.weatherDataNotExist)
         }
     }
-    
 }
