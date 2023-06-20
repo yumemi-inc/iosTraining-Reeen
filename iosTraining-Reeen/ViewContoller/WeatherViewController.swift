@@ -166,7 +166,7 @@ extension WeatherViewController: WeatherServiceDelegate {
     }
     
     func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError) {
-        let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+        errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
 
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
