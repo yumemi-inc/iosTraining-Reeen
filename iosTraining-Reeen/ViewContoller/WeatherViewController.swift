@@ -149,7 +149,7 @@ extension WeatherViewController: WeatherServiceDelegate {
         minTemperatureLabel.text = weatherData.minTemperature.description
     }
     
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: WeatherError) {
+    func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError) {
         let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)

@@ -16,7 +16,7 @@ protocol WeatherServiceProtocol: AnyObject {
 
 protocol WeatherServiceDelegate: AnyObject {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: WeatherData)
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: WeatherError)
+    func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError)
 }
 
 final class WeatherService: WeatherServiceProtocol {
@@ -32,15 +32,16 @@ final class WeatherService: WeatherServiceProtocol {
                 throw WeatherError.weatherDataNotExist
             }
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-
+            
             let weatherData = try decoder.decode(WeatherData.self, from: data)
             delegate?.weatherService(self, didUpdateCondition: weatherData)
         } catch YumemiWeatherError.invalidParameterError {
-            delegate?.weatherService(self, didFailWithError: .invalidParameterError)
+            delegate?.weatherService(self, didFailWithError: WeatherError.invalidParameterError)
         } catch YumemiWeatherError.unknownError {
-            delegate?.weatherService(self, didFailWithError: .unknownError)
+            delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
         } catch {
-            delegate?.weatherService(self, didFailWithError: .weatherDataNotExist)
+            delegate?.weatherService(self, didFailWithError: WeatherError.weatherDataNotExist)
         }
     }
+    
 }
