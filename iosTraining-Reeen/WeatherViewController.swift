@@ -73,6 +73,10 @@ final class WeatherViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("WeatherViewController deinitialized")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -80,41 +84,21 @@ final class WeatherViewController: UIViewController {
 }
 
 private extension WeatherViewController {
-    func displayWeatherCondition() {
-        let condition = weatherService.getWeatherInformation()
-        weatherConditionImageView.image = getImage(for: condition)
-    }
-    
-    func getImage(for condition: String) -> UIImage? {
-        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-        
-        switch condition {
-        case .sunny:
-            return UIImage(named: "sunny")?.withTintColor(.red)
-        case .cloudy:
-            return UIImage(named: "cloudy")?.withTintColor(.gray)
-        case .rainy:
-            return UIImage(named: "rainy")?.withTintColor(.blue)
-        }
-    }
-    
-    func closeEmptyViewController() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
         
+        weatherService.delegate = self
+        
         let reloadAction = UIAction { [weak self] _ in
-            self?.displayWeatherCondition()
+            self?.weatherService.getWeatherInformation()
         }
         reloadButton.addAction(reloadAction, for: .touchUpInside)
         
         let closeAction = UIAction { [weak self] _ in
-            self?.closeEmptyViewController()
+            self?.closeWeatherViewController()
         }
         closeButton.addAction(closeAction, for: .touchUpInside)
         
@@ -137,5 +121,29 @@ private extension WeatherViewController {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+    }
+    
+    func closeWeatherViewController() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func getImage(for condition: String) -> UIImage? {
+        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
+        
+        switch condition {
+        case .sunny:
+            return UIImage(named: "sunny")?.withTintColor(.red)
+        case .cloudy:
+            return UIImage(named: "cloudy")?.withTintColor(.gray)
+        case .rainy:
+            return UIImage(named: "rainy")?.withTintColor(.blue)
+        }
+    }
+}
+
+extension WeatherViewController: WeatherServiceDelegate {
+    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String) {
+        let image = getImage(for: weatherInfo)
+        weatherConditionImageView.image = image
     }
 }
