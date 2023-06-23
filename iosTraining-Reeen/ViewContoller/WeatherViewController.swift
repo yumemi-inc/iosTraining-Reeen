@@ -14,8 +14,8 @@ final class WeatherViewController: UIViewController {
         imageView.backgroundColor = .white
         return imageView
     }()
-
-    private let maxTemperatureLabel: UILabel = {
+    
+    let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         // TODO: textは仮の設定
         label.text = "最高気温"
@@ -23,8 +23,8 @@ final class WeatherViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-
-    private let minTemperatureLabel: UILabel = {
+    
+    let minTemperatureLabel: UILabel = {
         let label = UILabel()
         // TODO: textは仮の設定
         label.text = "最低気温"
