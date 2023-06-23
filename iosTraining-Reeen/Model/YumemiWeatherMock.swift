@@ -7,14 +7,13 @@
 
 import Foundation
 
-class YumemiWeatherMock: YumemiWeatherProtocol {
-    static var mockResponse: String?
-    static var mockError: Error?
+class YumemiWeatherMock: WeatherServiceProtocol {
+    var delegate: WeatherServiceDelegate?
 
-    static func fetchWeather(_ jsonString: String) throws -> String {
-        if let error = mockError {
-            throw error
-        }
-        return mockResponse ?? ""
+    var weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "sunny")
+
+    func getWeatherInformation() {
+        delegate?.weatherService(self, didUpdateCondition: weatherDataMock)
     }
+
 }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class WeatherViewController: UIViewController {
-    private let weatherConditionImageView: UIImageView = {
+    let weatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         return imageView
