@@ -19,11 +19,6 @@ protocol WeatherServiceDelegate: AnyObject {
     func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError)
 }
 
-protocol YumemiWeatherProtocol {
-    static func fetchWeather(_ jsonString: String) throws -> String
-}
-
-extension YumemiWeather: YumemiWeatherProtocol {}
 
 final class WeatherService: WeatherServiceProtocol {
 

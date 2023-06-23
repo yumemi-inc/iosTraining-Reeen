@@ -12,8 +12,6 @@
 		0D1566652A2EDA7F009A5927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1566642A2EDA7F009A5927 /* Assets.xcassets */; };
 		0D1566682A2EDA7F009A5927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */; };
 		0D1566732A2EDA7F009A5927 /* iosTraining_ReeenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */; };
-		0D15667D2A2EDA7F009A5927 /* iosTraining_ReeenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15667C2A2EDA7F009A5927 /* iosTraining_ReeenUITests.swift */; };
-		0D15667F2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15667E2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift */; };
 		0D15668D2A2EF99D009A5927 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668C2A2EF99D009A5927 /* YumemiWeather */; };
 		0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668F2A2EFC47009A5927 /* SnapKit */; };
 		0D1B08612A3C59BF0035F2FF /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B085F2A3C59BF0035F2FF /* WeatherViewController.swift */; };
@@ -33,13 +31,6 @@
 			remoteGlobalIDString = 0D1566572A2EDA7E009A5927;
 			remoteInfo = "iosTraining-Reeen";
 		};
-		0D1566792A2EDA7F009A5927 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0D1566502A2EDA7E009A5927 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0D1566572A2EDA7E009A5927;
-			remoteInfo = "iosTraining-Reeen";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -51,15 +42,14 @@
 		0D1566692A2EDA7F009A5927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D15666E2A2EDA7F009A5927 /* iosTraining-ReeenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iosTraining-ReeenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTraining_ReeenTests.swift; sourceTree = "<group>"; };
-		0D1566782A2EDA7F009A5927 /* iosTraining-ReeenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iosTraining-ReeenUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D15667C2A2EDA7F009A5927 /* iosTraining_ReeenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTraining_ReeenUITests.swift; sourceTree = "<group>"; };
-		0D15667E2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTraining_ReeenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0D1B085F2A3C59BF0035F2FF /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		0D1B08602A3C59BF0035F2FF /* ModalHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalHolderViewController.swift; sourceTree = "<group>"; };
 		0D1B08642A3C59E60035F2FF /* WeatherCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		0D1B08662A3C59E60035F2FF /* APICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		0D4A7B0D2A4E7CCE00F84BCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0D64CA562A45304A00180ADD /* YumemiWeatherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YumemiWeatherMock.swift; sourceTree = "<group>"; };
+		0D836E712A457672003076C1 /* iosTraining-Reeen.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "iosTraining-Reeen.xctestplan"; sourceTree = "<group>"; };
+		0D976FDF2A3C2476006F7A9D /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherData.swift; path = ../WeatherData.swift; sourceTree = "<group>"; };
 		0D976FE12A3C40BB006F7A9D /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,22 +70,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0D1566752A2EDA7F009A5927 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0D15664F2A2EDA7E009A5927 = {
 			isa = PBXGroup;
 			children = (
+				0D836E712A457672003076C1 /* iosTraining-Reeen.xctestplan */,
 				0D15665A2A2EDA7E009A5927 /* iosTraining-Reeen */,
 				0D1566712A2EDA7F009A5927 /* iosTraining-ReeenTests */,
-				0D15667B2A2EDA7F009A5927 /* iosTraining-ReeenUITests */,
 				0D1566592A2EDA7E009A5927 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,7 +88,6 @@
 			children = (
 				0D1566582A2EDA7E009A5927 /* iosTraining-Reeen.app */,
 				0D15666E2A2EDA7F009A5927 /* iosTraining-ReeenTests.xctest */,
-				0D1566782A2EDA7F009A5927 /* iosTraining-ReeenUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,15 +112,6 @@
 				0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */,
 			);
 			path = "iosTraining-ReeenTests";
-			sourceTree = "<group>";
-		};
-		0D15667B2A2EDA7F009A5927 /* iosTraining-ReeenUITests */ = {
-			isa = PBXGroup;
-			children = (
-				0D15667C2A2EDA7F009A5927 /* iosTraining_ReeenUITests.swift */,
-				0D15667E2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift */,
-			);
-			path = "iosTraining-ReeenUITests";
 			sourceTree = "<group>";
 		};
 		0D1B085E2A3C59BF0035F2FF /* ViewContoller */ = {
@@ -204,24 +177,6 @@
 			productReference = 0D15666E2A2EDA7F009A5927 /* iosTraining-ReeenTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0D1566772A2EDA7F009A5927 /* iosTraining-ReeenUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0D1566882A2EDA7F009A5927 /* Build configuration list for PBXNativeTarget "iosTraining-ReeenUITests" */;
-			buildPhases = (
-				0D1566742A2EDA7F009A5927 /* Sources */,
-				0D1566752A2EDA7F009A5927 /* Frameworks */,
-				0D1566762A2EDA7F009A5927 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0D15667A2A2EDA7F009A5927 /* PBXTargetDependency */,
-			);
-			name = "iosTraining-ReeenUITests";
-			productName = "iosTraining-ReeenUITests";
-			productReference = 0D1566782A2EDA7F009A5927 /* iosTraining-ReeenUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -236,10 +191,6 @@
 						CreatedOnToolsVersion = 14.3;
 					};
 					0D15666D2A2EDA7F009A5927 = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 0D1566572A2EDA7E009A5927;
-					};
-					0D1566772A2EDA7F009A5927 = {
 						CreatedOnToolsVersion = 14.3;
 						TestTargetID = 0D1566572A2EDA7E009A5927;
 					};
@@ -264,7 +215,6 @@
 			targets = (
 				0D1566572A2EDA7E009A5927 /* iosTraining-Reeen */,
 				0D15666D2A2EDA7F009A5927 /* iosTraining-ReeenTests */,
-				0D1566772A2EDA7F009A5927 /* iosTraining-ReeenUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -280,13 +230,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0D15666C2A2EDA7F009A5927 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0D1566762A2EDA7F009A5927 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,15 +263,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0D1566742A2EDA7F009A5927 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0D15667F2A2EDA7F009A5927 /* iosTraining_ReeenUITestsLaunchTests.swift in Sources */,
-				0D15667D2A2EDA7F009A5927 /* iosTraining_ReeenUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -336,11 +270,6 @@
 			isa = PBXTargetDependency;
 			target = 0D1566572A2EDA7E009A5927 /* iosTraining-Reeen */;
 			targetProxy = 0D15666F2A2EDA7F009A5927 /* PBXContainerItemProxy */;
-		};
-		0D15667A2A2EDA7F009A5927 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0D1566572A2EDA7E009A5927 /* iosTraining-Reeen */;
-			targetProxy = 0D1566792A2EDA7F009A5927 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -566,42 +495,6 @@
 			};
 			name = Release;
 		};
-		0D1566892A2EDA7F009A5927 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5DZ85S2CD;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Ren.iosTraining-ReeenUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iosTraining-Reeen";
-			};
-			name = Debug;
-		};
-		0D15668A2A2EDA7F009A5927 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5DZ85S2CD;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Ren.iosTraining-ReeenUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iosTraining-Reeen";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -628,15 +521,6 @@
 			buildConfigurations = (
 				0D1566862A2EDA7F009A5927 /* Debug */,
 				0D1566872A2EDA7F009A5927 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0D1566882A2EDA7F009A5927 /* Build configuration list for PBXNativeTarget "iosTraining-ReeenUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0D1566892A2EDA7F009A5927 /* Debug */,
-				0D15668A2A2EDA7F009A5927 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

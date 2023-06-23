@@ -15,11 +15,11 @@ enum WeatherError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidParameterError:
-            "Invalid parameter error occurred."
+            return "Invalid parameter error occurred."
         case .unknownError:
-            "Unknown error occurred."
+            return "Unknown error occurred."
         case .weatherDataNotExist:
-            "Weather data is not exist"
+            return "Weather data is not exist"
         }
     }
 }
