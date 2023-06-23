@@ -20,7 +20,8 @@
 		0D1B08622A3C59BF0035F2FF /* ModalHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B08602A3C59BF0035F2FF /* ModalHolderViewController.swift */; };
 		0D1B08672A3C59E60035F2FF /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B08642A3C59E60035F2FF /* WeatherCondition.swift */; };
 		0D1B08692A3C59E60035F2FF /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1B08662A3C59E60035F2FF /* APICaller.swift */; };
-		0D4A7B0C2A4E7A4700F84BCF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A7B0B2A4E7A4700F84BCF /* WeatherData.swift */; };
+		0D4A7B0E2A4E7CCE00F84BCF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A7B0D2A4E7CCE00F84BCF /* WeatherData.swift */; };
+		0D64CA572A45304A00180ADD /* YumemiWeatherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherMock.swift */; };
 		0D976FE22A3C40BB006F7A9D /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D976FE12A3C40BB006F7A9D /* WeatherError.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +58,8 @@
 		0D1B08602A3C59BF0035F2FF /* ModalHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalHolderViewController.swift; sourceTree = "<group>"; };
 		0D1B08642A3C59E60035F2FF /* WeatherCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		0D1B08662A3C59E60035F2FF /* APICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
-		0D4A7B0B2A4E7A4700F84BCF /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		0D4A7B0D2A4E7CCE00F84BCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		0D64CA562A45304A00180ADD /* YumemiWeatherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YumemiWeatherMock.swift; sourceTree = "<group>"; };
 		0D976FE12A3C40BB006F7A9D /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +117,6 @@
 				0D15665D2A2EDA7E009A5927 /* SceneDelegate.swift */,
 				0D1B08632A3C59E60035F2FF /* Model */,
 				0D1B085E2A3C59BF0035F2FF /* ViewContoller */,
-
 				0D1566642A2EDA7F009A5927 /* Assets.xcassets */,
 				0D1566662A2EDA7F009A5927 /* LaunchScreen.storyboard */,
 				0D1566692A2EDA7F009A5927 /* Info.plist */,
@@ -152,10 +153,11 @@
 		0D1B08632A3C59E60035F2FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0D4A7B0D2A4E7CCE00F84BCF /* WeatherData.swift */,
 				0D1B08642A3C59E60035F2FF /* WeatherCondition.swift */,
 				0D1B08662A3C59E60035F2FF /* APICaller.swift */,
 				0D976FE12A3C40BB006F7A9D /* WeatherError.swift */,
-				0D4A7B0B2A4E7A4700F84BCF /* WeatherData.swift */,
+				0D64CA562A45304A00180ADD /* YumemiWeatherMock.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,11 +302,12 @@
 			files = (
 				0D1B08612A3C59BF0035F2FF /* WeatherViewController.swift in Sources */,
 				0D1B08692A3C59E60035F2FF /* APICaller.swift in Sources */,
+				0D64CA572A45304A00180ADD /* YumemiWeatherMock.swift in Sources */,
 				0D15665C2A2EDA7E009A5927 /* AppDelegate.swift in Sources */,
 				0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */,
 				0D1B08622A3C59BF0035F2FF /* ModalHolderViewController.swift in Sources */,
 				0D976FE22A3C40BB006F7A9D /* WeatherError.swift in Sources */,
-				0D4A7B0C2A4E7A4700F84BCF /* WeatherData.swift in Sources */,
+				0D4A7B0E2A4E7CCE00F84BCF /* WeatherData.swift in Sources */,
 				0D1B08672A3C59E60035F2FF /* WeatherCondition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
