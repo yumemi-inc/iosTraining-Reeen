@@ -8,9 +8,7 @@
 import UIKit
 
 final class ModalHolderViewController: UIViewController {
-    
-    var heldViewController: UIViewController?
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let weatherService = WeatherService()
