@@ -19,7 +19,6 @@ protocol WeatherServiceDelegate: AnyObject {
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error)
 }
 
-
 final class WeatherService: WeatherServiceProtocol {
     
     private let decoder = JSONDecoder()
