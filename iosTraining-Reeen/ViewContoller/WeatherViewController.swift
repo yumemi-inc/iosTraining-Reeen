@@ -14,7 +14,7 @@ final class WeatherViewController: UIViewController {
         imageView.backgroundColor = .white
         return imageView
     }()
-    
+
     let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         // TODO: textは仮の設定
@@ -23,7 +23,7 @@ final class WeatherViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     let minTemperatureLabel: UILabel = {
         let label = UILabel()
         // TODO: textは仮の設定
@@ -32,7 +32,7 @@ final class WeatherViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     private let closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -46,14 +46,14 @@ final class WeatherViewController: UIViewController {
         button.setTitle("Reload", for: .normal)
         return button
     }()
-    
+
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         return stackView
     }()
-    
+
     private lazy var temperatureStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [maxTemperatureLabel, minTemperatureLabel])
         stackView.axis = .horizontal
@@ -61,24 +61,25 @@ final class WeatherViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    
+
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private var errorAlert = UIAlertController()
     private let weatherService: WeatherServiceProtocol
     private let notificationCenter = NotificationCenter()
-    
+
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         print("WeatherViewController deinitialized")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -92,40 +93,47 @@ private extension WeatherViewController {
         view.addSubview(weatherConditionStackView)
         view.addSubview(closeButton)
         view.addSubview(reloadButton)
-        
+        view.addSubview(activityIndicator)
+
         weatherService.delegate = self
-        
+
         let reloadAction = UIAction { [weak self] _ in
+            self?.activityIndicator.startAnimating()
             self?.weatherService.getWeatherInformation()
         }
         reloadButton.addAction(reloadAction, for: .touchUpInside)
-        
+
         let closeAction = UIAction { [weak self] _ in
             self?.closeWeatherViewController()
         }
         closeButton.addAction(closeAction, for: .touchUpInside)
-        
+
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
+
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(view.snp.width).multipliedBy(0.5)
         }
-        
+
         closeButton.snp.makeConstraints { make in
             make.centerX.equalTo(maxTemperatureLabel)
             make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(maxTemperatureLabel.snp.width)
         }
-        
+
         reloadButton.snp.makeConstraints { make in
             make.centerX.equalTo(minTemperatureLabel)
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+
+        activityIndicator.snp.makeConstraints { make in
+            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
+            make.centerX.equalToSuperview()
+        }
     }
-    
+
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -133,19 +141,19 @@ private extension WeatherViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
     }
-    
+
     @objc func willEnterForeground() {
         errorAlert.dismiss(animated: true)
         weatherService.getWeatherInformation()
     }
-    
+
     func closeWeatherViewController() {
         dismiss(animated: true, completion: nil)
     }
-    
+
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-        
+
         switch condition {
         case .sunny:
             return UIImage(named: "sunny")?.withTintColor(.red)
@@ -159,17 +167,25 @@ private extension WeatherViewController {
 
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
-        let image = getImage(for: weatherData.weatherCondition)
-        weatherConditionImageView.image = image
-        maxTemperatureLabel.text = weatherData.maxTemperature.description
-        minTemperatureLabel.text = weatherData.minTemperature.description
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let image = self.getImage(for: weatherData.weatherCondition)
+            self.weatherConditionImageView.image = image
+            self.maxTemperatureLabel.text = weatherData.maxTemperature.description
+            self.minTemperatureLabel.text = weatherData.minTemperature.description
+            self.activityIndicator.stopAnimating()
+        }
     }
-    
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError) {
-        errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
 
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true, completion: nil)
+
+    func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            self.errorAlert.addAction(alertAction)
+            present(self.errorAlert, animated: true, completion: nil)
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

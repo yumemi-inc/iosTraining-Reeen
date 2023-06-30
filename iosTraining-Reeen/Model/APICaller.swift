@@ -25,24 +25,26 @@ final class WeatherService: WeatherServiceProtocol {
     weak var delegate: WeatherServiceDelegate?
 
     func getWeatherInformation() {
-        do {
-            // input
-            let date = Date(timeIntervalSinceNow: 3 * 3600)
-            let formattedDate = ISO8601DateFormatter().string(from: date)
-            let request = RequestParameters(area: "tokyo", date: formattedDate)
-            let encodedRequest = try JSONEncoder().encode(request)
-            guard let jsonString = String(data: encodedRequest, encoding: .utf8) else { return }
+        DispatchQueue.global().async {
+            do {
+                // input
+                let date = Date(timeIntervalSinceNow: 3 * 3600)
+                let formattedDate = ISO8601DateFormatter().string(from: date)
+                let request = RequestParameters(area: "tokyo", date: formattedDate)
+                let encodedRequest = try JSONEncoder().encode(request)
+                guard let jsonString = String(data: encodedRequest, encoding: .utf8) else { return }
 
-            // output
-            let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
-            guard let data = weatherInfo.data(using: .utf8) else {
-                throw WeatherError.weatherDataNotExist
+                // output
+                let weatherInfo = try YumemiWeather.syncFetchWeather(jsonString)
+                guard let data = weatherInfo.data(using: .utf8) else {
+                    throw WeatherError.weatherDataNotExist
+                }
+                self.decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let weatherData = try self.decoder.decode(WeatherData.self, from: data)
+                self.delegate?.weatherService(self, didUpdateCondition: weatherData)
+            } catch {
+                self.handleWeatherServiceError(error)
             }
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let weatherData = try decoder.decode(WeatherData.self, from: data)
-            delegate?.weatherService(self, didUpdateCondition: weatherData)
-        } catch {
-            handleWeatherServiceError(error)
         }
     }
 }
