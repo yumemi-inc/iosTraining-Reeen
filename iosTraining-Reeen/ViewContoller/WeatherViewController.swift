@@ -17,8 +17,6 @@ final class WeatherViewController: UIViewController {
 
     let maxTemperatureLabel: UILabel = {
         let label = UILabel()
-        // TODO: textは仮の設定
-        label.text = "最高気温"
         label.textColor = .red
         label.textAlignment = .center
         return label
@@ -26,8 +24,6 @@ final class WeatherViewController: UIViewController {
 
     let minTemperatureLabel: UILabel = {
         let label = UILabel()
-        // TODO: textは仮の設定
-        label.text = "最低気温"
         label.textColor = .blue
         label.textAlignment = .center
         return label
@@ -133,7 +129,7 @@ private extension WeatherViewController {
     }
 
     func getWeatherInfo() {
-        weatherService.getWeatherInformation(completion: { [weak self] result in
+        weatherService.getWeatherInformation { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weatherData):
@@ -150,7 +146,7 @@ private extension WeatherViewController {
                     self?.activityIndicator.stopAnimating()
                 }
             }
-        })
+        }
     }
 
     func addNotificationCenter() {
