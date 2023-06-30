@@ -8,12 +8,9 @@
 import Foundation
 
 class YumemiWeatherMock: WeatherServiceProtocol {
-    var delegate: WeatherServiceDelegate?
-
     var weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "sunny")
 
-    func getWeatherInformation() {
-        delegate?.weatherService(self, didUpdateCondition: weatherDataMock)
+    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
+        completion(.success(weatherDataMock))
     }
-
 }

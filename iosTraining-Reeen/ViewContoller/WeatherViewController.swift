@@ -95,11 +95,9 @@ private extension WeatherViewController {
         view.addSubview(reloadButton)
         view.addSubview(activityIndicator)
 
-        weatherService.delegate = self
-
         let reloadAction = UIAction { [weak self] _ in
             self?.activityIndicator.startAnimating()
-            self?.weatherService.getWeatherInformation()
+            self?.getWeatherInfo()
         }
         reloadButton.addAction(reloadAction, for: .touchUpInside)
 
@@ -134,6 +132,27 @@ private extension WeatherViewController {
         }
     }
 
+    func getWeatherInfo() {
+        weatherService.getWeatherInformation(completion: { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let weatherData):
+                    let image = self?.getImage(for: weatherData.weatherCondition)
+                    self?.weatherConditionImageView.image = image
+                    self?.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
+                    self?.minTemperatureLabel.text = "\(weatherData.minTemperature)"
+                    self?.activityIndicator.stopAnimating()
+                case .failure(let error):
+                    let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    errorAlert.addAction(alertAction)
+                    self?.present(errorAlert, animated: true, completion: nil)
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        })
+    }
+
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -144,7 +163,7 @@ private extension WeatherViewController {
 
     @objc func willEnterForeground() {
         errorAlert.dismiss(animated: true)
-        weatherService.getWeatherInformation()
+        getWeatherInfo()
     }
 
     func closeWeatherViewController() {
@@ -165,27 +184,3 @@ private extension WeatherViewController {
     }
 }
 
-extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            let image = self.getImage(for: weatherData.weatherCondition)
-            self.weatherConditionImageView.image = image
-            self.maxTemperatureLabel.text = weatherData.maxTemperature.description
-            self.minTemperatureLabel.text = weatherData.minTemperature.description
-            self.activityIndicator.stopAnimating()
-        }
-    }
-
-
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: LocalizedError) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            self.errorAlert.addAction(alertAction)
-            present(self.errorAlert, animated: true, completion: nil)
-            self.activityIndicator.stopAnimating()
-        }
-    }
-}
