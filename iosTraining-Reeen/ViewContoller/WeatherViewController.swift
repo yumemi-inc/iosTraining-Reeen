@@ -92,6 +92,8 @@ private extension WeatherViewController {
         view.addSubview(activityIndicator)
 
         let reloadAction = UIAction { [weak self] _ in
+            self?.reloadButton.isEnabled = false
+            self?.reloadButton.setTitleColor(.gray, for: .normal)
             self?.activityIndicator.startAnimating()
             self?.getWeatherInfo()
         }
@@ -137,14 +139,16 @@ private extension WeatherViewController {
                     self?.weatherConditionImageView.image = image
                     self?.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
                     self?.minTemperatureLabel.text = "\(weatherData.minTemperature)"
-                    self?.activityIndicator.stopAnimating()
+
                 case .failure(let error):
                     let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     errorAlert.addAction(alertAction)
                     self?.present(errorAlert, animated: true, completion: nil)
-                    self?.activityIndicator.stopAnimating()
                 }
+                self?.activityIndicator.stopAnimating()
+                self?.reloadButton.isEnabled = true
+                self?.reloadButton.setTitleColor(.systemBlue, for: .normal)
             }
         }
     }
