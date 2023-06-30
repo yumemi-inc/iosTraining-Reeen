@@ -22,7 +22,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsSunny() {
         // Act
-        weatherService.getWeatherInformation()
+        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
         assertWeatherConditionImageView(withCondition: "sunny", tintColor: .red)
     }
@@ -31,7 +31,7 @@ final class iosTraining_ReeenTests: XCTestCase {
         // Arrange
         weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "rainy")
         // Act
-        weatherService.getWeatherInformation()
+        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
         assertWeatherConditionImageView(withCondition: "rainy", tintColor: .blue)
     }
@@ -40,7 +40,7 @@ final class iosTraining_ReeenTests: XCTestCase {
         // Arrange
         weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "cloudy")
         // Act
-        weatherService.getWeatherInformation()
+        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
         assertWeatherConditionImageView(withCondition: "cloudy", tintColor: .gray)
     }

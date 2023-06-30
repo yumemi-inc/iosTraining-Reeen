@@ -40,7 +40,7 @@ final class WeatherViewController: UIViewController {
         return button
     }()
 
-    private let reloadButton: UIButton = {
+    let reloadButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Reload", for: .normal)
