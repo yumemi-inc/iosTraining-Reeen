@@ -52,7 +52,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testTempLabelShowAsExpected() {
         // Act
-        weatherService.getWeatherInformation()
+        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
         let maxTempLabel = weatherViewController.maxTemperatureLabel.text
         let mimTempLabel = weatherViewController.minTemperatureLabel.text
