@@ -20,42 +20,42 @@ final class iosTraining_ReeenTests: XCTestCase {
         weatherViewController.viewDidLoad()
     }
 
-    func testWeatherConditionImageViewIsSunny() {
+    func testWeatherConditionImageViewIsSunny() async throws {
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        await weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        assertWeatherConditionImageView(withCondition: "sunny", tintColor: .red)
+        try await assertWeatherConditionImageView(withCondition: "sunny", tintColor: .red)
     }
 
-    func testWeatherConditionImageViewIsRainy() {
+    func testWeatherConditionImageViewIsRainy() async throws {
         // Arrange
         weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "rainy")
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        await weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        assertWeatherConditionImageView(withCondition: "rainy", tintColor: .blue)
+        try await assertWeatherConditionImageView(withCondition: "rainy", tintColor: .blue)
     }
 
-    func testWeatherConditionImageViewIsCloudy() {
+    func testWeatherConditionImageViewIsCloudy() async throws {
         // Arrange
         weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "cloudy")
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        await weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        assertWeatherConditionImageView(withCondition: "cloudy", tintColor: .gray)
+        try await assertWeatherConditionImageView(withCondition: "cloudy", tintColor: .gray)
     }
 
-    private func assertWeatherConditionImageView(withCondition condition: String, tintColor: UIColor) {
-        let weatherConditionImageView = weatherViewController.weatherConditionImageView.image
+    private func assertWeatherConditionImageView(withCondition condition: String, tintColor: UIColor) async throws {
+        let weatherConditionImageView = await self.weatherViewController.weatherConditionImageView.image
         XCTAssertEqual(weatherConditionImageView, UIImage(named: condition)?.withTintColor(tintColor))
     }
 
-    func testTempLabelShowAsExpected() {
+    func testTempLabelShowAsExpected() async throws {
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        await weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let maxTempLabel = weatherViewController.maxTemperatureLabel.text
-        let mimTempLabel = weatherViewController.minTemperatureLabel.text
+        let maxTempLabel = await weatherViewController.maxTemperatureLabel.text
+        let mimTempLabel = await weatherViewController.minTemperatureLabel.text
         XCTAssertEqual(maxTempLabel, "20")
         XCTAssertEqual(mimTempLabel, "10")
     }
