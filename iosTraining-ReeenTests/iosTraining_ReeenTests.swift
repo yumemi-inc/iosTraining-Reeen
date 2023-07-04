@@ -17,7 +17,7 @@ final class iosTraining_ReeenTests: XCTestCase {
         super.setUp()
         weatherService = YumemiWeatherStub()
         weatherViewController = WeatherViewController(weatherService: weatherService)
-        weatherViewController.viewDidLoad()
+        weatherViewController.loadViewIfNeeded()
     }
 
     func testWeatherConditionImageViewIsSunny() {
