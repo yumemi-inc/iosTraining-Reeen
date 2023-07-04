@@ -22,15 +22,16 @@ protocol WeatherServiceDelegate: AnyObject {
 final class WeatherService: WeatherServiceProtocol {
     
     private let decoder = JSONDecoder()
+    private let encoder = JSONEncoder()
     weak var delegate: WeatherServiceDelegate?
     
     func getWeatherInformation() {
         do {
             // input
-            let date = Date(timeIntervalSinceNow: 3 * 3600)
-            let formattedDate = ISO8601DateFormatter().string(from: date)
-            let request = RequestParameters(area: "tokyo", date: formattedDate)
-            let encodedRequest = try JSONEncoder().encode(request)
+            let currentDate = Date()
+            let request = RequestParameters(area: "tokyo", date: currentDate)
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedRequest = try encoder.encode(request)
             guard let jsonString = String(data: encodedRequest, encoding: .utf8) else { return }
             
             // output
