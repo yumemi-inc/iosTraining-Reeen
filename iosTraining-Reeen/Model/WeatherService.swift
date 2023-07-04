@@ -10,7 +10,7 @@ import YumemiWeather
 
 protocol WeatherServiceProtocol: AnyObject {
     var delegate: WeatherServiceDelegate? { get set }
-    
+
     func getWeatherInformation()
 }
 
@@ -20,31 +20,39 @@ protocol WeatherServiceDelegate: AnyObject {
 }
 
 final class WeatherService: WeatherServiceProtocol {
-    
+
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     weak var delegate: WeatherServiceDelegate?
-    
+
     func getWeatherInformation() {
         do {
-            // input
-            let currentDate = Date()
-            let request = RequestParameters(area: "tokyo", date: currentDate)
-            encoder.dateEncodingStrategy = .iso8601
-            let encodedRequest = try encoder.encode(request)
-            guard let jsonString = String(data: encodedRequest, encoding: .utf8) else { return }
-            
-            // output
-            let weatherInfo = try YumemiWeather.fetchWeather(jsonString)
-            guard let data = weatherInfo.data(using: .utf8) else {
-                throw WeatherError.encodingConversionError
-            }
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let weatherData = try decoder.decode(WeatherData.self, from: data)
+            let encodedRequest = try encodeRequestParameters()
+            let weatherInfo = try YumemiWeather.fetchWeather(encodedRequest)
+            let weatherData = try decodeWeatherInfo(weatherInfo)
             delegate?.weatherService(self, didUpdateCondition: weatherData)
         } catch {
             handleWeatherServiceError(error)
         }
+    }
+
+    private func encodeRequestParameters() throws -> String {
+        let currentDate = Date()
+        let request = RequestParameters(area: "tokyo", date: currentDate)
+        encoder.dateEncodingStrategy = .iso8601
+        let encodedRequest = try encoder.encode(request)
+        guard let jsonString = String(data: encodedRequest, encoding: .utf8) else {
+            throw WeatherError.encodingConversionError
+        }
+        return jsonString
+    }
+
+    private func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
+        guard let data = weatherInfo.data(using: .utf8) else {
+            throw WeatherError.encodingConversionError
+        }
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode(WeatherData.self, from: data)
     }
 }
 

@@ -12,3 +12,8 @@ enum WeatherCondition: String {
     case cloudy
     case rainy
 }
+
+struct RequestParameters: Codable {
+    let area: String
+    let date: Date
+}
