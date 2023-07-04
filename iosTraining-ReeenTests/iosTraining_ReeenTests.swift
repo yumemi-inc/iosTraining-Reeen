@@ -64,11 +64,11 @@ final class iosTraining_ReeenTests: XCTestCase {
     func testEncodingRequestParameters() {
         // Arrange
         let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(secondsFromGMT: 0), year: 2023, month: 6, day: 23, hour: 12, minute: 1, second: 1).date!
-        let formattedDate = ISO8601DateFormatter().string(from: date)
-        let request = RequestParameters(area: "tokyo", date: formattedDate)
+        let request = RequestParameters(area: "tokyo", date: date)
 
         // Act
         let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.sortedKeys] // .sortedKeysでJsonのキーの順序を指定
         let encodedData = try? encoder.encode(request)
         let jsonString = encodedData != nil ? String(data: encodedData!, encoding: .utf8) : nil
