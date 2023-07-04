@@ -101,6 +101,7 @@
 		0D15665A2A2EDA7E009A5927 /* iosTraining-Reeen */ = {
 			isa = PBXGroup;
 			children = (
+				0DA80ACD2A57E426005B7518 /* View */,
 				0DA658B02A54233300900998 /* Model */,
 				0DA80ACD2A57E426005B7518 /* View */,
 				0DA80AC32A57E36E005B7518 /* Contoller */,
@@ -151,6 +152,14 @@
 				0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */,
 			);
 			path = Contoller;
+			sourceTree = "<group>";
+		};
+		0DA80ACD2A57E426005B7518 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0DA80ACE2A57E426005B7518 /* WeatherView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0DA80ACD2A57E426005B7518 /* View */ = {
