@@ -9,61 +9,8 @@ import UIKit
 import SnapKit
 
 final class WeatherViewController: UIViewController {
-    let weatherConditionImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .white
-        return imageView
-    }()
-    
-    let maxTemperatureLabel: UILabel = {
-        let label = UILabel()
-        // TODO: textは仮の設定
-        label.text = "最高気温"
-        label.textColor = .red
-        label.textAlignment = .center
-        return label
-    }()
-    
-    let minTemperatureLabel: UILabel = {
-        let label = UILabel()
-        // TODO: textは仮の設定
-        label.text = "最低気温"
-        label.textColor = .blue
-        label.textAlignment = .center
-        return label
-    }()
-
-    private let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Close", for: .normal)
-        return button
-    }()
-
-    let reloadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Reload", for: .normal)
-        return button
-    }()
-
-    private lazy var weatherConditionStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        return stackView
-    }()
-
-    private lazy var temperatureStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [maxTemperatureLabel, minTemperatureLabel])
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
-
-    private var errorAlert = UIAlertController()
     private let weatherService: WeatherServiceProtocol
+    let weatherView = WeatherView()
 
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
@@ -87,42 +34,24 @@ final class WeatherViewController: UIViewController {
 
 private extension WeatherViewController {
     func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(weatherConditionStackView)
-        view.addSubview(closeButton)
-        view.addSubview(reloadButton)
+        view.addSubview(weatherView)
+        
+        weatherView.snp.makeConstraints { make in
+            make.center.edges.equalToSuperview()
+        }
 
         weatherService.delegate = self
 
         let reloadAction = UIAction { [weak self] _ in
             self?.weatherService.getWeatherInformation()
         }
-        reloadButton.addAction(reloadAction, for: .touchUpInside)
+
+        weatherView.reloadButton.addAction(reloadAction, for: .touchUpInside)
 
         let closeAction = UIAction { [weak self] _ in
             self?.closeWeatherViewController()
         }
-        closeButton.addAction(closeAction, for: .touchUpInside)
-
-        weatherConditionStackView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-
-        weatherConditionImageView.snp.makeConstraints { make in
-            make.size.equalTo(view.snp.width).multipliedBy(0.5)
-        }
-
-        closeButton.snp.makeConstraints { make in
-            make.centerX.equalTo(maxTemperatureLabel)
-            make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(maxTemperatureLabel.snp.width)
-        }
-
-        reloadButton.snp.makeConstraints { make in
-            make.centerX.equalTo(minTemperatureLabel)
-            make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(minTemperatureLabel.snp.width)
-        }
+        weatherView.closeButton.addAction(closeAction, for: .touchUpInside)
     }
 
     func addNotificationCenter() {
@@ -134,7 +63,7 @@ private extension WeatherViewController {
     }
 
     @objc func willEnterForeground() {
-        if self.presentedViewController != errorAlert {
+        if self.presentedViewController != weatherView.errorAlert {
             weatherService.getWeatherInformation()
         }
     }
@@ -160,15 +89,15 @@ private extension WeatherViewController {
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
         let image = getImage(for: weatherData.weatherCondition)
-        weatherConditionImageView.image = image
-        maxTemperatureLabel.text = weatherData.maxTemperature.description
-        minTemperatureLabel.text = weatherData.minTemperature.description
+        weatherView.weatherConditionImageView.image = image
+        weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
+        weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
     }
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+        weatherView.errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true, completion: nil)
+        weatherView.errorAlert.addAction(alertAction)
+        present(weatherView.errorAlert, animated: true, completion: nil)
     }
 }

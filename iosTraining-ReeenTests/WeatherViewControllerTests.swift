@@ -27,9 +27,9 @@ final class WeatherViewControllerTests: XCTestCase {
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherConditionImageView.image
+        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
         XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
     }
 
@@ -39,9 +39,9 @@ final class WeatherViewControllerTests: XCTestCase {
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherConditionImageView.image
+        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
         XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
     }
 
@@ -51,9 +51,9 @@ final class WeatherViewControllerTests: XCTestCase {
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherConditionImageView.image
+        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
         XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
     }
 
@@ -63,10 +63,10 @@ final class WeatherViewControllerTests: XCTestCase {
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
-        weatherViewController.reloadButton.sendActions(for: .touchUpInside)
+        weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let maxTempLabel = weatherViewController.maxTemperatureLabel.text
-        let mimTempLabel = weatherViewController.minTemperatureLabel.text
+        let maxTempLabel = weatherViewController.weatherView.maxTemperatureLabel.text
+        let mimTempLabel = weatherViewController.weatherView.minTemperatureLabel.text
         XCTAssertEqual(maxTempLabel, "20")
         XCTAssertEqual(mimTempLabel, "10")
     }
