@@ -134,7 +134,7 @@ private extension WeatherViewController {
     }
 
     @objc func willEnterForeground() {
-        if !(UIViewController.topMostViewController is UIAlertController) {
+        if (self.presentedViewController == nil) {
             weatherService.getWeatherInformation()
         }
     }
