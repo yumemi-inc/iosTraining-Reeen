@@ -40,7 +40,7 @@ final class WeatherService: WeatherServiceProtocol {
     }
 }
 
-extension WeatherService: LocalizedError {
+extension WeatherService {
     func handleWeatherServiceError(_ error: Error) {
         if let yumemiWeatherError = error as? YumemiWeatherError {
             switch yumemiWeatherError {
