@@ -9,13 +9,13 @@ import XCTest
 @testable import iosTraining_Reeen
 
 final class iosTraining_ReeenTests: XCTestCase {
-    var weatherService: YumemiWeatherMock!
+    var weatherService: YumemiWeatherStub!
     var weatherViewController: WeatherViewController!
 
     // Arrange
     override func setUp() {
         super.setUp()
-        weatherService = YumemiWeatherMock()
+        weatherService = YumemiWeatherStub()
         weatherViewController = WeatherViewController(weatherService: weatherService)
         weatherViewController.viewDidLoad()
     }
@@ -29,7 +29,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsRainy() {
         // Arrange
-        weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "rainy")
+        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "rainy")
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
@@ -38,7 +38,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsCloudy() {
         // Arrange
-        weatherService.weatherDataMock = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "cloudy")
+        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "cloudy")
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
         // Assert
