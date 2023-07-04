@@ -64,7 +64,6 @@ final class WeatherViewController: UIViewController {
     
     private var errorAlert = UIAlertController()
     private let weatherService: WeatherServiceProtocol
-    private let notificationCenter = NotificationCenter()
     
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
