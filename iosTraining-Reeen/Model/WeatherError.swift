@@ -12,7 +12,9 @@ enum WeatherError: Error {
     case unknownError
     case dataNotExistsError
     case encodingConversionError
-    
+}
+
+extension WeatherError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidParameterError:

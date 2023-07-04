@@ -16,7 +16,7 @@ protocol WeatherServiceProtocol: AnyObject {
 
 protocol WeatherServiceDelegate: AnyObject {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: WeatherData)
-    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: WeatherError)
+    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error)
 }
 
 final class WeatherService: WeatherServiceProtocol {
@@ -40,17 +40,17 @@ final class WeatherService: WeatherServiceProtocol {
     }
 }
 
-extension WeatherService {
+extension WeatherService: LocalizedError {
     func handleWeatherServiceError(_ error: Error) {
         if let yumemiWeatherError = error as? YumemiWeatherError {
             switch yumemiWeatherError {
             case .invalidParameterError:
-                delegate?.weatherService(self, didFailWithError: .invalidParameterError)
+                delegate?.weatherService(self, didFailWithError: WeatherError.invalidParameterError)
             case .unknownError:
-                delegate?.weatherService(self, didFailWithError: .unknownError)
+                delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
             }
         } else {
-            delegate?.weatherService(self, didFailWithError: .dataNotExistsError)
+            delegate?.weatherService(self, didFailWithError: WeatherError.dataNotExistsError)
         }
     }
 }
