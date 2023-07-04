@@ -172,16 +172,3 @@ extension WeatherViewController: WeatherServiceDelegate {
         present(errorAlert, animated: true, completion: nil)
     }
 }
-
-extension UIViewController {
-    static var topMostViewController: UIViewController? {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-            return nil
-        }
-        var topController = windowScene.windows.first?.rootViewController
-        while let presentedViewController = topController?.presentedViewController {
-            topController = presentedViewController
-        }
-        return topController
-    }
-}
