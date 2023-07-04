@@ -15,5 +15,5 @@ struct WeatherData: Codable {
 
 struct RequestParameters: Codable {
     let area: String
-    let date: String
+    let date: Date
 }
