@@ -6,13 +6,13 @@
 //
 
 import Foundation
- 
+
 enum WeatherError: Error {
     case invalidParameterError
-        case unknownError
-        case dataNotExistsError
-        case encodingConversionError
-
+    case unknownError
+    case dataNotExistsError
+    case encodingConversionError
+    
     var errorDescription: String? {
         switch self {
         case .invalidParameterError:
