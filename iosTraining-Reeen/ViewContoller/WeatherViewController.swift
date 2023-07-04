@@ -134,7 +134,7 @@ private extension WeatherViewController {
     }
 
     @objc func willEnterForeground() {
-        if (self.presentedViewController == nil) {
+        if self.presentedViewController != errorAlert {
             weatherService.getWeatherInformation()
         }
     }
@@ -166,7 +166,7 @@ extension WeatherViewController: WeatherServiceDelegate {
     }
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+        errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
         present(errorAlert, animated: true, completion: nil)
