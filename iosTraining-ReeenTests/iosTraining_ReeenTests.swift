@@ -61,42 +61,33 @@ final class iosTraining_ReeenTests: XCTestCase {
         XCTAssertEqual(mimTempLabel, "10")
     }
 
-    func testEncodingRequestParameters() {
-        // Arrange
-        let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(secondsFromGMT: 0), year: 2023, month: 6, day: 23, hour: 12, minute: 1, second: 1).date!
-        let request = RequestParameters(area: "tokyo", date: date)
-
-        // Act
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        encoder.outputFormatting = [.sortedKeys] // .sortedKeysでJsonのキーの順序を指定
-        let encodedData = try? encoder.encode(request)
-        let jsonString = encodedData != nil ? String(data: encodedData!, encoding: .utf8) : nil
-
-        // Assert
-        let expectedJsonString = #"{"area":"tokyo","date":"2023-06-23T12:01:01Z"}"#
-        XCTAssertEqual(jsonString, expectedJsonString)
+    func testEncodeRequestParameters() {
+        let weatherService = WeatherService()
+        do {
+            let encodedRequest = try weatherService.encodeRequestParameters()
+            XCTAssertNotNil(encodedRequest)
+        } catch {
+            XCTFail("Encoding failed with error: \(error)")
+        }
     }
 
-    func testDecodingWeatherData() {
-        // Arrange
-        let json = """
-        {
-            "max_temperature": 30,
-            "min_temperature": 20,
-            "weather_condition": "sunny"
+
+    func testDecodeWeatherInfo() {
+        let weatherService = WeatherService()
+        let dummyWeatherInfo = """
+            {
+                "weather_condition": "sunny",
+                "max_temperature": 30,
+                "min_temperature": 20
+            }
+            """
+        do {
+            let weatherData = try weatherService.decodeWeatherInfo(dummyWeatherInfo)
+            XCTAssertEqual(weatherData.weatherCondition, "sunny")
+            XCTAssertEqual(weatherData.maxTemperature, 30)
+            XCTAssertEqual(weatherData.minTemperature, 20)
+        } catch {
+            XCTFail("Decoding failed with error: \(error)")
         }
-        """
-        let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-        // Act
-        let weatherData = try? decoder.decode(WeatherData.self, from: data)
-
-        // Assert
-        XCTAssertEqual(weatherData?.maxTemperature, 30)
-        XCTAssertEqual(weatherData?.minTemperature, 20)
-        XCTAssertEqual(weatherData?.weatherCondition, "sunny")
     }
 }

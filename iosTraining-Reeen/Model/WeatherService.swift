@@ -36,7 +36,7 @@ final class WeatherService: WeatherServiceProtocol {
         }
     }
 
-    private func encodeRequestParameters() throws -> String {
+    func encodeRequestParameters() throws -> String {
         let currentDate = Date()
         let request = RequestParameters(area: "tokyo", date: currentDate)
         encoder.dateEncodingStrategy = .iso8601
@@ -47,7 +47,7 @@ final class WeatherService: WeatherServiceProtocol {
         return jsonString
     }
 
-    private func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
+    func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
         guard let data = weatherInfo.data(using: .utf8) else {
             throw WeatherError.encodingConversionError
         }
