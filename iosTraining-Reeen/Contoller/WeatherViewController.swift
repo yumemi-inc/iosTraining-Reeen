@@ -33,14 +33,34 @@ final class WeatherViewController: UIViewController {
         setupViews()
         addNotificationCenter()
     }
+
+    func getWeatherInformation() {
+        weatherService.getWeatherInformation { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let weatherData):
+                    let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
+                    self?.weatherView.weatherConditionImageView.image = image
+                    self?.weatherView.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
+                    self?.weatherView.minTemperatureLabel.text = "\(weatherData.minTemperature)"
+
+                case .failure(let error):
+                    let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    errorAlert.addAction(alertAction)
+                    self?.present(errorAlert, animated: true, completion: nil)
+                }
+                self?.weatherView.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
 
 private extension WeatherViewController {
     func setupViews() {
-        weatherService.delegate = self
         weatherView.weatherViewDelegate = self
     }
-
+    
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -49,11 +69,11 @@ private extension WeatherViewController {
             object: nil
         )
     }
-
+    
     @objc func willEnterForeground() {
         if presentedViewController == nil {
             weatherView.activityIndicator.startAnimating()
-            weatherService.getWeatherInformation()
+            getWeatherInformation()
         }
     }
 }
@@ -61,31 +81,11 @@ private extension WeatherViewController {
 extension WeatherViewController: WeatherViewDelegate {
     func didRequestUpdate(_ reloadButton: UIButton) {
         weatherView.activityIndicator.startAnimating()
-        weatherService.getWeatherInformation()
+        getWeatherInformation()
     }
 
     func didRequestClose(_ closeButton: UIButton) {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
-        DispatchQueue.main.async { [weak self] in
-            let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
-            self?.weatherView.displayWeatherConditions(data: weatherData, image: image)
-            self?.weatherView.activityIndicator.stopAnimating()
-        }
-    }
-
-    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default)
-            errorAlert.addAction(alertAction)
-            self?.present(errorAlert, animated: true)
-            self?.weatherView.activityIndicator.stopAnimating()
-        }
     }
 }
 
@@ -101,4 +101,3 @@ private extension WeatherCondition {
         }
     }
 }
-
