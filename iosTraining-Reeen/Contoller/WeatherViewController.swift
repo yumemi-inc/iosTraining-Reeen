@@ -75,6 +75,7 @@ private extension WeatherViewController {
     
     @objc func willEnterForeground() {
         if presentedViewController == nil {
+            weatherView.activityIndicator.startAnimating()
             getWeatherInformation()
         }
     }
@@ -108,4 +109,3 @@ private extension WeatherCondition {
         }
     }
 }
-

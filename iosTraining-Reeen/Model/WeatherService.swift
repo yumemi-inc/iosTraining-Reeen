@@ -13,6 +13,7 @@ protocol WeatherServiceProtocol: AnyObject {
 }
 
 final class WeatherService: WeatherServiceProtocol {
+
     func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
