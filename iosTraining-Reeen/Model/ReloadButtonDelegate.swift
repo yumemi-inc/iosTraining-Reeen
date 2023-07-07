@@ -8,13 +8,13 @@
 import Foundation
 
 protocol ReloadButtonDelegate: AnyObject {
-    func reloadButtonDidTapped()
+    func reloadButtonDidTap()
 }
 
-class ReloadButtonActionImpl: ReloadButtonDelegate {
+class WeatherReloadButtonHandler: ReloadButtonDelegate {
     weak var weatherViewController: WeatherViewController?
 
-    func reloadButtonDidTapped() {
+    func reloadButtonDidTap() {
         guard let weatherViewController else { return }
         weatherViewController.getWeatherInformation()
     }

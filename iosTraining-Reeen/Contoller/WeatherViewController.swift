@@ -9,6 +9,7 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
+    private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
 
     init(weatherService: WeatherServiceProtocol) {
