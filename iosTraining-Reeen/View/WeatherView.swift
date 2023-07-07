@@ -60,8 +60,8 @@ class WeatherView: UIView {
     }()
 
     weak var weatherViewDelegate: WeatherViewDelegate?
-
     let activityIndicator = UIActivityIndicatorView(style: .medium)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -85,7 +85,7 @@ extension WeatherView {
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
+
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
         }
