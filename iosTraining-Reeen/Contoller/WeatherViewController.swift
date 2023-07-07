@@ -40,19 +40,39 @@ final class WeatherViewController: UIViewController {
         setupViews()
         addNotificationCenter()
     }
+
+    func getWeatherInformation() {
+        weatherService.getWeatherInformation { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let weatherData):
+                    let image = self?.getImage(for: weatherData.weatherCondition)
+                    self?.weatherView.weatherConditionImageView.image = image
+                    self?.weatherView.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
+                    self?.weatherView.minTemperatureLabel.text = "\(weatherData.minTemperature)"
+
+                case .failure(let error):
+                    let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    errorAlert.addAction(alertAction)
+                    self?.present(errorAlert, animated: true, completion: nil)
+                }
+                self?.weatherView.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
 
 private extension WeatherViewController {
     func setupViews() {
-        weatherService.delegate = self
         weatherView.weatherViewDelegate = self
-
+        
         let closeAction = UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         weatherView.closeButton.addAction(closeAction, for: .touchUpInside)
     }
-
+    
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -60,17 +80,17 @@ private extension WeatherViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
     }
-
+    
     @objc func willEnterForeground() {
         if self.presentedViewController != errorAlert {
             self.weatherView.activityIndicator.startAnimating()
-            weatherService.getWeatherInformation()
+            self.getWeatherInformation()
         }
     }
-
+    
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-
+        
         switch condition {
         case .sunny:
             return UIImage(named: "sunny")?.withTintColor(.red)
@@ -85,30 +105,6 @@ private extension WeatherViewController {
 extension WeatherViewController: WeatherViewDelegate {
     func reloadButtonDidTapped() {
         self.weatherView.activityIndicator.startAnimating()
-        weatherService.getWeatherInformation()
+        self.getWeatherInformation()
     }
 }
-
-extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
-        let image = getImage(for: weatherData.weatherCondition)
-        DispatchQueue.main.async { [weak self] in
-            self?.weatherView.weatherConditionImageView.image = image
-            self?.weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
-            self?.weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
-            self?.weatherView.activityIndicator.stopAnimating()
-        }
-    }
-    
-    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            self.errorAlert.addAction(alertAction)
-            present(self.errorAlert, animated: true, completion: nil)
-            self.weatherView.activityIndicator.stopAnimating()
-        }
-    }
-}
-
