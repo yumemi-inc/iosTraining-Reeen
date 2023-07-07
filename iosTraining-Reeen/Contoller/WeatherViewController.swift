@@ -45,10 +45,11 @@ final class WeatherViewController: UIViewController {
                     self?.weatherView.minTemperatureLabel.text = "\(weatherData.minTemperature)"
 
                 case .failure(let error):
-                    let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+                    guard let self else { return }
+                    self.weatherView.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    errorAlert.addAction(alertAction)
-                    self?.present(errorAlert, animated: true, completion: nil)
+                    self.weatherView.errorAlert.addAction(alertAction)
+                    self.present(self.weatherView.errorAlert, animated: true, completion: nil)
                 }
                 self?.weatherView.activityIndicator.stopAnimating()
             }
