@@ -25,21 +25,21 @@ final class WeatherViewController: UIViewController {
         print("WeatherViewController deinitialized")
     }
 
+    override func loadView() {
+        super.loadView()
+        view = weatherView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         addNotificationCenter()
     }
+
 }
 
 private extension WeatherViewController {
     func setupViews() {
-        view.addSubview(weatherView)
-        
-        weatherView.snp.makeConstraints { make in
-            make.center.edges.equalToSuperview()
-        }
-
         weatherService.delegate = self
 
         let reloadAction = UIAction { [weak self] _ in
@@ -93,7 +93,7 @@ extension WeatherViewController: WeatherServiceDelegate {
         weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
         weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
     }
-    
+
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
         weatherView.errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
