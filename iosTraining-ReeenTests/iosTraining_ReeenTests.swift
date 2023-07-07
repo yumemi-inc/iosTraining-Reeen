@@ -15,13 +15,12 @@ final class iosTraining_ReeenTests: XCTestCase {
     override func setUp() {
         super.setUp()
         weatherService = YumemiWeatherStub()
-        weatherViewController = WeatherViewController(weatherService: weatherService)
-        weatherViewController.loadViewIfNeeded()
     }
 
     func testWeatherConditionImageViewIsSunny() {
         // Arrange
-        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "sunny")
+        let weatherDataStub = YumemiWeatherStub(weatherCondition: "sunny")
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
@@ -32,7 +31,8 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsRainy() {
         // Arrange
-        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "rainy")
+        let weatherDataStub = YumemiWeatherStub(weatherCondition: "rainy")
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
@@ -43,7 +43,8 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsCloudy() {
         // Arrange
-        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "cloudy")
+        let weatherDataStub = YumemiWeatherStub(weatherCondition: "cloudy")
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
@@ -54,7 +55,8 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testTempLabelShowAsExpected() {
         // Arrange
-        weatherService.weatherDataStub = WeatherData(maxTemperature: 20, minTemperature: 10, weatherCondition: "sunny")
+        let weatherDataStub = YumemiWeatherStub(maxTemperature: 20, minTemperature: 10)
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.reloadButton.sendActions(for: .touchUpInside)
