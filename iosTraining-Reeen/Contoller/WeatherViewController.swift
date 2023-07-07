@@ -9,6 +9,7 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
+    private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
 
     init(weatherService: WeatherServiceProtocol) {
@@ -46,10 +47,10 @@ final class WeatherViewController: UIViewController {
 
                 case .failure(let error):
                     guard let self else { return }
-                    self.weatherView.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+                    self.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    self.weatherView.errorAlert.addAction(alertAction)
-                    self.present(self.weatherView.errorAlert, animated: true, completion: nil)
+                    self.errorAlert.addAction(alertAction)
+                    self.present(self.errorAlert, animated: true, completion: nil)
                 }
                 self?.weatherView.activityIndicator.stopAnimating()
             }
