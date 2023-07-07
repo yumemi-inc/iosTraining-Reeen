@@ -6,17 +6,25 @@
 //
 
 import Foundation
- 
-enum WeatherError: LocalizedError {
+
+enum WeatherError: Error {
     case invalidParameterError
     case unknownError
-    
+    case dataNotExistsError
+    case encodingConversionError
+}
+
+extension WeatherError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidParameterError:
             "Invalid parameter error occurred."
         case .unknownError:
             "Unknown error occurred."
+        case .dataNotExistsError:
+            "Weather data is not exist"
+        case .encodingConversionError:
+            "Encoding conversion is failure"
         }
     }
 }

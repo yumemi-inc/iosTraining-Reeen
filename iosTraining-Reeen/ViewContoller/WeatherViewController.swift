@@ -142,15 +142,17 @@ private extension WeatherViewController {
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
-    func weatherService(_ weatherService: WeatherService, didFailWithError error: WeatherError) {
-        let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
+    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
+        let image = getImage(for: weatherData.weatherCondition)
+        weatherConditionImageView.image = image
+        maxTemperatureLabel.text = weatherData.maxTemperature.description
+        minTemperatureLabel.text = weatherData.minTemperature.description
+    }
+    
+    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
+        let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
         present(errorAlert, animated: true, completion: nil)
-    }
-    
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: String) {
-        let image = getImage(for: weatherInfo)
-        weatherConditionImageView.image = image
     }
 }
