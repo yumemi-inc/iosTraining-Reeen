@@ -25,7 +25,7 @@ final class WeatherViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         print("WeatherViewController deinitialized")
     }
@@ -67,7 +67,7 @@ private extension WeatherViewController {
             weatherService.getWeatherInformation()
         }
     }
-    
+
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
 
