@@ -149,13 +149,13 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		0DA80AC32A57E36E005B7518 /* ViewContoller */ = {
+		0DA80AC32A57E36E005B7518 /* Contoller */ = {
 			isa = PBXGroup;
 			children = (
 				0DA80AC52A57E36E005B7518 /* WeatherViewController.swift */,
 				0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */,
 			);
-			path = ViewContoller;
+			path = Contoller;
 			sourceTree = "<group>";
 		};
 		0DA80ACD2A57E426005B7518 /* View */ = {
