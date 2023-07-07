@@ -63,6 +63,7 @@ private extension WeatherViewController {
 
     @objc func willEnterForeground() {
         if self.presentedViewController != errorAlert {
+            self.weatherView.activityIndicator.startAnimating()
             weatherService.getWeatherInformation()
         }
     }
@@ -83,6 +84,7 @@ private extension WeatherViewController {
 
 extension WeatherViewController: WeatherViewDelegate {
     func reloadButtonDidTapped() {
+        self.weatherView.activityIndicator.startAnimating()
         weatherService.getWeatherInformation()
     }
 }
@@ -90,15 +92,23 @@ extension WeatherViewController: WeatherViewDelegate {
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
         let image = getImage(for: weatherData.weatherCondition)
-        weatherView.weatherConditionImageView.image = image
-        weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
-        weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
+        DispatchQueue.main.async { [weak self] in
+            self?.weatherView.weatherConditionImageView.image = image
+            self?.weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
+            self?.weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
+            self?.weatherView.activityIndicator.stopAnimating()
+        }
     }
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            self.errorAlert.addAction(alertAction)
+            present(self.errorAlert, animated: true, completion: nil)
+            self.weatherView.activityIndicator.stopAnimating()
+        }
     }
 }
+
