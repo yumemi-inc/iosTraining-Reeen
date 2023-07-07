@@ -21,6 +21,8 @@
 		0DA80A7E2A579D62005B7518 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A7A2A579D62005B7518 /* WeatherService.swift */; };
 		0DA80A7F2A579D6F005B7518 /* ModalHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A6E2A579CE9005B7518 /* ModalHolderViewController.swift */; };
 		0DA80A802A579D78005B7518 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A6D2A579CE9005B7518 /* WeatherViewController.swift */; };
+		0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */; };
+		0DA80AC12A57DA57005B7518 /* WeatherEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		0DA80A782A579D62005B7518 /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0DA80A792A579D62005B7518 /* WeatherError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		0DA80A7A2A579D62005B7518 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDecoder.swift; sourceTree = "<group>"; };
+		0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEncoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,11 +120,13 @@
 		0DA80A662A579CE9005B7518 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0DA80A7A2A579D62005B7518 /* WeatherService.swift */,
 				0DA80A772A579D62005B7518 /* WeatherCondition.swift */,
 				0DA80A782A579D62005B7518 /* WeatherData.swift */,
 				0DA80A792A579D62005B7518 /* WeatherError.swift */,
-				0DA80A7A2A579D62005B7518 /* WeatherService.swift */,
 				0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */,
+				0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */,
+				0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,15 +136,6 @@
 			children = (
 				0DA80A6D2A579CE9005B7518 /* WeatherViewController.swift */,
 				0DA80A6E2A579CE9005B7518 /* ModalHolderViewController.swift */,
-			);
-			path = ViewContoller;
-			sourceTree = "<group>";
-		};
-		0DA658972A54108600900998 /* ViewContoller */ = {
-			isa = PBXGroup;
-			children = (
-				0DA658982A54108600900998 /* WeatherViewController.swift */,
-				0DA658992A54108600900998 /* ModalHolderViewController.swift */,
 			);
 			path = ViewContoller;
 			sourceTree = "<group>";
@@ -258,8 +255,10 @@
 				0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */,
 				0DA80A7F2A579D6F005B7518 /* ModalHolderViewController.swift in Sources */,
 				0DA80A7C2A579D62005B7518 /* WeatherData.swift in Sources */,
+				0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */,
 				0DA80A7B2A579D62005B7518 /* WeatherCondition.swift in Sources */,
 				0DA80A7D2A579D62005B7518 /* WeatherError.swift in Sources */,
+				0DA80AC12A57DA57005B7518 /* WeatherEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

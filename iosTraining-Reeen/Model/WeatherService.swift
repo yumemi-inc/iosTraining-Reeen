@@ -21,38 +21,19 @@ protocol WeatherServiceDelegate: AnyObject {
 
 final class WeatherService: WeatherServiceProtocol {
 
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
+    private let decoder = WeatherDecoder()
+    private let encoder = WeatherEncoder()
     weak var delegate: WeatherServiceDelegate?
 
     func getWeatherInformation() {
         do {
-            let encodedRequest = try encodeRequestParameters()
+            let encodedRequest = try encoder.encodeRequestParameters(RequestParameters(area: "tokyo", date: Date()))
             let weatherInfo = try YumemiWeather.fetchWeather(encodedRequest)
-            let weatherData = try decodeWeatherInfo(weatherInfo)
+            let weatherData = try decoder.decodeWeatherInfo(weatherInfo)
             delegate?.weatherService(self, didUpdateCondition: weatherData)
         } catch {
             handleWeatherServiceError(error)
         }
-    }
-
-    func encodeRequestParameters() throws -> String {
-        let currentDate = Date()
-        let request = RequestParameters(area: "tokyo", date: currentDate)
-        encoder.dateEncodingStrategy = .iso8601
-        let encodedRequest = try encoder.encode(request)
-        guard let jsonString = String(data: encodedRequest, encoding: .utf8) else {
-            throw WeatherError.encodingConversionError
-        }
-        return jsonString
-    }
-
-    func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
-        guard let data = weatherInfo.data(using: .utf8) else {
-            throw WeatherError.encodingConversionError
-        }
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(WeatherData.self, from: data)
     }
 }
 
