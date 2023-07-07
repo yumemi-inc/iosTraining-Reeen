@@ -74,10 +74,12 @@ extension WeatherViewController: WeatherServiceDelegate {
     }
 
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default)
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true)
+        DispatchQueue.main.async {
+            let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            errorAlert.addAction(alertAction)
+            self.present(errorAlert, animated: true)
+        }
     }
 }
 
@@ -93,3 +95,4 @@ private extension WeatherCondition {
         }
     }
 }
+
