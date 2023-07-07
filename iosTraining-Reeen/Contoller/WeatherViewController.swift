@@ -16,12 +16,12 @@ final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
     private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
-    
+
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,7 +34,7 @@ final class WeatherViewController: UIViewController {
         super.loadView()
         view = weatherView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -46,13 +46,13 @@ private extension WeatherViewController {
     func setupViews() {
         weatherService.delegate = self
         weatherView.weatherViewDelegate = self
-        
+
         let closeAction = UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         weatherView.closeButton.addAction(closeAction, for: .touchUpInside)
     }
-    
+
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -60,7 +60,7 @@ private extension WeatherViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
     }
-    
+
     @objc func willEnterForeground() {
         if self.presentedViewController != errorAlert {
             weatherService.getWeatherInformation()
@@ -69,7 +69,7 @@ private extension WeatherViewController {
     
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-        
+
         switch condition {
         case .sunny:
             return UIImage(named: "sunny")?.withTintColor(.red)
