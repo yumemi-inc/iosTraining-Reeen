@@ -13,7 +13,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsSunny() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherCondition: "sunny")
+        let weatherDataStub = YumemiWeatherStub(yumemiWeatherStub: .init(weatherCondition: "sunny"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
@@ -25,7 +25,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsRainy() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherCondition: "rainy")
+        let weatherDataStub = YumemiWeatherStub(yumemiWeatherStub: .init(weatherCondition: "rainy"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
@@ -37,7 +37,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testWeatherConditionImageViewIsCloudy() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherCondition: "cloudy")
+        let weatherDataStub = YumemiWeatherStub(yumemiWeatherStub: .init(weatherCondition: "cloudy"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
@@ -49,7 +49,7 @@ final class iosTraining_ReeenTests: XCTestCase {
 
     func testTempLabelShowAsExpected() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(maxTemperature: 20, minTemperature: 10)
+        let weatherDataStub = YumemiWeatherStub(yumemiWeatherStub: .init(maxTemperature: 20, minTemperature: 10))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act

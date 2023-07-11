@@ -10,22 +10,10 @@ import Foundation
 class YumemiWeatherStub: WeatherServiceProtocol {
     var delegate: WeatherServiceDelegate?
 
-    var maxTemperature: Int
-    var minTemperature: Int
-    var weatherCondition: String
+    var yumemiWeatherStub: WeatherData
 
-    init(maxTemperature: Int = 0, minTemperature: Int = 0, weatherCondition: String = "") {
-        self.maxTemperature = maxTemperature
-        self.minTemperature = minTemperature
-        self.weatherCondition = weatherCondition
-    }
-
-    var yumemiWeatherStub: WeatherData {
-        WeatherData(
-            maxTemperature: maxTemperature,
-            minTemperature: minTemperature,
-            weatherCondition: weatherCondition
-        )
+    init(yumemiWeatherStub: WeatherData) {
+        self.yumemiWeatherStub = yumemiWeatherStub
     }
 
     func getWeatherInformation() {

@@ -12,3 +12,11 @@ struct WeatherData: Decodable {
     let minTemperature: Int
     let weatherCondition: String
 }
+
+extension WeatherData {
+    init(weatherCondition: String = "", maxTemperature: Int = 0, minTemperature: Int = 0) {
+        self.weatherCondition = weatherCondition
+        self.maxTemperature = maxTemperature
+        self.minTemperature = minTemperature
+    }
+}
