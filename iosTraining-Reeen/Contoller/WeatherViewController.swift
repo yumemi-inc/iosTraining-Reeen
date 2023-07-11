@@ -10,8 +10,6 @@ import SnapKit
 
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
-    private var reloadButtonDelegate: ReloadButtonDelegate?
-    private let reloadButtonActionImpl = ReloadButtonActionImpl()
     private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
 
@@ -43,14 +41,7 @@ final class WeatherViewController: UIViewController {
 private extension WeatherViewController {
     func setupViews() {
         weatherService.delegate = self
-        reloadButtonActionImpl.weatherService = weatherService
-        reloadButtonDelegate = reloadButtonActionImpl
-
-        let reloadAction = UIAction { [weak self] _ in
-            self?.reloadButtonDelegate?.reloadButtonDidTapped()
-        }
-
-        weatherView.reloadButton.addAction(reloadAction, for: .touchUpInside)
+        weatherView.reloadButton.delegate = self
 
         let closeAction = UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
@@ -83,6 +74,12 @@ private extension WeatherViewController {
         case .rainy:
             return UIImage(named: "rainy")?.withTintColor(.blue)
         }
+    }
+}
+
+extension WeatherViewController: ReloadButtonDelegate {
+    func reloadButtonDidTapped() {
+        weatherService.getWeatherInformation()
     }
 }
 
