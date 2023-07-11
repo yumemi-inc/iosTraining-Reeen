@@ -14,12 +14,6 @@ class YumemiWeatherStub: WeatherServiceProtocol {
     var minTemperature = 0
     var weatherCondition = ""
 
-    init(maxTemperature: Int = 0, minTemperature: Int = 0, weatherCondition: String = "") {
-        self.maxTemperature = maxTemperature
-        self.minTemperature = minTemperature
-        self.weatherCondition = weatherCondition
-    }
-
     var yumemiWeatherStub: WeatherData {
         WeatherData(
             maxTemperature: maxTemperature,
