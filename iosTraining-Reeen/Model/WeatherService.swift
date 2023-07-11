@@ -46,6 +46,8 @@ extension WeatherService {
             case .unknownError:
                 delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
             }
+        } else if let weatherError = error as? WeatherError {
+            delegate?.weatherService(self, didFailWithError: weatherError)
         } else {
             delegate?.weatherService(self, didFailWithError: WeatherError.dataNotExistsError)
         }
