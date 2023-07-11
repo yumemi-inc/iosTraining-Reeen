@@ -59,8 +59,6 @@ class WeatherView: UIView {
         return stackView
     }()
 
-    var errorAlert = UIAlertController()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
