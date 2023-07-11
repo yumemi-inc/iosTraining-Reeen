@@ -37,12 +37,7 @@ class WeatherView: UIView {
         return button
     }()
 
-    let reloadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Reload", for: .normal)
-        return button
-    }()
+    let reloadButton = ReloadButton()
 
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])

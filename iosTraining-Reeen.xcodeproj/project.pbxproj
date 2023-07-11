@@ -14,7 +14,6 @@
 		0D1566732A2EDA7F009A5927 /* WeatherViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566722A2EDA7F009A5927 /* WeatherViewControllerTests.swift */; };
 		0D15668D2A2EF99D009A5927 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668C2A2EF99D009A5927 /* YumemiWeather */; };
 		0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668F2A2EFC47009A5927 /* SnapKit */; };
-		0D64CA572A45304A00180ADD /* YumemiWeatherStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */; };
 		0D8C49C72A580A23008B12E9 /* ReloadButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C49C62A580A23008B12E9 /* ReloadButtonDelegate.swift */; };
 		0DA80A7B2A579D62005B7518 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A772A579D62005B7518 /* WeatherCondition.swift */; };
 		0DA80A7C2A579D62005B7518 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A782A579D62005B7518 /* WeatherData.swift */; };
@@ -22,13 +21,11 @@
 		0DA80A7E2A579D62005B7518 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A7A2A579D62005B7518 /* WeatherService.swift */; };
 		0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */; };
 		0DA80AC12A57DA57005B7518 /* WeatherEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */; };
-		0DDEA2F32A60DBA700A465C3 /* YumemiWeatherStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */; };
-		0DDEA2F52A60DC1E00A465C3 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		0DDEA2F62A61064000A465C3 /* ModalHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */; };
-		0DDEA2F72A61064300A465C3 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC52A57E36E005B7518 /* WeatherViewController.swift */; };
-		0DDEA2F82A61064500A465C3 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		0DDEA2F92A61068400A465C3 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80ACE2A57E426005B7518 /* WeatherView.swift */; };
-		0DDEA2FA2A6106D700A465C3 /* ButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C49C62A580A23008B12E9 /* ButtonDelegate.swift */; };
+		0DA80AC92A57E36E005B7518 /* ModalHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */; };
+		0DDEA2FB2A6107B000A465C3 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC52A57E36E005B7518 /* WeatherViewController.swift */; };
+		0DDEA2FC2A6107B700A465C3 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80ACE2A57E426005B7518 /* WeatherView.swift */; };
+		0DDEA2FD2A6107C000A465C3 /* YumemiWeatherStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */; };
+		0DED2E282A5D1AFE00FD8059 /* ReloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DED2E272A5D1AFE00FD8059 /* ReloadButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +60,7 @@
 		0DA80AC52A57E36E005B7518 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalHolderViewController.swift; sourceTree = "<group>"; };
 		0DA80ACE2A57E426005B7518 /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		0DED2E272A5D1AFE00FD8059 /* ReloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +151,7 @@
 		0DA80AC32A57E36E005B7518 /* Contoller */ = {
 			isa = PBXGroup;
 			children = (
+				0D8C49C62A580A23008B12E9 /* ReloadButtonDelegate.swift */,
 				0DA80AC52A57E36E005B7518 /* WeatherViewController.swift */,
 				0DA80AC62A57E36E005B7518 /* ModalHolderViewController.swift */,
 			);
@@ -162,8 +161,8 @@
 		0DA80ACD2A57E426005B7518 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0D8C49C62A580A23008B12E9 /* ReloadButtonDelegate.swift */,
 				0DA80ACE2A57E426005B7518 /* WeatherView.swift */,
+				0DED2E272A5D1AFE00FD8059 /* ReloadButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,22 +275,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DDEA2FA2A6106D700A465C3 /* ButtonDelegate.swift in Sources */,
 				0DA80A7E2A579D62005B7518 /* WeatherService.swift in Sources */,
+				0DDEA2FB2A6107B000A465C3 /* WeatherViewController.swift in Sources */,
 				0D15665C2A2EDA7E009A5927 /* AppDelegate.swift in Sources */,
 				0DA80AC92A57E36E005B7518 /* ModalHolderViewController.swift in Sources */,
 				0D8C49C72A580A23008B12E9 /* ReloadButtonDelegate.swift in Sources */,
+				0DDEA2FC2A6107B700A465C3 /* WeatherView.swift in Sources */,
 				0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */,
-				0DDEA2F82A61064500A465C3 /* (null) in Sources */,
 				0DA80A7C2A579D62005B7518 /* WeatherData.swift in Sources */,
-				0DDEA2F92A61068400A465C3 /* WeatherView.swift in Sources */,
-				0DDEA2F32A60DBA700A465C3 /* YumemiWeatherStub.swift in Sources */,
 				0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */,
-				0DDEA2F62A61064000A465C3 /* ModalHolderViewController.swift in Sources */,
+				0DED2E282A5D1AFE00FD8059 /* ReloadButton.swift in Sources */,
+				0DDEA2FD2A6107C000A465C3 /* YumemiWeatherStub.swift in Sources */,
 				0DA80A7B2A579D62005B7518 /* WeatherCondition.swift in Sources */,
 				0DA80A7D2A579D62005B7518 /* WeatherError.swift in Sources */,
 				0DA80AC12A57DA57005B7518 /* WeatherEncoder.swift in Sources */,
-				0DDEA2F72A61064300A465C3 /* WeatherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +297,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D1566732A2EDA7F009A5927 /* WeatherViewControllerTests.swift in Sources */,
-				0DDEA2F52A60DC1E00A465C3 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
