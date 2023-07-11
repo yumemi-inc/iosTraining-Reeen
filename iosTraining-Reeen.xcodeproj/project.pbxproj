@@ -156,7 +156,6 @@
 		0DA80ACD2A57E426005B7518 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0D8C49C62A580A23008B12E9 /* ReloadButtonDelegate.swift */,
 				0DA80ACE2A57E426005B7518 /* WeatherView.swift */,
 			);
 			path = View;
