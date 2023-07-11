@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherDecoder {
+struct WeatherDecoder {
     private let decoder = JSONDecoder()
     func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
         guard let data = weatherInfo.data(using: .utf8) else {
