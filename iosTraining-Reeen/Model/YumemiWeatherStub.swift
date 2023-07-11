@@ -20,7 +20,7 @@ class YumemiWeatherStub: WeatherServiceProtocol {
         self.weatherCondition = weatherCondition
     }
 
-    var weatherDataStub: WeatherData {
+    var yumemiWeatherStub: WeatherData {
         WeatherData(
             maxTemperature: maxTemperature,
             minTemperature: minTemperature,
@@ -29,6 +29,6 @@ class YumemiWeatherStub: WeatherServiceProtocol {
     }
 
     func getWeatherInformation() {
-        delegate?.weatherService(self, didUpdateCondition: weatherDataStub)
+        delegate?.weatherService(self, didUpdateCondition: yumemiWeatherStub)
     }
 }

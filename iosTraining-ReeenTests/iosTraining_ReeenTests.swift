@@ -9,12 +9,12 @@ import XCTest
 @testable import iosTraining_Reeen
 
 final class iosTraining_ReeenTests: XCTestCase {
-    var weatherService: YumemiWeatherStub!
+    var yumemiWeatherStub: YumemiWeatherStub!
     var weatherViewController: WeatherViewController!
 
     override func setUp() {
         super.setUp()
-        weatherService = YumemiWeatherStub()
+        yumemiWeatherStub = YumemiWeatherStub()
     }
 
     func testWeatherConditionImageViewIsSunny() {
