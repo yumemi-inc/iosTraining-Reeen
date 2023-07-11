@@ -12,6 +12,7 @@ final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
     private var reloadButtonDelegate: ReloadButtonDelegate?
     private let reloadButtonActionImpl = ReloadButtonActionImpl()
+    private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
 
     init(weatherService: WeatherServiceProtocol) {
@@ -66,7 +67,7 @@ private extension WeatherViewController {
     }
 
     @objc func willEnterForeground() {
-        if self.presentedViewController != weatherView.errorAlert {
+        if self.presentedViewController != errorAlert {
             weatherService.getWeatherInformation()
         }
     }
@@ -94,9 +95,9 @@ extension WeatherViewController: WeatherServiceDelegate {
     }
 
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        weatherView.errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+        errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        weatherView.errorAlert.addAction(alertAction)
-        present(weatherView.errorAlert, animated: true, completion: nil)
+        errorAlert.addAction(alertAction)
+        present(errorAlert, animated: true, completion: nil)
     }
 }
