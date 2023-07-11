@@ -8,6 +8,16 @@
 import XCTest
 @testable import iosTraining_Reeen
 
+extension WeatherData {
+    init(weatherCondition: String = "", maxTemperature: Int = 0, minTemperature: Int = 0) {
+        self.init(
+            maxTemperature: maxTemperature,
+            minTemperature: minTemperature,
+            weatherCondition: weatherCondition
+        )
+    }
+}
+
 final class iosTraining_ReeenTests: XCTestCase {
     var weatherViewController: WeatherViewController!
 
