@@ -10,13 +10,13 @@ import Foundation
 class YumemiWeatherStub: WeatherServiceProtocol {
     var delegate: WeatherServiceDelegate?
 
-    var yumemiWeatherStub: WeatherData
+    var weatherData: WeatherData
 
-    init(yumemiWeatherStub: WeatherData) {
-        self.yumemiWeatherStub = yumemiWeatherStub
+    init(weatherData: WeatherData) {
+        self.weatherData = weatherData
     }
 
     func getWeatherInformation() {
-        delegate?.weatherService(self, didUpdateCondition: yumemiWeatherStub)
+        delegate?.weatherService(self, didUpdateCondition: weatherData)
     }
 }
