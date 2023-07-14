@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "8D9F1671-41EA-4B50-949D-C42088480931",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:iosTraining-Reeen.xcodeproj",
+      "identifier" : "0D1566572A2EDA7E009A5927",
+      "name" : "iosTraining-Reeen"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iosTraining-Reeen.xcodeproj",
+        "identifier" : "0D15666D2A2EDA7F009A5927",
+        "name" : "iosTraining-ReeenTests"
+      }
+    }
+  ],
+  "version" : 1
+}
