@@ -14,7 +14,6 @@
 		0D1566732A2EDA7F009A5927 /* iosTraining_ReeenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */; };
 		0D15668D2A2EF99D009A5927 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668C2A2EF99D009A5927 /* YumemiWeather */; };
 		0D1566902A2EFC47009A5927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D15668F2A2EFC47009A5927 /* SnapKit */; };
-		0D64CA572A45304A00180ADD /* YumemiWeatherStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */; };
 		0DA80A7B2A579D62005B7518 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A772A579D62005B7518 /* WeatherCondition.swift */; };
 		0DA80A7C2A579D62005B7518 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A782A579D62005B7518 /* WeatherData.swift */; };
 		0DA80A7D2A579D62005B7518 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A792A579D62005B7518 /* WeatherError.swift */; };
@@ -23,6 +22,7 @@
 		0DA80A802A579D78005B7518 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80A6D2A579CE9005B7518 /* WeatherViewController.swift */; };
 		0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */; };
 		0DA80AC12A57DA57005B7518 /* WeatherEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */; };
+		0DDEA2F32A60DBA700A465C3 /* YumemiWeatherStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +112,7 @@
 		0D1566712A2EDA7F009A5927 /* iosTraining-ReeenTests */ = {
 			isa = PBXGroup;
 			children = (
+				0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */,
 				0D1566722A2EDA7F009A5927 /* iosTraining_ReeenTests.swift */,
 			);
 			path = "iosTraining-ReeenTests";
@@ -124,7 +125,6 @@
 				0DA80A772A579D62005B7518 /* WeatherCondition.swift */,
 				0DA80A782A579D62005B7518 /* WeatherData.swift */,
 				0DA80A792A579D62005B7518 /* WeatherError.swift */,
-				0D64CA562A45304A00180ADD /* YumemiWeatherStub.swift */,
 				0DA80AC02A57DA57005B7518 /* WeatherEncoder.swift */,
 				0DA80ABE2A57DA20005B7518 /* WeatherDecoder.swift */,
 			);
@@ -250,11 +250,11 @@
 			files = (
 				0DA80A7E2A579D62005B7518 /* WeatherService.swift in Sources */,
 				0DA80A802A579D78005B7518 /* WeatherViewController.swift in Sources */,
-				0D64CA572A45304A00180ADD /* YumemiWeatherStub.swift in Sources */,
 				0D15665C2A2EDA7E009A5927 /* AppDelegate.swift in Sources */,
 				0D15665E2A2EDA7E009A5927 /* SceneDelegate.swift in Sources */,
 				0DA80A7F2A579D6F005B7518 /* ModalHolderViewController.swift in Sources */,
 				0DA80A7C2A579D62005B7518 /* WeatherData.swift in Sources */,
+				0DDEA2F32A60DBA700A465C3 /* YumemiWeatherStub.swift in Sources */,
 				0DA80ABF2A57DA20005B7518 /* WeatherDecoder.swift in Sources */,
 				0DA80A7B2A579D62005B7518 /* WeatherCondition.swift in Sources */,
 				0DA80A7D2A579D62005B7518 /* WeatherError.swift in Sources */,
