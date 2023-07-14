@@ -8,8 +8,8 @@
 import Foundation
 
 struct WeatherDecoder {
-    private let decoder = JSONDecoder()
     func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
+        let decoder = JSONDecoder()
         guard let data = weatherInfo.data(using: .utf8) else {
             throw WeatherError.encodingConversionError
         }

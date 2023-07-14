@@ -21,11 +21,11 @@ protocol WeatherServiceDelegate: AnyObject {
 
 final class WeatherService: WeatherServiceProtocol {
 
-    private let decoder = WeatherDecoder()
-    private let encoder = WeatherEncoder()
     weak var delegate: WeatherServiceDelegate?
 
     func getWeatherInformation() {
+        let decoder = WeatherDecoder()
+        let encoder = WeatherEncoder()
         do {
             let encodedRequest = try encoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
             let weatherInfo = try YumemiWeather.fetchWeather(encodedRequest)
