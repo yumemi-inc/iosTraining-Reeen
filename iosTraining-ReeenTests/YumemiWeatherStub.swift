@@ -8,15 +8,13 @@
 import Foundation
 
 class YumemiWeatherStub: WeatherServiceProtocol {
-    var delegate: WeatherServiceDelegate?
-
     var weatherData: WeatherData
 
     init(weatherData: WeatherData) {
         self.weatherData = weatherData
     }
 
-    func getWeatherInformation() {
-        delegate?.weatherService(self, didUpdateCondition: weatherData)
+    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
+        completion(.success(weatherData))
     }
 }

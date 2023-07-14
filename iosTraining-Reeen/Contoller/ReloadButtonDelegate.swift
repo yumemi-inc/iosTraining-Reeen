@@ -12,8 +12,10 @@ protocol ReloadButtonDelegate: AnyObject {
 }
 
 class ReloadButtonActionImpl: ReloadButtonDelegate {
-    weak var weatherService: WeatherServiceProtocol?
+    weak var weatherViewController: WeatherViewController?
+
     func reloadButtonDidTapped() {
-        weatherService?.getWeatherInformation()
+        guard let weatherViewController else { return }
+        weatherViewController.getWeatherInformation()
     }
 }

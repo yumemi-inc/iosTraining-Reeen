@@ -60,7 +60,6 @@ class WeatherView: UIView {
     }()
 
     weak var weatherViewDelegate: WeatherViewDelegate?
-
     let activityIndicator = UIActivityIndicatorView(style: .medium)
 
     override init(frame: CGRect) {
@@ -111,6 +110,5 @@ extension WeatherView {
     
     @objc private func buttonPressed() {
         weatherViewDelegate?.reloadButtonDidTapped()
-
     }
 }
