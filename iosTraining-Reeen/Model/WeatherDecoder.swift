@@ -11,7 +11,7 @@ struct WeatherDecoder {
     func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
         let decoder = JSONDecoder()
         guard let data = weatherInfo.data(using: .utf8) else {
-            throw WeatherError.encodingConversionError
+            fatalError("unexpected error occurred.")
         }
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode(WeatherData.self, from: data)

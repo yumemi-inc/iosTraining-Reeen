@@ -14,7 +14,7 @@ struct WeatherEncoder {
         encoder.outputFormatting = .sortedKeys
         let encodedRequest = try encoder.encode(requestParameters)
         guard let jsonString = String(data: encodedRequest, encoding: .utf8) else {
-            throw WeatherError.encodingConversionError
+            fatalError("unexpected error occurred.")
         }
         return jsonString
     }
