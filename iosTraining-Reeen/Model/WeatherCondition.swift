@@ -13,7 +13,7 @@ enum WeatherCondition: String {
     case rainy
 }
 
-struct RequestParameters: Encodable {
+struct WeatherInformationRequest: Encodable {
     let area: String
     let date: Date
 }

@@ -74,7 +74,7 @@ final class iosTraining_ReeenTests: XCTestCase {
     func testEncodeRequestParameters() {
         let encoder = WeatherEncoder()
         let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(secondsFromGMT: 0), year: 2023, month: 7, day: 7, hour: 12, minute: 1, second: 1).date!
-        let dummyRequestParameters = RequestParameters(area: "tokyo", date: date)
+        let dummyRequestParameters = WeatherInformationRequest(area: "tokyo", date: date)
         let expectData = #"{"area":"tokyo","date":"2023-07-07T12:01:01Z"}"#
 
         do {
