@@ -37,7 +37,12 @@ class WeatherView: UIView {
         return button
     }()
 
-    let reloadButton = ReloadButton()
+    let reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Reload", for: .normal)
+        return button
+    }()
 
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
@@ -53,6 +58,8 @@ class WeatherView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
+
+    weak var weatherViewDelegate: WeatherViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,10 +78,12 @@ extension WeatherView {
         addSubview(closeButton)
         addSubview(reloadButton)
 
+        reloadButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
+
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
         }
@@ -90,5 +99,9 @@ extension WeatherView {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
+    }
+
+    @objc private func buttonPressed() {
+        weatherViewDelegate?.reloadButtonDidTapped()
     }
 }

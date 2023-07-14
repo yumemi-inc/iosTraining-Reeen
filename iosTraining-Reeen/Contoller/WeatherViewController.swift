@@ -8,29 +8,33 @@
 import UIKit
 import SnapKit
 
+protocol WeatherViewDelegate: AnyObject {
+    func reloadButtonDidTapped()
+}
+
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
     private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
-
+    
     init(weatherService: WeatherServiceProtocol) {
         self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     deinit {
         print("WeatherViewController deinitialized")
     }
-
+    
     override func loadView() {
         super.loadView()
         view = weatherView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -41,14 +45,14 @@ final class WeatherViewController: UIViewController {
 private extension WeatherViewController {
     func setupViews() {
         weatherService.delegate = self
-        weatherView.reloadButton.delegate = self
-
+        weatherView.weatherViewDelegate = self
+        
         let closeAction = UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         weatherView.closeButton.addAction(closeAction, for: .touchUpInside)
     }
-
+    
     func addNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -56,16 +60,16 @@ private extension WeatherViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
     }
-
+    
     @objc func willEnterForeground() {
         if self.presentedViewController != errorAlert {
             weatherService.getWeatherInformation()
         }
     }
-
+    
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-
+        
         switch condition {
         case .sunny:
             return UIImage(named: "sunny")?.withTintColor(.red)
@@ -77,7 +81,7 @@ private extension WeatherViewController {
     }
 }
 
-extension WeatherViewController: ReloadButtonDelegate {
+extension WeatherViewController: WeatherViewDelegate {
     func reloadButtonDidTapped() {
         weatherService.getWeatherInformation()
     }
@@ -90,7 +94,7 @@ extension WeatherViewController: WeatherServiceDelegate {
         weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
         weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
     }
-
+    
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
         errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
