@@ -35,26 +35,30 @@ final class WeatherViewController: UIViewController {
         addNotificationCenter()
     }
 
-    func getWeatherInformation() {
-        weatherView.activityIndicator.startAnimating()
-        weatherService.getWeatherInformation { [weak self] result in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let weatherData):
-                    let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
-                    self.weatherView.weatherConditionImageView.image = image
-                    self.weatherView.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
-                    self.weatherView.minTemperatureLabel.text = "\(weatherData.minTemperature)"
-                case .failure(let error):
-                    self.errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    self.errorAlert.addAction(alertAction)
-                    self.present(self.errorAlert, animated: true, completion: nil)
-                }
-                self.weatherView.activityIndicator.stopAnimating()
+    func reloadWeatherInformation() {
+        Task {
+            defer {
+                weatherView.activityIndicator.stopAnimating()
+            }
+            do {
+                let weatherData = try await weatherService.getWeatherInformation()
+                let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
+                weatherView.weatherConditionImageView.image = image
+                weatherView.maxTemperatureLabel.text = "\(weatherData.maxTemperature)"
+                weatherView.minTemperatureLabel.text = "\(weatherData.minTemperature)"
+            } catch let error as WeatherError {
+                showErrorAlert(message: error.errorDescription ?? "Unknown error occurred.")
+            } catch {
+                showErrorAlert(message: "Unknown error occurred.")
             }
         }
+    }
+
+    func showErrorAlert(message: String) {
+        errorAlert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        errorAlert.addAction(alertAction)
+        present(errorAlert, animated: true, completion: nil)
     }
 }
 
@@ -75,7 +79,7 @@ private extension WeatherViewController {
     @objc func willEnterForeground() {
         if presentedViewController == nil {
             weatherView.activityIndicator.startAnimating()
-            getWeatherInformation()
+            reloadWeatherInformation()
         }
     }
 
@@ -88,7 +92,7 @@ private extension WeatherViewController {
 
 extension WeatherViewController: WeatherViewDelegate {
     func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
-        getWeatherInformation()
+        reloadWeatherInformation()
     }
 
     func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView) {

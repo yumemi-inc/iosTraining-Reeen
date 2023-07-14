@@ -14,7 +14,7 @@ class YumemiWeatherStub: WeatherServiceProtocol {
         self.weatherData = weatherData
     }
 
-    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
-        completion(.success(weatherData))
+    func getWeatherInformation() async throws -> WeatherData {
+        weatherData
     }
 }
