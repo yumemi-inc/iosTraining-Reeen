@@ -9,22 +9,31 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherServiceProtocol: AnyObject {
-    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void)
+    func getWeatherInformation() async throws -> WeatherData
 }
 
 final class WeatherService: WeatherServiceProtocol {
+    func getWeatherInformation() async throws -> WeatherData {
+        do {
+            let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
+            let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
+            let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
+            return weatherData
+        } catch {
+            try handleWeatherServiceError(error)
+        }
+        throw WeatherError.dataNotExistsError
+    }
+}
 
-    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
-        DispatchQueue.global(qos: .background).async {
-            do {
-                let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
-                let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
-                let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
-                completion(.success(weatherData))
-            } catch let error as WeatherError {
-                completion(.failure(error))
-            } catch {
-                completion(.failure(WeatherError.unknownError))
+extension WeatherService {
+    func handleWeatherServiceError(_ error: Error) throws {
+        if let yumemiWeatherError = error as? YumemiWeatherError {
+            switch yumemiWeatherError {
+            case .invalidParameterError:
+                throw WeatherError.invalidParameterError
+            case .unknownError:
+                throw WeatherError.unknownError
             }
         }
     }
