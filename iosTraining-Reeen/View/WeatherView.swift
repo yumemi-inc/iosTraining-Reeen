@@ -61,6 +61,8 @@ class WeatherView: UIView {
 
     weak var weatherViewDelegate: WeatherViewDelegate?
 
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -77,6 +79,7 @@ extension WeatherView {
         addSubview(weatherConditionStackView)
         addSubview(closeButton)
         addSubview(reloadButton)
+        addSubview(activityIndicator)
 
         reloadButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
@@ -99,9 +102,15 @@ extension WeatherView {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
-    }
 
+        activityIndicator.snp.makeConstraints { make in
+            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
     @objc private func buttonPressed() {
         weatherViewDelegate?.reloadButtonDidTapped()
+
     }
 }
