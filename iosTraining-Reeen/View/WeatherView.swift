@@ -80,7 +80,11 @@ extension WeatherView {
         addSubview(reloadButton)
         addSubview(activityIndicator)
 
-        reloadButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        reloadButton.addAction(UIAction { _ in
+            Task {
+                await self.weatherViewDelegate?.reloadButtonDidTapped()
+            }
+        }, for: .touchUpInside)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -106,9 +110,5 @@ extension WeatherView {
             make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
             make.centerX.equalToSuperview()
         }
-    }
-    
-    @objc private func buttonPressed() {
-        weatherViewDelegate?.reloadButtonDidTapped()
     }
 }
