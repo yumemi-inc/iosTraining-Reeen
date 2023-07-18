@@ -65,6 +65,7 @@ private extension WeatherViewController {
 
 extension WeatherViewController: WeatherViewDelegate {
     func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
+        weatherView.activityIndicator.startAnimating()
         weatherService.getWeatherInformation()
     }
 
