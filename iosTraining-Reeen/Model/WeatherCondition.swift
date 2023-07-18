@@ -14,6 +14,6 @@ enum WeatherCondition: String {
 }
 
 struct WeatherInformationRequest: Encodable {
-    let area: String
-    let date: Date
+    let areas: [String]
+    let date: String
 }

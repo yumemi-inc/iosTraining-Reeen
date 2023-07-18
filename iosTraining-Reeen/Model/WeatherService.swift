@@ -9,14 +9,19 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherServiceProtocol: AnyObject {
-    func getWeatherInformation() async throws -> WeatherData
+    func getWeatherInformation() async throws -> [WeatherResponse]
 }
 
 final class WeatherService: WeatherServiceProtocol {
-    func getWeatherInformation() async throws -> WeatherData {
+    private let dateFormatter = DateFormatter()
+    private let areas = ["Sapporo", "Sendai", "Niigata", "Kanazawa", "Tokyo", "Nagoya", "Osaka", "Hiroshima", "Kochi", "Fukuoka", "Kagoshima", "Naha"]
+
+    func getWeatherInformation() async throws -> [WeatherResponse] {
         do {
-            let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
-            let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
+            let formattedDate = dateFormatter.string(from: Date())
+            let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(areas: areas, date: formattedDate))
+            let weatherInfo = try YumemiWeather.syncFetchWeatherList(encodedRequest)
             let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
             return weatherData
         } catch {
