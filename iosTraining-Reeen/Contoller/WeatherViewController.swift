@@ -10,6 +10,7 @@ import SnapKit
 
 protocol WeatherViewDelegate: AnyObject {
     func reloadButtonDidTapped()
+    func closeButtonDidTapped()
 }
 
 final class WeatherViewController: UIViewController {
@@ -46,11 +47,6 @@ private extension WeatherViewController {
     func setupViews() {
         weatherService.delegate = self
         weatherView.weatherViewDelegate = self
-        
-        let closeAction = UIAction { [weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        weatherView.closeButton.addAction(closeAction, for: .touchUpInside)
     }
     
     func addNotificationCenter() {
@@ -84,6 +80,10 @@ private extension WeatherViewController {
 extension WeatherViewController: WeatherViewDelegate {
     func reloadButtonDidTapped() {
         weatherService.getWeatherInformation()
+    }
+
+    func closeButtonDidTapped() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

@@ -71,14 +71,20 @@ class WeatherView: UIView {
     }
 }
 
-extension WeatherView {
+private extension WeatherView {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(weatherConditionStackView)
         addSubview(closeButton)
         addSubview(reloadButton)
 
-        reloadButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        reloadButton.addAction(UIAction { [weak self] _ in
+            self?.reloadWeatherInfo()
+        }, for: .touchUpInside)
+
+        closeButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.closeWeatherViewController()
+        }), for: .touchUpInside)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -101,7 +107,11 @@ extension WeatherView {
         }
     }
 
-    @objc private func buttonPressed() {
+    func reloadWeatherInfo() {
         weatherViewDelegate?.reloadButtonDidTapped()
+    }
+
+    func closeWeatherViewController() {
+        weatherViewDelegate?.closeButtonDidTapped()
     }
 }
