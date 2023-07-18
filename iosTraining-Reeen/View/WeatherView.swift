@@ -90,7 +90,6 @@ private extension WeatherView {
         addSubview(weatherConditionStackView)
         addSubview(closeButton)
         addSubview(reloadButton)
-        addSubview(activityIndicator)
 
         reloadButton.addAction(UIAction { [weak self] _ in
             guard let self else { return }
@@ -120,11 +119,6 @@ private extension WeatherView {
             make.centerX.equalTo(minTemperatureLabel)
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
-        }
-
-        activityIndicator.snp.makeConstraints { make in
-            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
-            make.centerX.equalToSuperview()
         }
     }
 }
