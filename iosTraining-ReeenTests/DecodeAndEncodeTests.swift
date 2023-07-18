@@ -16,7 +16,7 @@ final class DecodeAndEncodeTests: XCTestCase {
         let expectData = #"{"area":"tokyo","date":"2023-07-07T12:01:01Z"}"#
 
         do {
-            let encodedRequest = try WeatherEncoder().encodeRequestParameters(encodeRequest)
+            let encodedRequest = try WeatherEncoder.encodeRequestParameters(encodeRequest)
             XCTAssertEqual(encodedRequest, expectData)
         } catch {
             XCTFail("Encoding failed with error: \(error)")
@@ -25,7 +25,6 @@ final class DecodeAndEncodeTests: XCTestCase {
 
 
     func testDecodeWeatherInfo() {
-        let decoder = WeatherDecoder()
         let dummyWeatherInfo = """
             {
                 "weather_condition": "sunny",
@@ -34,7 +33,7 @@ final class DecodeAndEncodeTests: XCTestCase {
             }
             """
         do {
-            let weatherData = try decoder.decodeWeatherInfo(dummyWeatherInfo)
+            let weatherData = try WeatherDecoder.decodeWeatherInfo(dummyWeatherInfo)
             XCTAssertEqual(weatherData.weatherCondition, "sunny")
             XCTAssertEqual(weatherData.maxTemperature, 30)
             XCTAssertEqual(weatherData.minTemperature, 20)
