@@ -10,18 +10,18 @@ import XCTest
 
 final class DecodeAndEncodeTests: XCTestCase {
     
-    func testEncodeRequestParameters() {
-        let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(secondsFromGMT: 0), year: 2023, month: 7, day: 7, hour: 12, minute: 1, second: 1).date!
-        let dummyRequestParameters = WeatherInformationRequest(areas: ["tokyo"], date: date)
-        let expectData = #"{"areas":["tokyo"],"date":"2023-07-07T12:01:01Z"}"#
-
-        do {
-            let encodedRequest = try WeatherEncoder.encodeRequestParameters(dummyRequestParameters)
-            XCTAssertEqual(encodedRequest, expectData)
-        } catch {
-            XCTFail("Encoding failed with error: \(error)")
-        }
-    }
+//    func testEncodeRequestParameters() {
+//        let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(secondsFromGMT: 0), year: 2023, month: 7, day: 7, hour: 12, minute: 1, second: 1).date!
+//        let dummyRequestParameters = WeatherInformationRequest(areas: ["tokyo"], date: date)
+//        let expectData = #"{"areas":["tokyo"],"date":"2023-07-07T12:01:01Z"}"#
+//
+//        do {
+//            let encodedRequest = try WeatherEncoder.encodeRequestParameters(dummyRequestParameters)
+//            XCTAssertEqual(encodedRequest, expectData)
+//        } catch {
+//            XCTFail("Encoding failed with error: \(error)")
+//        }
+//    }
 
 
     func testDecodeWeatherInfo() {

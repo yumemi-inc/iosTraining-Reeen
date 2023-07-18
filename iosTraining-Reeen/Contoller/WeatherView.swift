@@ -74,8 +74,8 @@ class WeatherView: UIView {
 
     func displayWeatherConditions(data: WeatherData, image: UIImage?) {
         weatherConditionImageView.image = image
-        maxTemperatureLabel.text = data.items[0].maxTemperature.description
-        minTemperatureLabel.text = data.items[0].minTemperature.description
+        maxTemperatureLabel.text = data.maxTemperature.description
+        minTemperatureLabel.text = data.minTemperature.description
     }
 }
 
