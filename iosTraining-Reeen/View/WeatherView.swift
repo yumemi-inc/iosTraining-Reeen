@@ -69,6 +69,12 @@ class WeatherView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func displayWeatherConditions(data: WeatherData, image: UIImage?) {
+        weatherConditionImageView.image = image
+        maxTemperatureLabel.text = data.maxTemperature.description
+        minTemperatureLabel.text = data.minTemperature.description
+    }
 }
 
 private extension WeatherView {

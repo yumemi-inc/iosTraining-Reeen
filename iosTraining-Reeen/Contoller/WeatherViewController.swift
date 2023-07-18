@@ -90,9 +90,7 @@ extension WeatherViewController: WeatherViewDelegate {
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
         let image = getImage(for: weatherData.weatherCondition)
-        weatherView.weatherConditionImageView.image = image
-        weatherView.maxTemperatureLabel.text = weatherData.maxTemperature.description
-        weatherView.minTemperatureLabel.text = weatherData.minTemperature.description
+        weatherView.displayWeatherConditions(data: weatherData, image: image)
     }
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
