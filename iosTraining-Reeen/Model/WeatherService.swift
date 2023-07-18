@@ -27,7 +27,7 @@ final class WeatherService: WeatherServiceProtocol {
         let decoder = WeatherDecoder()
         let encoder = WeatherEncoder()
         do {
-            let encodedRequest = try encoder.encodeRequest(WeatherInformationRequest(area: "tokyo", date: Date()))
+            let encodedRequest = try encoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
             let weatherInfo = try YumemiWeather.fetchWeather(encodedRequest)
             let weatherData = try decoder.decodeWeatherInfo(weatherInfo)
             delegate?.weatherService(self, didUpdateCondition: weatherData)

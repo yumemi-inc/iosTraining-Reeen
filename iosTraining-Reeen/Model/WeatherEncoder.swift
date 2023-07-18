@@ -8,11 +8,11 @@
 import Foundation
 
 struct WeatherEncoder {
-    func encodeRequest(_ requestParameters: WeatherInformationRequest) throws -> String {
+    func encodeRequestParameters(_ encodeRequest: WeatherInformationRequest) throws -> String {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = .sortedKeys
-        let encodedRequest = try encoder.encode(requestParameters)
+        let encodedRequest = try encoder.encode(encodeRequest)
         guard let jsonString = String(data: encodedRequest, encoding: .utf8) else {
             fatalError("unexpected error occurred.")
         }
