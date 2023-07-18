@@ -8,7 +8,7 @@
 import Foundation
 
 struct WeatherDecoder {
-    func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
+    static func decodeWeatherInfo(_ weatherInfo: String) throws -> WeatherData {
         let decoder = JSONDecoder()
         guard let data = weatherInfo.data(using: .utf8) else {
             fatalError("unexpected error occurred.")

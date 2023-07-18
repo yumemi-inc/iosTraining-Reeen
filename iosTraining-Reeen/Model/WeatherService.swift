@@ -24,12 +24,10 @@ final class WeatherService: WeatherServiceProtocol {
     weak var delegate: WeatherServiceDelegate?
 
     func getWeatherInformation() {
-        let decoder = WeatherDecoder()
-        let encoder = WeatherEncoder()
         do {
-            let encodedRequest = try encoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
+            let encodedRequest = try WeatherEncoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
             let weatherInfo = try YumemiWeather.fetchWeather(encodedRequest)
-            let weatherData = try decoder.decodeWeatherInfo(weatherInfo)
+            let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
             delegate?.weatherService(self, didUpdateCondition: weatherData)
         } catch {
             handleWeatherServiceError(error)

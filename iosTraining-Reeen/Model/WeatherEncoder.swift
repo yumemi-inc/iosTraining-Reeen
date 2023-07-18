@@ -8,7 +8,7 @@
 import Foundation
 
 struct WeatherEncoder {
-    func encodeRequestParameters(_ encodeRequest: WeatherInformationRequest) throws -> String {
+    static func encodeRequestParameters(_ encodeRequest: WeatherInformationRequest) throws -> String {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = .sortedKeys
