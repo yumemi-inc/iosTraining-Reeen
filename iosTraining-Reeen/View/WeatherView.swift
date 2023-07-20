@@ -125,7 +125,7 @@ private extension WeatherView {
             make.centerX.equalToSuperview()
         }
     }
-
+    
     func reloadWeatherInfo() {
         weatherViewDelegate?.didRequestUpdate(reloadButton)
     }
