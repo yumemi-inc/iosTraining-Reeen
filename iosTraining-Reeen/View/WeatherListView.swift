@@ -11,7 +11,7 @@ import SnapKit
 final class WeatherListView: UIView {
     lazy var weatherListColelctionView: UICollectionView = {
         var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.backgroundColor = .blue
+        config.backgroundColor = .systemGray4
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: 100, height: 100)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -19,6 +19,15 @@ final class WeatherListView: UIView {
         collectionView.register(WeatherListViewCell.self, forCellWithReuseIdentifier: "WeatherCell")
         return collectionView
     }()
+
+    let emptyStateLabel:UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "画面をリロードしてください"
+        return label
+    }()
+
+    let activityIndicator = UIActivityIndicatorView(style: .large)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,8 +40,20 @@ final class WeatherListView: UIView {
 
     func setupView() {
         addSubview(weatherListColelctionView)
+        addSubview(emptyStateLabel)
+        addSubview(activityIndicator)
+
         weatherListColelctionView.snp.makeConstraints { make in
             make.center.edges.equalToSuperview()
+        }
+
+        emptyStateLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(20)
+        }
+
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

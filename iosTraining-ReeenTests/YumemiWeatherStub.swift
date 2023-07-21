@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class YumemiWeatherStub: WeatherServiceProtocol {
     var weatherResponse: [WeatherResponse]
 

@@ -14,6 +14,14 @@ final class WeatherListViewCell: UICollectionViewCell {
         return imageView
     }()
 
+    let areaLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+
     let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
@@ -38,21 +46,29 @@ final class WeatherListViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(_ weatherData: WeatherData, image: UIImage?) {
+    func configure(_ response: WeatherResponse, image: UIImage?) {
         weatherConditionImageView.image = image
-        maxTemperatureLabel.text = weatherData.maxTemperature.description
-        minTemperatureLabel.text = weatherData.minTemperature.description
+        areaLabel.text = response.area
+        maxTemperatureLabel.text = response.info.maxTemperature.description
+        minTemperatureLabel.text = response.info.minTemperature.description
     }
 }
 
 private extension WeatherListViewCell {
     func setupView() {
         addSubview(weatherConditionImageView)
+        addSubview(areaLabel)
         addSubview(maxTemperatureLabel)
         addSubview(minTemperatureLabel)
 
+        areaLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(15)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(25)
+        }
+
         weatherConditionImageView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.right.equalTo(maxTemperatureLabel.snp.left).offset(-40)
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2)
         }

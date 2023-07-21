@@ -16,7 +16,6 @@ class WeatherView: UIView {
 
     let maxTemperatureLabel: UILabel = {
         let label = UILabel()
-        // TODO: textは仮の設定
         label.text = "最高気温"
         label.textColor = .red
         label.textAlignment = .center
@@ -25,13 +24,11 @@ class WeatherView: UIView {
 
     let minTemperatureLabel: UILabel = {
         let label = UILabel()
-        // TODO: textは仮の設定
         label.text = "最低気温"
         label.textColor = .blue
         label.textAlignment = .center
         return label
     }()
-
 
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
@@ -48,8 +45,7 @@ class WeatherView: UIView {
         return stackView
     }()
 
-    var errorAlert = UIAlertController()
-
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -59,24 +55,30 @@ class WeatherView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func displayWeatherConditions(data: WeatherData, image: UIImage?) {
+    func displayWeatherConditions(data: WeatherResponse, image: UIImage?) {
         weatherConditionImageView.image = image
-        maxTemperatureLabel.text = data.maxTemperature.description
-        minTemperatureLabel.text = data.minTemperature.description
+        maxTemperatureLabel.text = data.info.maxTemperature.description
+        minTemperatureLabel.text = data.info.minTemperature.description
     }
 }
 
-extension WeatherView {
+private extension WeatherView {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(weatherConditionStackView)
+        addSubview(activityIndicator)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
+
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
+        }
+
+        activityIndicator.snp.makeConstraints { make in
+            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
+            make.centerX.equalToSuperview()
         }
     }
 }
