@@ -13,6 +13,6 @@ final class ModalHolderViewController: UIViewController {
         super.viewDidAppear(animated)
         let vc = WeatherListViewController()
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
     }
 }

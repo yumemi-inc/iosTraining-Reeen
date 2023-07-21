@@ -32,19 +32,6 @@ class WeatherView: UIView {
         return label
     }()
 
-    let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Close", for: .normal)
-        return button
-    }()
-
-    let reloadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Reload", for: .normal)
-        return button
-    }()
 
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
@@ -83,8 +70,6 @@ extension WeatherView {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(weatherConditionStackView)
-        addSubview(closeButton)
-        addSubview(reloadButton)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -92,18 +77,6 @@ extension WeatherView {
         
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
-        }
-
-        closeButton.snp.makeConstraints { make in
-            make.centerX.equalTo(maxTemperatureLabel)
-            make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(maxTemperatureLabel.snp.width)
-        }
-
-        reloadButton.snp.makeConstraints { make in
-            make.centerX.equalTo(minTemperatureLabel)
-            make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(minTemperatureLabel.snp.width)
         }
     }
 }

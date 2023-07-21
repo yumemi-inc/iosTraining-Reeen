@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class WeatherViewController: UIViewController {
+<<<<<<< HEAD
     let weatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
@@ -64,28 +65,22 @@ final class WeatherViewController: UIViewController {
 
     private var errorAlert = UIAlertController()
     private let weatherService: WeatherServiceProtocol
+=======
+    let weatherView = WeatherView()
+>>>>>>> 67e9cb8 (feat: CollectionViewの画面遷移の実装)
 
-    init(weatherService: WeatherServiceProtocol) {
-        self.weatherService = weatherService
-        super.init(nibName: nil, bundle: nil)
+    override func loadView() {
+        super.loadView()
+        view = weatherView
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        print("WeatherViewController deinitialized")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        addNotificationCenter()
+    func configureNavigationBarTitle(_ areaName: String) {
+        self.title = areaName
     }
 }
 
 private extension WeatherViewController {
+<<<<<<< HEAD
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(weatherConditionStackView)
@@ -139,6 +134,8 @@ private extension WeatherViewController {
         dismiss(animated: true, completion: nil)
     }
 
+=======
+>>>>>>> 67e9cb8 (feat: CollectionViewの画面遷移の実装)
     func getImage(for condition: String) -> UIImage? {
         guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
 

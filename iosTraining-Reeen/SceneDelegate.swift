@@ -16,8 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        let holderViewController = ModalHolderViewController()
-        window.rootViewController = holderViewController
+        let weatherListViewController = WeatherListViewController()
+        let navigationController = UINavigationController(rootViewController: weatherListViewController)
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
     

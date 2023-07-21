@@ -21,14 +21,11 @@ final class WeatherListViewController: UIViewController {
         view = weatherListView
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureDataSource()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .gray
         reloadWetherData()
+        configureDataSource()
     }
 }
 
@@ -41,6 +38,8 @@ private extension WeatherListViewController {
     }
 
     func configureDataSource() {
+        weatherListView.weatherListColelctionView.delegate = self
+
         dataSource = UICollectionViewDiffableDataSource<Section, WeatherData>(collectionView: weatherListView.weatherListColelctionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, weatherData: WeatherData) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as? WeatherListViewCell else { return UICollectionViewCell()}
@@ -69,5 +68,16 @@ private extension WeatherListViewController {
         snapshot.appendItems(models)
 
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension WeatherListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailView = WeatherViewController(weatherService: weatherService)
+        let snapShot = dataSource.snapshot()
+        let item = snapShot.itemIdentifiers(inSection: .main)[indexPath.row]
+        let image = getImage(for: item.weatherCondition)
+        detailView.weatherView.displayWeatherConditions(data: item, image: image)
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
