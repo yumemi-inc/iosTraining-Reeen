@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol WeatherViewDelegate: AnyObject {
     func reloadButtonDidTapped()
