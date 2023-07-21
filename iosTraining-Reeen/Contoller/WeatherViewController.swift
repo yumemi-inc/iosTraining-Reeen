@@ -14,7 +14,6 @@ protocol WeatherViewDelegate: AnyObject {
 
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
-    private var errorAlert = UIAlertController()
     let weatherView = WeatherView()
     
     init(weatherService: WeatherServiceProtocol) {
@@ -57,7 +56,7 @@ private extension WeatherViewController {
     }
     
     @objc func willEnterForeground() {
-        if self.presentedViewController != errorAlert {
+        if self.presentedViewController == nil {
             weatherService.getWeatherInformation()
         }
     }
@@ -93,7 +92,7 @@ extension WeatherViewController: WeatherServiceDelegate {
     }
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+        let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
         present(errorAlert, animated: true, completion: nil)
