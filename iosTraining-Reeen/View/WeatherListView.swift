@@ -38,6 +38,12 @@ final class WeatherListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    weak var delegate: WeatherListViewDelegate?
+
+    @objc func reloadWeatherConditions() {
+        delegate?.reloadButtonTapped()
+    }
+
     func setupView() {
         addSubview(weatherListColelctionView)
         addSubview(emptyStateLabel)
@@ -51,7 +57,7 @@ final class WeatherListView: UIView {
             make.center.equalToSuperview()
             make.height.equalTo(20)
         }
-
+        
         activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }

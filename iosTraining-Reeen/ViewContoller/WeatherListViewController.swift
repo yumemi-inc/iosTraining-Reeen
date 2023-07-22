@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol WeatherListViewDelegate: AnyObject {
+    func reloadButtonTapped()
+}
+
 enum Section: CaseIterable {
     case main
 }
@@ -138,3 +142,4 @@ extension WeatherListViewController: UICollectionViewDelegate {
         navigationController?.pushViewController(detailView, animated: true)
     }
 }
+

@@ -20,7 +20,6 @@ struct WeatherResponse: Decodable, Hashable, Identifiable {
     }
 }
 
-
 struct WeatherData: Decodable, Hashable {
     let maxTemperature: Int
     let minTemperature: Int
