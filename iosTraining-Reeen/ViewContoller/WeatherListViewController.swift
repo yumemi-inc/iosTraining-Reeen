@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol WeatherListViewDelegate: AnyObject {
-    func reloadButtonTapped()
-}
-
 enum Section: CaseIterable {
     case main
 }
