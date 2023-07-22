@@ -33,9 +33,4 @@ private extension WeatherViewController {
             return UIImage(named: "rainy")?.withTintColor(.blue)
         }
     }
-
-    func setupNavigationController() {
-        //TODO: ここには選択したエリアの名前が入るようにする
-        title = "DetailView"
-    }
 }
