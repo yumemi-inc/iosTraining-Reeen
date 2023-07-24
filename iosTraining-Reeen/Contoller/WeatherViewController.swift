@@ -56,7 +56,7 @@ private extension WeatherViewController {
     }
 
     @objc func willEnterForeground() {
-        if self.presentedViewController == nil {
+        if presentedViewController == nil {
             weatherService.getWeatherInformation()
         }
     }

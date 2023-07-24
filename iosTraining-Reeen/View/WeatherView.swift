@@ -80,7 +80,7 @@ class WeatherView: UIView {
 
 private extension WeatherView {
     func setupViews() {
-        self.backgroundColor = .white
+        backgroundColor = .white
         addSubview(weatherConditionStackView)
         addSubview(closeButton)
         addSubview(reloadButton)
