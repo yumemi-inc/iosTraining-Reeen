@@ -51,7 +51,8 @@ private extension WeatherViewController {
             self,
             selector: #selector(self.willEnterForeground),
             name: UIApplication.willEnterForegroundNotification,
-            object: nil)
+            object: nil
+        )
     }
 
     @objc func willEnterForeground() {
