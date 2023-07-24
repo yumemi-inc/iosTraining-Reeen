@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol WeatherViewDelegate: AnyObject {
-    func didRequestUpdate(_ reloadButton: UIButton)
-    func didRequestClose(_ closeButton: UIButton)
-}
-
 final class WeatherViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
     let weatherView = WeatherView()

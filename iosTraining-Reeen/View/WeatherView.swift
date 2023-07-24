@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 
-class WeatherView: UIView {
+protocol WeatherViewDelegate: AnyObject {
+    func didRequestUpdate(_ reloadButton: UIButton)
+    func didRequestClose(_ closeButton: UIButton)
+}
+
+final class WeatherView: UIView {
     let weatherConditionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
