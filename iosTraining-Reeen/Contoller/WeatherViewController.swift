@@ -8,8 +8,8 @@
 import UIKit
 
 protocol WeatherViewDelegate: AnyObject {
-    func reloadButtonDidTapped()
-    func closeButtonDidTapped()
+    func didRequestUpdate(_ reloadButton: UIButton)
+    func didRequestClose(_ closeButton: UIButton)
 }
 
 final class WeatherViewController: UIViewController {
@@ -63,11 +63,11 @@ private extension WeatherViewController {
 }
 
 extension WeatherViewController: WeatherViewDelegate {
-    func reloadButtonDidTapped() {
+    func didRequestUpdate(_ reloadButton: UIButton) {
         weatherService.getWeatherInformation()
     }
 
-    func closeButtonDidTapped() {
+    func didRequestClose(_ closeButton: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 }

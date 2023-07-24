@@ -115,10 +115,10 @@ private extension WeatherView {
     }
 
     func reloadWeatherInfo() {
-        weatherViewDelegate?.reloadButtonDidTapped()
+        weatherViewDelegate?.didRequestUpdate(reloadButton)
     }
 
     func closeWeatherViewController() {
-        weatherViewDelegate?.closeButtonDidTapped()
+        weatherViewDelegate?.didRequestClose(closeButton)
     }
 }
