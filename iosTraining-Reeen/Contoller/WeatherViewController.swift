@@ -30,7 +30,6 @@ final class WeatherViewController: UIViewController {
     }
 
     override func loadView() {
-        super.loadView()
         view = weatherView
     }
 
