@@ -91,11 +91,13 @@ private extension WeatherView {
         addSubview(reloadButton)
 
         reloadButton.addAction(UIAction { [weak self] _ in
-            self?.reloadWeatherInfo()
+            guard let self else { return }
+            self.weatherViewDelegate?.weatherViewDidReloadButtonTapped(self)
         }, for: .touchUpInside)
 
         closeButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.closeWeatherViewController()
+            guard let self else { return }
+            self.weatherViewDelegate?.weatherViewDidCloseButtonTapped(self)
         }), for: .touchUpInside)
 
         weatherConditionStackView.snp.makeConstraints { make in
@@ -117,13 +119,5 @@ private extension WeatherView {
             make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
             make.width.equalTo(minTemperatureLabel.snp.width)
         }
-    }
-
-    func reloadWeatherInfo() {
-        weatherViewDelegate?.weatherViewDidReloadButtonTapped(self)
-    }
-
-    func closeWeatherViewController() {
-        weatherViewDelegate?.weatherViewDidCloseButtonTapped(self)
     }
 }
