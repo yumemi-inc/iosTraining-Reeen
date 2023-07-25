@@ -51,7 +51,7 @@ final class WeatherListView: UIView {
             make.center.equalToSuperview()
             make.height.equalTo(20)
         }
-        
+
         activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
