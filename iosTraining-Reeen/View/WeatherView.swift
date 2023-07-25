@@ -36,20 +36,6 @@ final class WeatherView: UIView {
         return label
     }()
 
-    let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Close", for: .normal)
-        return button
-    }()
-
-    let reloadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Reload", for: .normal)
-        return button
-    }()
-
     private lazy var weatherConditionStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherConditionImageView, temperatureStackView])
         stackView.axis = .vertical
@@ -65,9 +51,6 @@ final class WeatherView: UIView {
         return stackView
     }()
 
-    weak var weatherViewDelegate: WeatherViewDelegate?
-    let activityIndicator = UIActivityIndicatorView(style: .medium)
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -77,28 +60,17 @@ final class WeatherView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func displayWeatherConditions(data: WeatherData, image: UIImage?) {
+    func displayWeatherConditions(data: WeatherResponse, image: UIImage?) {
         weatherConditionImageView.image = image
-        maxTemperatureLabel.text = data.maxTemperature.description
-        minTemperatureLabel.text = data.minTemperature.description
+        maxTemperatureLabel.text = data.info.maxTemperature.description
+        minTemperatureLabel.text = data.info.minTemperature.description
     }
 }
 
 private extension WeatherView {
     func setupViews() {
-        backgroundColor = .white
+        self.backgroundColor = .white
         addSubview(weatherConditionStackView)
-        addSubview(closeButton)
-        addSubview(reloadButton)
-        addSubview(activityIndicator)
-
-        reloadButton.addAction(UIAction { [weak self] _ in
-            self?.reloadWeatherInfo()
-        }, for: .touchUpInside)
-
-        closeButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.closeWeatherViewController()
-        }), for: .touchUpInside)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -107,30 +79,5 @@ private extension WeatherView {
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
         }
-
-        closeButton.snp.makeConstraints { make in
-            make.centerX.equalTo(maxTemperatureLabel)
-            make.top.equalTo(maxTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(maxTemperatureLabel.snp.width)
-        }
-
-        reloadButton.snp.makeConstraints { make in
-            make.centerX.equalTo(minTemperatureLabel)
-            make.top.equalTo(minTemperatureLabel.snp.centerY).offset(80)
-            make.width.equalTo(minTemperatureLabel.snp.width)
-        }
-
-        activityIndicator.snp.makeConstraints { make in
-            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
-            make.centerX.equalToSuperview()
-        }
-    }
-    
-    func reloadWeatherInfo() {
-        weatherViewDelegate?.didRequestUpdate(reloadButton)
-    }
-
-    func closeWeatherViewController() {
-        weatherViewDelegate?.didRequestClose(closeButton)
     }
 }

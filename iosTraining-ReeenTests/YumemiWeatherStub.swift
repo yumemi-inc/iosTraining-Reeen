@@ -8,13 +8,13 @@
 import Foundation
 
 class YumemiWeatherStub: WeatherServiceProtocol {
-    var weatherData: WeatherData
+    var weatherResponse: [WeatherResponse]
 
-    init(weatherData: WeatherData) {
-        self.weatherData = weatherData
+    init(weatherResponse: [WeatherResponse]) {
+        self.weatherResponse = weatherResponse
     }
 
-    func getWeatherInformation() async throws -> WeatherData {
-        weatherData
+    func getWeatherInformation() async throws -> [WeatherResponse] {
+        weatherResponse
     }
 }
