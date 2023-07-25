@@ -58,11 +58,11 @@ private extension WeatherViewController {
 }
 
 extension WeatherViewController: WeatherViewDelegate {
-    func didRequestUpdate(_ reloadButton: UIButton) {
+    func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
         weatherService.getWeatherInformation()
     }
-
-    func didRequestClose(_ closeButton: UIButton) {
+    
+    func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView) {
         dismiss(animated: true, completion: nil)
     }
 }

@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 protocol WeatherViewDelegate: AnyObject {
-    func didRequestUpdate(_ reloadButton: UIButton)
-    func didRequestClose(_ closeButton: UIButton)
+    func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView)
+    func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView)
 }
 
 final class WeatherView: UIView {
@@ -120,10 +120,10 @@ private extension WeatherView {
     }
 
     func reloadWeatherInfo() {
-        weatherViewDelegate?.didRequestUpdate(reloadButton)
+        weatherViewDelegate?.weatherViewDidReloadButtonTapped(self)
     }
 
     func closeWeatherViewController() {
-        weatherViewDelegate?.didRequestClose(closeButton)
+        weatherViewDelegate?.weatherViewDidCloseButtonTapped(self)
     }
 }
