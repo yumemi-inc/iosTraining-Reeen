@@ -64,7 +64,6 @@ private extension WeatherListViewCell {
         areaLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.centerY.equalToSuperview()
-            make.height.equalTo(25)
         }
 
         weatherConditionImageView.snp.makeConstraints { make in
@@ -76,13 +75,11 @@ private extension WeatherListViewCell {
         maxTemperatureLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-40)
             make.centerY.equalToSuperview().offset(-20)
-            make.height.equalTo(20)
         }
 
         minTemperatureLabel.snp.makeConstraints { make in
             make.right.equalTo(maxTemperatureLabel.snp.right)
             make.centerY.equalToSuperview().offset(20)
-            make.height.equalTo(20)
         }
     }
 }

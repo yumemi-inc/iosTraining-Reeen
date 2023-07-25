@@ -11,26 +11,10 @@ final class WeatherViewController: UIViewController {
     let weatherView = WeatherView()
 
     override func loadView() {
-        super.loadView()
         view = weatherView
     }
 
     func configureNavigationBarTitle(_ areaName: String) {
         self.title = areaName
-    }
-}
-
-private extension WeatherViewController {
-    func getImage(for condition: String) -> UIImage? {
-        guard let condition = WeatherCondition(rawValue: condition) else { return UIImage() }
-
-        switch condition {
-        case .sunny:
-            return UIImage(named: "sunny")?.withTintColor(.red)
-        case .cloudy:
-            return UIImage(named: "cloudy")?.withTintColor(.gray)
-        case .rainy:
-            return UIImage(named: "rainy")?.withTintColor(.blue)
-        }
     }
 }

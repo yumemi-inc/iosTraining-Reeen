@@ -13,7 +13,6 @@ enum Section: CaseIterable {
 
 final class WeatherListViewController: UIViewController {
     private let weatherService: WeatherServiceProtocol
-    private var errorAlert = UIAlertController()
     let weatherListView = WeatherListView()
     let refreshControl = UIRefreshControl()
 
@@ -84,7 +83,7 @@ extension WeatherListViewController {
     }
 
     func showErrorAlert(message: String) {
-        errorAlert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let errorAlert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)
         present(errorAlert, animated: true, completion: nil)

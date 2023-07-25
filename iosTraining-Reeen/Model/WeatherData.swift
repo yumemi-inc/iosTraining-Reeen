@@ -13,21 +13,10 @@ struct WeatherResponse: Decodable, Hashable, Identifiable {
     }
     let area: String
     let info: WeatherData
-
-    init(area: String = "Tokyo", info: WeatherData = .init()) {
-        self.area = area
-        self.info = info
-    }
 }
 
 struct WeatherData: Decodable, Hashable {
     let maxTemperature: Int
     let minTemperature: Int
     let weatherCondition: String
-
-    init(maxTemperature: Int = 30, minTemperature: Int = 20, weatherCondition: String = "sunny") {
-        self.maxTemperature = maxTemperature
-        self.minTemperature = minTemperature
-        self.weatherCondition = weatherCondition
-    }
 }

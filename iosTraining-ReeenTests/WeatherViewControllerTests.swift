@@ -8,6 +8,18 @@
 import XCTest
 @testable import iosTraining_Reeen
 
+extension WeatherResponse {
+    init(stubArea: String = "Tokyo", stubInfo: WeatherData = .init()) {
+        self.init(area: stubArea, info: stubInfo)
+    }
+}
+
+extension WeatherData {
+    init(stubMaxTemperature: Int = 30, stubMinTemperature: Int = 20, stubWeatherCondition: String = "sunny") {
+        self.init(maxTemperature: stubMaxTemperature, minTemperature: stubMinTemperature, weatherCondition: stubWeatherCondition)
+    }
+}
+
 final class WeatherViewControllerTests: XCTestCase {
     var weatherListViewController: WeatherListViewController!
     let indexPath = IndexPath(item: 0, section: 0)

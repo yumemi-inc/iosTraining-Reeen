@@ -51,8 +51,6 @@ final class WeatherView: UIView {
         return stackView
     }()
 
-    let activityIndicator = UIActivityIndicatorView(style: .medium)
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -73,7 +71,6 @@ private extension WeatherView {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(weatherConditionStackView)
-        addSubview(activityIndicator)
 
         weatherConditionStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -81,11 +78,6 @@ private extension WeatherView {
 
         weatherConditionImageView.snp.makeConstraints { make in
             make.size.equalTo(self.snp.width).multipliedBy(0.5)
-        }
-
-        activityIndicator.snp.makeConstraints { make in
-            make.centerY.equalTo(maxTemperatureLabel.snp.centerY).offset(50)
-            make.centerX.equalToSuperview()
         }
     }
 }

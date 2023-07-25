@@ -49,7 +49,6 @@ final class WeatherListView: UIView {
 
         emptyStateLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(20)
         }
 
         activityIndicator.snp.makeConstraints { make in
