@@ -24,8 +24,8 @@ final class WeatherListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadWeatherData()
         setupView()
+        reloadWeatherData()
         addNotificationCenter()
         setupNavigationController()
         configureDataSource()
@@ -43,6 +43,8 @@ final class WeatherListViewController: UIViewController {
 
 extension WeatherListViewController {
     func setupView() {
+        weatherListView.activityIndicator.startAnimating()
+        weatherListView.emptyStateLabel.text = "天気情報を取得中です..."
         weatherListView.weatherListColelctionView.delegate = self
         weatherListView.weatherListColelctionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(reloadWeatherData), for: .valueChanged)
@@ -83,6 +85,7 @@ extension WeatherListViewController {
     }
 
     func showErrorAlert(message: String) {
+        weatherListView.emptyStateLabel.text = "天気情報の取得に失敗しました。\n画面を引っ張って更新してください。"
         let errorAlert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(alertAction)

@@ -23,7 +23,8 @@ final class WeatherListView: UIView {
     let emptyStateLabel:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "画面をリロードしてください"
+        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
 
@@ -47,12 +48,13 @@ final class WeatherListView: UIView {
             make.center.edges.equalToSuperview()
         }
 
-        emptyStateLabel.snp.makeConstraints { make in
+        activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
 
-        activityIndicator.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        emptyStateLabel.snp.makeConstraints { make in
+            make.top.equalTo(activityIndicator.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
         }
     }
 }
