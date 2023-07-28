@@ -18,14 +18,8 @@ protocol WeatherServiceDelegate: AnyObject {
 }
 
 final class WeatherService: WeatherServiceProtocol {
-    weak var delegate: WeatherServiceDelegate?
     func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self else { return }
-            self.delegate?.weatherServiceDidStartFetching(self)
-            defer {
-                self.delegate?.weatherServiceDidEndFetching(self)
-            }
+        DispatchQueue.global(qos: .background).async {
             do {
                 let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
                 let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
