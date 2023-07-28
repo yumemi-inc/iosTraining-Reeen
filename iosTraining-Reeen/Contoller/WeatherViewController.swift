@@ -36,6 +36,7 @@ final class WeatherViewController: UIViewController {
     }
 
     func getWeatherInformation() {
+        weatherView.activityIndicator.startAnimating()
         weatherService.getWeatherInformation { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -87,26 +88,11 @@ private extension WeatherViewController {
 
 extension WeatherViewController: WeatherViewDelegate {
     func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
-        weatherView.activityIndicator.startAnimating()
         getWeatherInformation()
     }
 
     func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView) {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension WeatherViewController: WeatherServiceDelegate {
-    func weatherServiceDidStartFetching(_ weatherService: WeatherServiceProtocol) {
-        DispatchQueue.main.async { [weak self] in
-            self?.weatherView.activityIndicator.startAnimating()
-        }
-    }
-    
-    func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol) {
-        DispatchQueue.main.async { [weak self] in
-            self?.weatherView.activityIndicator.stopAnimating()
-        }
     }
 }
 
