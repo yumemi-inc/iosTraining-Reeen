@@ -88,18 +88,20 @@ extension WeatherViewController: WeatherServiceDelegate {
     
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
         DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
-            self?.weatherView.displayWeatherConditions(data: weatherData, image: image)
-            self?.weatherView.activityIndicator.stopAnimating()
+            self.weatherView.displayWeatherConditions(data: weatherData, image: image)
+            self.weatherView.activityIndicator.stopAnimating()
         }
     }
 
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
         DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default)
             errorAlert.addAction(alertAction)
-            self?.present(errorAlert, animated: true)
+            self.present(errorAlert, animated: true)
         }
     }
 }
