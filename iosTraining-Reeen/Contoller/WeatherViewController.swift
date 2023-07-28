@@ -37,6 +37,7 @@ final class WeatherViewController: UIViewController {
 
     func reloadWeatherInformation() {
         Task {
+            weatherView.activityIndicator.startAnimating()
             defer {
                 weatherView.activityIndicator.stopAnimating()
             }
@@ -78,7 +79,6 @@ private extension WeatherViewController {
     
     @objc func willEnterForeground() {
         if presentedViewController == nil {
-            weatherView.activityIndicator.startAnimating()
             reloadWeatherInformation()
         }
     }
