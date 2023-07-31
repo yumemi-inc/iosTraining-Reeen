@@ -29,15 +29,16 @@ final class WeatherService: WeatherServiceProtocol {
         delegate?.weatherServiceWillStartFetching(self)
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
+            defer {
+                self.delegate?.weatherServiceDidEndFetching(self)
+            }
             do {
                 let encodedRequest = try WeatherEncoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
                 let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
                 let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
                 self.delegate?.weatherService(self, didUpdateCondition: weatherData)
-                delegate?.weatherServiceDidEndFetching(self)
             } catch {
                 self.handleWeatherServiceError(error)
-                delegate?.weatherServiceDidEndFetching(self)
             }
         }
     }
