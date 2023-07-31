@@ -74,7 +74,7 @@ extension WeatherViewController: WeatherViewDelegate {
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
-    func weatherServiceDidStartFetching(_ weatherService: WeatherServiceProtocol) {
+    func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol) {
         DispatchQueue.main.async {
             self.weatherView.activityIndicator.startAnimating()
         }

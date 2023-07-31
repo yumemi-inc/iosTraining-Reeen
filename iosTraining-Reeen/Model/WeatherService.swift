@@ -15,7 +15,7 @@ protocol WeatherServiceProtocol: AnyObject {
 }
 
 protocol WeatherServiceDelegate: AnyObject {
-    func weatherServiceDidStartFetching(_ weatherService: WeatherServiceProtocol)
+    func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol)
     func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol)
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: WeatherData)
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error)
@@ -26,7 +26,7 @@ final class WeatherService: WeatherServiceProtocol {
     weak var delegate: WeatherServiceDelegate?
 
     func getWeatherInformation() {
-        delegate?.weatherServiceDidStartFetching(self)
+        delegate?.weatherServiceWillStartFetching(self)
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
             do {
