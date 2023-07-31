@@ -21,53 +21,61 @@ extension WeatherData {
 final class WeatherViewControllerTests: XCTestCase {
     var weatherViewController: WeatherViewController!
 
-    func testWeatherConditionImageViewIsSunny() async throws {
+    func testWeatherConditionImageViewIsSunny() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "sunny"))
-        weatherViewController = await WeatherViewController(weatherService: weatherDataStub)
-        await weatherViewController.loadViewIfNeeded()
-        // Act
-        await weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
-        // Assert
-        let weatherConditionImageView = await weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
+        DispatchQueue.main.async {
+            let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "sunny"))
+            self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+            self.weatherViewController.loadViewIfNeeded()
+            // Act
+            self.weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
+            // Assert
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
+        }
     }
 
-    func testWeatherConditionImageViewIsRainy() async throws {
+    func testWeatherConditionImageViewIsRainy() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "rainy"))
-        weatherViewController = await WeatherViewController(weatherService: weatherDataStub)
-        await weatherViewController.loadViewIfNeeded()
-        // Act
-        await weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
-        // Assert
-        let weatherConditionImageView = await weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
+        DispatchQueue.main.async {
+            let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "rainy"))
+            self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+            self.weatherViewController.loadViewIfNeeded()
+            // Act
+            self.weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
+            // Assert
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
+        }
     }
 
-    func testWeatherConditionImageViewIsCloudy() async throws {
+    func testWeatherConditionImageViewIsCloudy() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "cloudy"))
-        weatherViewController = await WeatherViewController(weatherService: weatherDataStub)
-        await weatherViewController.loadViewIfNeeded()
-        // Act
-        await weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
-        // Assert
-        let weatherConditionImageView = await weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
+        DispatchQueue.main.async {
+            let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "cloudy"))
+            self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+            self.weatherViewController.loadViewIfNeeded()
+            // Act
+            self.weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
+            // Assert
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
+        }
     }
 
-    func testTempLabelShowAsExpected() async throws {
+    func testTempLabelShowAsExpected() {
         // Arrange
-        let weatherDataStub = YumemiWeatherStub(weatherData: .init(maxTemperature: 20, minTemperature: 10))
-        weatherViewController = await WeatherViewController(weatherService: weatherDataStub)
-        await weatherViewController.loadViewIfNeeded()
-        // Act
-        await weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
-        // Assert
-        let maxTempLabel = await weatherViewController.weatherView.maxTemperatureLabel.text
-        let mimTempLabel = await weatherViewController.weatherView.minTemperatureLabel.text
-        XCTAssertEqual(maxTempLabel, "20")
-        XCTAssertEqual(mimTempLabel, "10")
+        DispatchQueue.main.async {
+            let weatherDataStub = YumemiWeatherStub(weatherData: .init(maxTemperature: 20, minTemperature: 10))
+            self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+            self.weatherViewController.loadViewIfNeeded()
+            // Act
+            self.weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
+            // Assert
+            let maxTempLabel = self.weatherViewController.weatherView.maxTemperatureLabel.text
+            let mimTempLabel = self.weatherViewController.weatherView.minTemperatureLabel.text
+            XCTAssertEqual(maxTempLabel, "20")
+            XCTAssertEqual(mimTempLabel, "10")
+        }
     }
 }
