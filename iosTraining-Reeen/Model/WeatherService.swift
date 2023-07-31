@@ -27,7 +27,7 @@ final class WeatherService: WeatherServiceProtocol {
 
     func getWeatherInformation() {
         delegate?.weatherServiceDidStartFetching(self)
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        DispatchQueue.global().async { [weak self] in
             guard let self else { return }
             do {
                 let encodedRequest = try WeatherEncoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
