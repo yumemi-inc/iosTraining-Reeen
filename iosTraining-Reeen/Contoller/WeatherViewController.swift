@@ -55,12 +55,6 @@ private extension WeatherViewController {
             weatherService.getWeatherInformation()
         }
     }
-
-    func performData(_ weatherData: WeatherData?) {
-        guard let weatherData else { return }
-        let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
-        weatherView.displayWeatherConditions(data: weatherData, image: image)
-    }
 }
 
 extension WeatherViewController: WeatherViewDelegate {
