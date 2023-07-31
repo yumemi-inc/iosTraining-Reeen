@@ -69,14 +69,14 @@ extension WeatherViewController: WeatherViewDelegate {
 
 extension WeatherViewController: WeatherServiceDelegate {
     func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicator.startAnimating()
+        DispatchQueue.main.async { [weak self] in
+            self?.weatherView.activityIndicator.startAnimating()
         }
     }
     
     func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicator.stopAnimating()
+        DispatchQueue.main.async { [weak self] in
+            self?.weatherView.activityIndicator.stopAnimating()
         }
     }
     
@@ -85,7 +85,6 @@ extension WeatherViewController: WeatherServiceDelegate {
             guard let self else { return }
             let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
             self.weatherView.displayWeatherConditions(data: weatherData, image: image)
-            self.weatherView.activityIndicator.stopAnimating()
         }
     }
 
