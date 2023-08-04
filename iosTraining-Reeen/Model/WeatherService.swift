@@ -12,11 +12,6 @@ protocol WeatherServiceProtocol: AnyObject {
     func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void)
 }
 
-protocol WeatherServiceDelegate: AnyObject {
-    func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol)
-    func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol)
-}
-
 final class WeatherService: WeatherServiceProtocol {
     func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
         DispatchQueue.global(qos: .background).async {
