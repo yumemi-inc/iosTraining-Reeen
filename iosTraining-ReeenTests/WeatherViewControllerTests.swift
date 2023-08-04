@@ -42,7 +42,7 @@ final class WeatherViewControllerTests: XCTestCase {
     func testWeatherConditionImageViewIsRainy() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "rainy"))
-        self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
@@ -58,7 +58,7 @@ final class WeatherViewControllerTests: XCTestCase {
     func testWeatherConditionImageViewIsCloudy() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "cloudy"))
-        self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
@@ -74,7 +74,7 @@ final class WeatherViewControllerTests: XCTestCase {
     func testTempLabelShowAsExpected() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(maxTemperature: 20, minTemperature: 10))
-        self.weatherViewController = WeatherViewController(weatherService: weatherDataStub)
+        weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
