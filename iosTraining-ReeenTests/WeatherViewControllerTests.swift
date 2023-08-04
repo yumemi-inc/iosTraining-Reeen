@@ -27,7 +27,6 @@ final class WeatherViewControllerTests: XCTestCase {
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "sunny"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
         weatherViewController.loadViewIfNeeded()
-        weatherDataStub.delegate = weatherViewController
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
