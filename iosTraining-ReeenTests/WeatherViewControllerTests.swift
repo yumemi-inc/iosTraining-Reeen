@@ -30,12 +30,12 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
             XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.2)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testWeatherConditionImageViewIsRainy() throws {
@@ -46,12 +46,12 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
             XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.2)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testWeatherConditionImageViewIsCloudy() throws {
@@ -62,12 +62,12 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
             XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.2)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testTempLabelShowAsExpected() throws {
@@ -78,14 +78,14 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             let maxTempLabel = self.weatherViewController.weatherView.maxTemperatureLabel.text
             let mimTempLabel = self.weatherViewController.weatherView.minTemperatureLabel.text
             XCTAssertEqual(maxTempLabel, "20")
             XCTAssertEqual(mimTempLabel, "10")
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.2)
+        wait(for: [expectation], timeout: 0.1)
 
     }
 }
