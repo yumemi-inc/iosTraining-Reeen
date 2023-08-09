@@ -20,8 +20,9 @@ extension WeatherData {
 
 final class WeatherViewControllerTests: XCTestCase {
     var weatherViewController: WeatherViewController!
+    let expectation = XCTestExpectation(description: "Wait for weather data to update")
 
-    func testWeatherConditionImageViewIsSunny() {
+    func testWeatherConditionImageViewIsSunny() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "sunny"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
@@ -29,11 +30,15 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "sunny")?.withTintColor(.red))
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testWeatherConditionImageViewIsRainy() {
+    func testWeatherConditionImageViewIsRainy() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "rainy"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
@@ -41,11 +46,15 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "rainy")?.withTintColor(.blue))
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testWeatherConditionImageViewIsCloudy() {
+    func testWeatherConditionImageViewIsCloudy() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(weatherCondition: "cloudy"))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
@@ -53,11 +62,15 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let weatherConditionImageView = weatherViewController.weatherView.weatherConditionImageView.image
-        XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let weatherConditionImageView = self.weatherViewController.weatherView.weatherConditionImageView.image
+            XCTAssertEqual(weatherConditionImageView, UIImage(named: "cloudy")?.withTintColor(.gray))
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testTempLabelShowAsExpected() {
+    func testTempLabelShowAsExpected() throws {
         // Arrange
         let weatherDataStub = YumemiWeatherStub(weatherData: .init(maxTemperature: 20, minTemperature: 10))
         weatherViewController = WeatherViewController(weatherService: weatherDataStub)
@@ -65,9 +78,14 @@ final class WeatherViewControllerTests: XCTestCase {
         // Act
         weatherViewController.weatherView.reloadButton.sendActions(for: .touchUpInside)
         // Assert
-        let maxTempLabel = weatherViewController.weatherView.maxTemperatureLabel.text
-        let mimTempLabel = weatherViewController.weatherView.minTemperatureLabel.text
-        XCTAssertEqual(maxTempLabel, "20")
-        XCTAssertEqual(mimTempLabel, "10")
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let maxTempLabel = self.weatherViewController.weatherView.maxTemperatureLabel.text
+            let mimTempLabel = self.weatherViewController.weatherView.minTemperatureLabel.text
+            XCTAssertEqual(maxTempLabel, "20")
+            XCTAssertEqual(mimTempLabel, "10")
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.1)
+
     }
 }

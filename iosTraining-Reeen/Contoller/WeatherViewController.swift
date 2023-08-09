@@ -61,23 +61,41 @@ extension WeatherViewController: WeatherViewDelegate {
     func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
         weatherService.getWeatherInformation()
     }
-    
+
     func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView) {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension WeatherViewController: WeatherServiceDelegate {
+    func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol) {
+        DispatchQueue.main.async { [weak self] in
+            self?.weatherView.activityIndicator.startAnimating()
+        }
+    }
+    
+    func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol) {
+        DispatchQueue.main.async { [weak self] in
+            self?.weatherView.activityIndicator.stopAnimating()
+        }
+    }
+    
     func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherData: WeatherData) {
-        let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
-        weatherView.displayWeatherConditions(data: weatherData, image: image)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let image = WeatherCondition(rawValue: weatherData.weatherCondition)?.getImage()
+            self.weatherView.displayWeatherConditions(data: weatherData, image: image)
+        }
     }
 
     func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error) {
-        let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default)
-        errorAlert.addAction(alertAction)
-        present(errorAlert, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let errorAlert = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            errorAlert.addAction(alertAction)
+            self.present(errorAlert, animated: true)
+        }
     }
 }
 
@@ -93,3 +111,4 @@ private extension WeatherCondition {
         }
     }
 }
+
