@@ -49,9 +49,9 @@ final class WeatherViewController: UIViewController {
 
                 case .failure(let error):
                     let errorAlert = UIAlertController(title: "Alert", message: error.errorDescription, preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    let alertAction = UIAlertAction(title: "OK", style: .default)
                     errorAlert.addAction(alertAction)
-                    self.present(errorAlert, animated: true, completion: nil)
+                    self.present(errorAlert, animated: true)
                 }
                 self.weatherView.activityIndicator.stopAnimating()
             }
