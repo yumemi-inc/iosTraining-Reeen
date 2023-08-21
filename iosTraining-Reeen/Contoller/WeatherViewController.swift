@@ -35,7 +35,7 @@ final class WeatherViewController: UIViewController {
         addNotificationCenter()
     }
 
-    func getWeatherInformation() {
+    func fetchWeatherInformation() {
         weatherView.activityIndicator.startAnimating()
         weatherService.getWeatherInformation { [weak self] result in
             guard let self else { return }
@@ -75,14 +75,14 @@ private extension WeatherViewController {
     
     @objc func willEnterForeground() {
         if presentedViewController == nil {
-            getWeatherInformation()
+            fetchWeatherInformation()
         }
     }
 }
 
 extension WeatherViewController: WeatherViewDelegate {
     func weatherViewDidReloadButtonTapped(_ weatherView: WeatherView) {
-        getWeatherInformation()
+        fetchWeatherInformation()
     }
 
     func weatherViewDidCloseButtonTapped(_ weatherView: WeatherView) {
