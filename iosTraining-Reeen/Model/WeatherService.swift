@@ -9,52 +9,22 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherServiceProtocol: AnyObject {
-    var delegate: WeatherServiceDelegate? { get set }
-
-    func getWeatherInformation()
-}
-
-protocol WeatherServiceDelegate: AnyObject {
-    func weatherServiceWillStartFetching(_ weatherService: WeatherServiceProtocol)
-    func weatherServiceDidEndFetching(_ weatherService: WeatherServiceProtocol)
-    func weatherService(_ weatherService: WeatherServiceProtocol, didUpdateCondition weatherInfo: WeatherData)
-    func weatherService(_ weatherService: WeatherServiceProtocol, didFailWithError error: Error)
+    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void)
 }
 
 final class WeatherService: WeatherServiceProtocol {
-
-    weak var delegate: WeatherServiceDelegate?
-
-    func getWeatherInformation() {
-        delegate?.weatherServiceWillStartFetching(self)
-        DispatchQueue.global().async { [weak self] in
-            guard let self else { return }
-            defer {
-                self.delegate?.weatherServiceDidEndFetching(self)
-            }
+    func getWeatherInformation(completion: @escaping (Result<WeatherData, WeatherError>) -> Void) {
+        DispatchQueue.global(qos: .background).async {
             do {
-                let encodedRequest = try WeatherEncoder.encodeRequestParameters(.init(area: "tokyo", date: Date()))
+                let encodedRequest = try WeatherEncoder.encodeRequestParameters(WeatherInformationRequest(area: "tokyo", date: Date()))
                 let weatherInfo = try YumemiWeather.syncFetchWeather(encodedRequest)
                 let weatherData = try WeatherDecoder.decodeWeatherInfo(weatherInfo)
-                self.delegate?.weatherService(self, didUpdateCondition: weatherData)
+                completion(.success(weatherData))
+            } catch let error as WeatherError {
+                completion(.failure(error))
             } catch {
-                self.handleWeatherServiceError(error)
+                completion(.failure(WeatherError.unknownError))
             }
-        }
-    }
-}
-
-extension WeatherService {
-    func handleWeatherServiceError(_ error: Error) {
-        if let yumemiWeatherError = error as? YumemiWeatherError {
-            switch yumemiWeatherError {
-            case .invalidParameterError:
-                delegate?.weatherService(self, didFailWithError: WeatherError.invalidParameterError)
-            case .unknownError:
-                delegate?.weatherService(self, didFailWithError: WeatherError.unknownError)
-            }
-        } else {
-            delegate?.weatherService(self, didFailWithError: WeatherError.dataNotExistsError)
         }
     }
 }
